@@ -1,0 +1,23 @@
+.logo {
+  height: 80px;
+}
+
+.navbar {
+  background-image: linear-gradient(45deg, black 0 50%, red);
+}
+
+#search {
+  width: 15rem;
+}
+.divisor {
+  width: 1px;
+  height: 2rem;
+}
+.nav-link {
+  color: white;
+}
+.nav-link:hover {
+  color: #f3acac;
+  cursor: pointer;
+  border-bottom: 1px dotted #f3acac;
+}
