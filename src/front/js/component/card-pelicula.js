@@ -1,25 +1,34 @@
 import React from "react";
+import "../../styles/cardMovie.css";
 
-export default function CardPelicula() {
+export default function CardPelicula(props) {
   return (
     <div>
-      {/*<div className="card " style={{ width: "18rem" }}>
-        <img
-          className="card-img-top"
-          src="https://i0.wp.com/hipertextual.com/wp-content/uploads/2020/12/Evil-Toddler-Meme.jpg?fit=1200%2C800&quality=50&strip=all&ssl=1"
-          alt="movie-poster"
-        />
+      <div
+        className="tarjeta card text-light rounded mx-2"
+        style={{ width: "17rem", height: "32rem" }}
+      >
+        <img className="card-img-top" src={props.poster} alt="movie-poster" />
         <div className="card-body">
-          <h5 className="card-title">Card title</h5>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" className="btn btn-primary">
-            Go somewhere
-          </a>
+          <div className="d-flex">
+            <i
+              style={{ color: "yellow" }}
+              className="fas fa-star me-1 mt-1"
+            ></i>
+            <p>
+              <strong>{props.averageVote}</strong>
+            </p>
+          </div>
+          <div className="mx-1 botones rounded">
+            <button className="btn col text-light">
+              <i className="fa fa-plus me-2"></i>Mi lista
+            </button>
+          </div>
         </div>
-      </div>*/}
+      </div>
+      <div className="text-center mb-2">
+        <p className="card-title mt-3 titulo">{props.titulo}</p>
+      </div>
     </div>
   );
 }

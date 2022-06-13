@@ -13,7 +13,10 @@ a {
   text-decoration: none;
   color: white;
 }
-a:hover {
+li:hover {
   color: #f3acac;
   cursor: pointer;
+}
+li {
+  color: gray;
 }

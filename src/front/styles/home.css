@@ -1,3 +1,23 @@
 #home {
   background-color: black;
+  /*background-image: url("../../img/tema.jpg");*/
+}
+.overflow {
+  overflow-x: scroll;
+  max-width: 90%;
+  margin-left: 100px;
+}
+.overflow::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+.overflow::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+.overflow::-webkit-scrollbar-thumb {
+  background-color: #ce4c4c;
+  border-radius: 20px;
+  border: 2px solid #5e0606;
+}
+li {
+  list-style: none;
 }
