@@ -1,0 +1,51 @@
+import React from "react";
+import "../../styles/rates.css";
+
+export default function RatedMovie(props) {
+  return (
+    <div>
+      <div className="lista rounded ms-2 my-3 p-4 d-flex">
+        <img src={props.poster} className="poster me-2"></img>
+
+        <span
+          href="#"
+          className="list-group-item-action text-light"
+          aria-current="true"
+        >
+          <div className="d-flex w-100 justify-content-between mt-2">
+            <h5 className="mb-1">{props.titulo}</h5>
+            <small>
+              <i className="fas fa-film fa-lg"></i>
+            </small>
+          </div>
+          <div class="progress">
+            <div
+              className="progress-bar"
+              role="progressbar"
+              style={{
+                width: `5${props.rate}%`,
+              }}
+              aria-valuemin="0"
+              aria-valuemax="20"
+            >
+              {props.rate}
+            </div>
+          </div>
+          <small className="d-flex flex-start mt-2">Popularidad</small>
+          <div class="progress mt-1">
+            <div
+              className="progress-bar bg-warning"
+              role="progressbar"
+              style={{
+                width: `${props.popularidad}%`,
+              }}
+              aria-valuemin="0"
+              aria-valuemax="20"
+            ></div>
+          </div>
+          <small className="text-secondary">{props.fecha}</small>
+        </span>
+      </div>
+    </div>
+  );
+}

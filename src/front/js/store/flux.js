@@ -5,6 +5,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       peliculasPopulares: [],
       posters: [],
       generos: [],
+      proximamente: [],
+      enCines: [],
+      topRated: [],
       message: null,
       demo: [
         {
@@ -104,6 +107,45 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
         //console.log(indicePeliculas);
         return indicePeliculas;
+      },
+      enCines: async () => {
+        console.log("en cines.... buscando");
+
+        await fetch(
+          "https://api.themoviedb.org/3/movie/now_playing?api_key=87330f0fa794fb3eb980c887157031c9&page=1"
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.results);
+            setStore({ enCines: data.results });
+          })
+          .catch((error) => console.log("Algo salió mal", error));
+      },
+      topRated: async () => {
+        console.log("top rated... buscando");
+
+        await fetch(
+          "https://api.themoviedb.org/3/movie/top_rated?api_key=87330f0fa794fb3eb980c887157031c9&page=1"
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.results);
+            setStore({ topRated: data.results });
+          })
+          .catch((error) => console.log("Algo no va bien", error));
+      },
+      proximamente: async () => {
+        console.log("buscando las pelis en la API");
+
+        await fetch(
+          "https://api.themoviedb.org/3/movie/upcoming?api_key=87330f0fa794fb3eb980c887157031c9&page=1"
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.results);
+            setStore({ proximamente: data.results });
+          })
+          .catch((error) => console.log("Algo salió mal", error));
       },
       changeColor: (index, color) => {
         //get the store

@@ -1,7 +1,10 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
+import { object } from "prop-types";
+//COMPONENTES
 import CardPelicula from "../component/card-pelicula";
+import RatedMovie from "../component/rates";
 import Detalles from "../component/descripPoster";
 
 export const Home = (props) => {
@@ -41,40 +44,44 @@ export const Home = (props) => {
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img
-              src="https://estaticos-cdn.epe.es/clip/5f67e001-e043-4993-8880-b9a80b108be6_alta-libre-aspect-ratio_default_0.jpg"
+              src="https://los40.com/los40/imagenes/2022/03/29/cinetv/1648545776_800000_1648545862_gigante_normal.jpg"
               className="imagenPrinc"
               alt="..."
             />
             <div className="carousel-caption">
               <Detalles
-                title={"hola"}
-                description={"ashvbhsgdfailgdfiSOPGFUIEG"}
+                title={<h1 className="display-6 ms-3">"Sonic"</h1>}
+                description={"ANIMACION | ACCION | FANTASIA"}
               />
             </div>
           </div>
           <div className="carousel-item">
             <img
-              src="https://estaticos-cdn.epe.es/clip/5f67e001-e043-4993-8880-b9a80b108be6_alta-libre-aspect-ratio_default_0.jpg"
+              src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/3FF6648A2BB444D7A43CB0E41FD3E1F1AB3E0500CEF32F07A002ABDC30212A0D/scale?width=2880&aspectRatio=1.78&format=jpeg"
               className="imagenPrinc"
               alt="..."
             />
             <div className="carousel-caption">
               <Detalles
-                title={"hola"}
-                description={"ashvbhsgdfailgdfiSOPGFUIEG"}
+                title={
+                  <h1 className="display-6 ms-3">
+                    "Doctor Strange in the Multiverse of Madness"
+                  </h1>
+                }
+                description={"ACCION | SUPERHEROES | FANTASIA"}
               />
             </div>
           </div>
           <div className="carousel-item">
             <img
-              src="https://estaticos-cdn.epe.es/clip/5f67e001-e043-4993-8880-b9a80b108be6_alta-libre-aspect-ratio_default_0.jpg"
+              src="https://ntvb.tmsimg.com/assets/p22147304_v_h8_aa.jpg?w=960&h=540"
               className="imagenPrinc"
               alt="..."
             />
             <div className="carousel-caption">
               <Detalles
-                title={"hola"}
-                description={"ashvbhsgdfailgdfiSOPGFUIEG"}
+                title={<h1 className="display-6 ms-3">"Jackass"</h1>}
+                description={"COMEDIA | AVENTURA | ACCION"}
               />
             </div>
           </div>
@@ -135,28 +142,124 @@ export const Home = (props) => {
         </div>
       </div>
       <div className="text-light">
-        {/*SECCION DE GENEROS*/}
-
-        <h2 className="mt-3 text-start ps-5 py-4 ms-5">GENEROS</h2>
         <div>
-          {store.generos?.map((obj, index) => {
-            return (
-              <div key={index}>
-                <div
-                  className="flex-shrink-0 p-3 bg-gradient ms-1 d-flex"
-                  style={{ width: "280px" }}
+          <h2 className="mt-3 text-start ps-5 py-4 ms-5">MEJOR VALORADAS</h2>
+          <div className="d-flex">
+            {/*SECCION TOP-RATED*/}
+
+            <div className="d-flex overflow me-5">
+              {store.topRated?.map((obj, index) => {
+                return (
+                  <div key={index}>
+                    <RatedMovie
+                      key={index}
+                      poster={`https://image.tmdb.org/t/p/w500${obj.poster_path}`}
+                      titulo={obj.title}
+                      rate={obj.vote_average}
+                      fecha={obj.release_date}
+                      popularidad={obj.popularity}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+
+            {/*SECCION DE GENEROS Y PERSONAJES*/}
+          </div>
+          <div className="accordion d-flex mt-5">
+            <div className="accordion-item bg-transparent">
+              <h1 className="accordion-header">
+                <button
+                  className="accordion-button text-light ps-5"
+                  type="btn"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#panelsStayOpen-collapseOne"
+                  aria-expanded="true"
+                  aria-controls="panelsStayOpen-collapseOne"
                 >
-                  <div></div>
-                  <li key={index}>
-                    <i className="fas fa-tag me-3 ms-5"></i>
-                    {obj.name}
-                  </li>
+                  <h2>GENEROS</h2>
+                </button>
+              </h1>
+
+              <div
+                id="panelsStayOpen-collapseOne"
+                className="accordion-collapse collapse show"
+              >
+                <div className="accordion-body text-dark">
+                  <div>
+                    {store.generos?.map((obj, index) => {
+                      return (
+                        <div key={index}>
+                          <div
+                            className="flex-shrink-0 p-3 bg-gradient ms-1 d-flex"
+                            style={{ width: "280px" }}
+                          >
+                            <li key={index}>
+                              <i className="fas fa-tag me-3 ms-5"></i>
+                              {obj.name}
+                            </li>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
-            );
-          })}
+              <h2 className="mt-3 text-start py-4 ms-5">PRÓXIMAMENTE</h2>
+            </div>
+            <div className="d-flex pt-3 px-0 overflow">
+              {store.proximamente?.map((obj, index) => {
+                return (
+                  <div key={index}>
+                    <CardPelicula
+                      key={index}
+                      poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
+                      titulo={obj.title}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
+//{/*SECCION AHORA EN CINES*/}
+//<div>
+//  <h2 className="mt-3 text-start py-4 ms-5 ps-5">AHORA EN CINES</h2>
+//  <div className="px-5 mx-5">
+//    {store.enCines?.map((obj, index) => {
+//      return (
+//        <div key={index} className="text-light d-flex">
+//          <div className="col p-2 d-flex">
+//            <p>{obj.title}</p>
+//          </div>
+//          <div className="d-flex flex-start">
+//            <p>{obj.release_date}</p>
+//          </div>
+//          <div className="progress">
+//            <div
+//              className="progress-bar bg-danger"
+//              role="progressbar"
+//              style={{
+//                width: `4${obj.vote_average}%`,
+//              }}
+//              aria-valuemin="0"
+//              aria-valuemax="20"
+//            >
+//              {obj.vote_average}
+//            </div>
+//          </div>
+//          <button className="btn">
+//            <i className="fas fa-plus-square fa-2x"></i>
+//          </button>
+//        </div>
+//      );
+//    })}
+//  </div>
+//</div>
+
+//
+//
