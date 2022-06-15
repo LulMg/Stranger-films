@@ -3,7 +3,11 @@
 }
 
 .navbar {
-  background-image: linear-gradient(45deg, black 0 50%, red);
+  background-image: linear-gradient(
+    45deg,
+    rgba(37, 6, 6, 0.5) 0 30%,
+    rgba(253, 36, 36, 0.712)
+  );
 }
 
 #search {
@@ -20,4 +24,14 @@
   color: #f3acac;
   cursor: pointer;
   border-bottom: 1px dotted #f3acac;
+}
+/*.buscar {
+  background-color: rgba(220, 20, 60, 0.137);
+}*/
+.imagenPrinc {
+  width: 95rem;
+  height: 45rem;
+}
+a {
+  font-size: 20px;
 }

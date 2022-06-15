@@ -1,0 +1,8 @@
+.descrip {
+  background-image: linear-gradient(
+    to right,
+    rgba(70, 7, 7, 0.479),
+    rgba(255, 0, 0, 0)
+  );
+  border-radius: 10px;
+}

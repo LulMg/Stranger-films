@@ -20,9 +20,7 @@ export const Footer = () => (
       <div className="m-2">
         <ul>
           <h5>Participa</h5>
-          <li>
-            <a href="#">Aportaciones</a>
-          </li>
+          <li>Aportaciones</li>
           <li>Guía de aportaciones</li>
           <li>Añadir nueva película</li>
         </ul>
