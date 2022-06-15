@@ -2,12 +2,12 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       peliculas: [],
+      peliculasPrueba: [],
       peliculasPopulares: [],
       posters: [],
       generos: [],
       proximamente: [],
       enCines: [],
-      topRated: [],
       message: null,
       demo: [
         {
@@ -38,7 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         )
           .then((response) => response.json())
           .then((data) => {
-            console.log(data.results);
+            //console.log(data.results);
             setStore({ peliculasPopulares: data.results });
           })
           .catch((error) => console.log(error));
@@ -60,7 +60,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         )
           .then((response) => response.json())
           .then((data) => {
-            console.log(data.genres);
+            //console.log(data.genres);
             setStore({ generos: data.genres });
           })
           .catch((error) => console.log("Algo salió mal", error));
@@ -76,7 +76,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           )
             .then((response) => response.json())
             .then((data) => {
-              console.log(data.results);
+              //console.log(data.results);
               peliculasTotales = [...peliculasTotales, ...data.results];
               setStore({ peliculas: peliculasTotales });
             })
@@ -106,7 +106,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         }
         //console.log(indicePeliculas);
-        return indicePeliculas;
+
+        setStore({ peliculasPrueba: indicePeliculas });
+        console.log(getStore());
       },
       enCines: async () => {
         console.log("en cines.... buscando");
@@ -116,23 +118,37 @@ const getState = ({ getStore, getActions, setStore }) => {
         )
           .then((response) => response.json())
           .then((data) => {
-            console.log(data.results);
+            //console.log(data.results);
             setStore({ enCines: data.results });
           })
           .catch((error) => console.log("Algo salió mal", error));
       },
-      topRated: async () => {
-        console.log("top rated... buscando");
+      topRated: () => {
+        let store = getStore();
+        store.peliculas.sort(function (a, b) {
+          if (a.vote_average < b.vote_average) {
+            return 1;
+          }
+          if (a.vote_average > b.vote_average) {
+            return -1;
+          }
+          return 0;
+        });
+        //console.log("peliculas ordenadas por votos", store.peliculas);
+      },
+      ordenarPor: (propiedad) => {
+        console.log("aaa");
+        let store = getStore();
 
-        await fetch(
-          "https://api.themoviedb.org/3/movie/top_rated?api_key=87330f0fa794fb3eb980c887157031c9&page=1"
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data.results);
-            setStore({ topRated: data.results });
-          })
-          .catch((error) => console.log("Algo no va bien", error));
+        store.peliculas.sort(function (a, b) {
+          if (a.propiedad < b.propiedad) {
+            return 1;
+          }
+          if (a.propiedad > b.propiedad) {
+            return -1;
+          }
+          return 0;
+        });
       },
       proximamente: async () => {
         console.log("buscando las pelis en la API");
@@ -142,7 +158,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         )
           .then((response) => response.json())
           .then((data) => {
-            console.log(data.results);
+            //console.log(data.results);
             setStore({ proximamente: data.results });
           })
           .catch((error) => console.log("Algo salió mal", error));
