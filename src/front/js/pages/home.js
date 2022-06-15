@@ -6,10 +6,15 @@ import { object } from "prop-types";
 import CardPelicula from "../component/card-pelicula";
 import RatedMovie from "../component/rates";
 import Detalles from "../component/descripPoster";
+import { useState, useEffect } from "react";
 
 export const Home = (props) => {
   const { store, actions } = useContext(Context);
-
+  const [categoria, setCategoia] = useState(12);
+  //EN LA VARIABLE DE ESTADO CATEGORIA PONEMOS UN USEEFECT PARA QUE NOS MUESTRE LA LISTA DE PELICULAS ORDENADAS POR GENERO
+  //useEffect(() => {
+  //  store.peliculas.length > 0 && actions.filtroDeGenero(12);
+  //}, []);
   return (
     <div className="text-center" id="home">
       {/*CAROUSEL ESTRENOS*/}
@@ -118,12 +123,35 @@ export const Home = (props) => {
         <h2
           className="mt-3 text-start ps-5 py-4 ms-5"
           onClick={() => {
-            var arraysFiltrados = actions.filtroDeGenero(12);
-            console.log(arraysFiltrados);
+            actions.filtroDeGenero(12);
           }}
         >
           POPULARES
         </h2>
+        <div>
+          //NOS GENERA UNA LISTA DINAMICA EN BASE AL GENERO QUE SE ENCUENTRA
+          ALMACENADO EN PELICULASGENERO
+          <ul>
+            {/*{store.peliculasPrueba?.map((obj, index) => {
+              return <li key={index}>{obj}</li>;
+            })}*/}
+            {
+              store.peliculas?.map((obj, index) => {
+                if (
+                  store.peliculasPrueba.includes(obj.index) &&
+                  store.peliculasPrueba > 0
+                ) {
+                  return <li>{store.peliculas[index].title}</li>;
+                }
+              })
+              //for(let i=0; i<store.peliculas.length -1; i++){
+              //  //if(store.peliculasPrueba == i){
+              //  return <li>{peliculas[i].title}</li>;
+              //
+              //  //}
+            }
+          </ul>
+        </div>
         <div className="d-flex pt-3 px-0 overflow">
           {/*COMPONENTE CARDMOVIE*/}
 
@@ -143,12 +171,17 @@ export const Home = (props) => {
       </div>
       <div className="text-light">
         <div>
-          <h2 className="mt-3 text-start ps-5 py-4 ms-5">MEJOR VALORADAS</h2>
+          <h2
+            className="mt-3 text-start ps-5 py-4 ms-5"
+            onClick={actions.topRated()}
+          >
+            MEJOR VALORADAS
+          </h2>
           <div className="d-flex">
             {/*SECCION TOP-RATED*/}
 
             <div className="d-flex overflow me-5">
-              {store.topRated?.map((obj, index) => {
+              {store.peliculas?.map((obj, index) => {
                 return (
                   <div key={index}>
                     <RatedMovie
