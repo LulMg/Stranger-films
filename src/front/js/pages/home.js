@@ -123,39 +123,38 @@ export const Home = (props) => {
         <h2
           className="mt-3 text-start ps-5 py-4 ms-5"
           onClick={() => {
-            actions.filtroDeGenero(12);
+            actions.filtroDeGenero(10752);
           }}
         >
           POPULARES
+        </h2>
+        <h2
+          className="mt-3 text-start ps-5 py-4 ms-5"
+          onClick={() => {
+            actions.popularidad();
+          }}
+        >
+          ORDENAR POR POPULARIDAD
         </h2>
         <div>
           //NOS GENERA UNA LISTA DINAMICA EN BASE AL GENERO QUE SE ENCUENTRA
           ALMACENADO EN PELICULASGENERO
           <ul>
-            {/*{store.peliculasPrueba?.map((obj, index) => {
-              return <li key={index}>{obj}</li>;
-            })}*/}
-            {
-              store.peliculas?.map((obj, index) => {
-                if (
-                  store.peliculasPrueba.includes(obj.index) &&
-                  store.peliculasPrueba > 0
-                ) {
-                  return <li>{store.peliculas[index].title}</li>;
+            {store.peliculas?.map((pelicula, index) => {
+              store.peliculasPrueba.map((peliprueba, indice) => {
+                if (peliprueba === index) {
+                  console.log("DESDE HOME => peli de genero ", pelicula.title);
+                  return <li key={index}>{pelicula.title}</li>;
                 }
-              })
-              //for(let i=0; i<store.peliculas.length -1; i++){
-              //  //if(store.peliculasPrueba == i){
-              //  return <li>{peliculas[i].title}</li>;
-              //
-              //  //}
-            }
+              });
+              // return <li key={index}>{pelicula.title}</li>;
+            })}
           </ul>
         </div>
         <div className="d-flex pt-3 px-0 overflow">
           {/*COMPONENTE CARDMOVIE*/}
 
-          {store.peliculasPopulares?.map((obj, index) => {
+          {store.peliculas?.map((obj, index) => {
             return (
               <div key={index}>
                 <CardPelicula
@@ -227,7 +226,20 @@ export const Home = (props) => {
                             className="flex-shrink-0 p-3 bg-gradient ms-1 d-flex"
                             style={{ width: "280px" }}
                           >
-                            <li key={index}>
+                            {/* HACEMOS QUE EL KEY SEA EL OBJ.ID ASÍ LUEGO LO APROVECHAMOS 
+        PARA HACER LA BUSQUEDA POR GENEROS AL LLAMAR A LA FUNCION DE MOSTRAR
+        POR GENERO EL ID SE CORRESPONDE CON LA CONSULTA DEVUELTA POR LA API Y QUE
+        CONTIENE EL GENERO DE CADA PELICULA
+        EJ :     {
+        "id": 37,
+        "name": "Western"}
+      */}
+                            <li
+                              key={obj.id} //al poner de ID el OBJ.ID Coincide con el genero de la API de MOVIEDB
+                              onClick={() => {
+                                actions.filtroDeGenero(obj.id); //
+                              }}
+                            >
                               <i className="fas fa-tag me-3 ms-5"></i>
                               {obj.name}
                             </li>

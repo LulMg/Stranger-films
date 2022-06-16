@@ -91,22 +91,18 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         for (var i = 0; i < store.peliculas.length - 1; i++) {
           for (var x = 0; x < store.peliculas[i].genre_ids.length - 1; x++) {
-            //if (store.peliculas[i].genre_ids[x] == genero) {
-            //  console.log("encontrada pelicula con indice", i);
-            //  indicePeliculas.push(i);
-            //}
             if (store.peliculas[i].genre_ids[x] == genero) {
               //SI ES DEL GENERO ACCION (12) MOSTRAMOS EL TITULO
               console.log(
-                "ENCONTRADA PELICULO CON GENERO 12",
+                "DESDE FLUX => ENCONTRADA PELICULO CON GENERO ",
+                genero,
+                "  ",
                 store.peliculas[i].original_title
               );
               indicePeliculas.push(i);
             } //FIN IF
           }
         }
-        //console.log(indicePeliculas);
-
         setStore({ peliculasPrueba: indicePeliculas });
         console.log(getStore());
       },
@@ -136,19 +132,21 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         //console.log("peliculas ordenadas por votos", store.peliculas);
       },
-      ordenarPor: (propiedad) => {
-        console.log("aaa");
+      popularidad: () => {
+        console.log("ORDENANDO POR POPULARIDAD");
         let store = getStore();
 
         store.peliculas.sort(function (a, b) {
-          if (a.propiedad < b.propiedad) {
+          if (a.popularity > b.popularity) {
             return 1;
           }
-          if (a.propiedad > b.propiedad) {
+          if (a.popularity < b.popularity) {
             return -1;
           }
           return 0;
         });
+        setStore({ peliculasPopulares: store.peliculas });
+        console.log(getStore());
       },
       proximamente: async () => {
         console.log("buscando las pelis en la API");
