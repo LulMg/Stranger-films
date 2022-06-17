@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { object } from "prop-types";
+import { useState, useEffect } from "react";
 //COMPONENTES
 import CardPelicula from "../component/card-pelicula";
 import RatedMovie from "../component/rates";
 import Detalles from "../component/descripPoster";
-import { useState, useEffect } from "react";
 
 export const Home = (props) => {
   const { store, actions } = useContext(Context);

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "../../styles/navbar.css";
+import { LogIn } from "../component/login";
 
 //funcion que retorna el NAVBAR
 export const Navbar = () => {
@@ -50,7 +51,9 @@ export const Navbar = () => {
               </button>
             </div>
             <div className="divisor bg-light me-3"></div>
-            <h6 className="text-light mt-1 me-2">iniciar sesión</h6>
+            <h6 className="text-light mt-1 me-2" onClick={() => {}}>
+              iniciar sesión
+            </h6>
           </div>
         </div>
       </nav>
