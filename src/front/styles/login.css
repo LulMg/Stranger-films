@@ -3,12 +3,12 @@ body {
   color: rgba(0, 0, 0, 0);
 }
 
-@font-face {
+/* @font-face {
   font-family: benguiat;
   src: url(Benguiat\ Bold.ttf);
-}
+} */
 
-.container {
+.container-login {
   border: 1px solid white;
   width: 600px;
   height: 350px;
