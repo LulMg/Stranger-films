@@ -1,0 +1,153 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgba(0, 0, 0, 0);
+}
+
+@font-face {
+  font-family: benguiat;
+  src: url(Benguiat\ Bold.ttf);
+}
+
+.container {
+  border: 1px solid white;
+  width: 600px;
+  height: 350px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  background-image: url(https://i0.wp.com/hipertextual.com/wp-content/uploads/2016/07/stranger_things_duffer_matt_ferguson.jpg?fit=1000%2C667&ssl=1);
+}
+.backbox {
+  background-color: #00000063;
+  width: 100%;
+  height: 80%;
+  position: absolute;
+  transform: translate(0, -50%);
+  top: 50%;
+  display: inline-flex;
+}
+
+.frontbox {
+  background-color: rgb(41, 41, 41);
+  border-radius: 40px;
+  height: 100%;
+  width: 50%;
+  z-index: 10;
+  position: absolute;
+  right: 0;
+  margin-right: 3%;
+  margin-left: 3%;
+  transition: right 0.8s ease-in-out;
+}
+
+.moving {
+  right: 45%;
+}
+
+.loginMsg,
+.signupMsg {
+  width: 50%;
+  height: 100%;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.loginMsg .title,
+.signupMsg .title {
+  font-weight: 300;
+  font-size: 23px;
+  font-family: benguiat;
+}
+
+.loginMsg p,
+.signupMsg p {
+  font-weight: 100;
+}
+
+.textcontent {
+  color: white;
+  margin-top: 65px;
+  margin-left: 12%;
+}
+
+.loginMsg button,
+.signupMsg button {
+  background-color: #000000;
+  border: 2px solid white;
+  border-radius: 10px;
+  color: white;
+  font-size: 12px;
+  box-sizing: content-box;
+  font-weight: 300;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+/* front box content*/
+.login,
+.signup {
+  padding: 20px;
+  text-align: center;
+}
+
+.login h2,
+.signup h2 {
+  color: #b72929;
+  font-size: 22px;
+  font-family: benguiat;
+}
+
+.inputbox {
+  margin-top: 30px;
+}
+.login input,
+.signup input {
+  display: block;
+  width: 100%;
+  height: 40px;
+  background-color: #f2f2f2;
+  border: none;
+  margin-bottom: 20px;
+  font-size: 12px;
+}
+
+.login button,
+.signup button {
+  background-color: #b72929;
+  border: none;
+  color: white;
+  font-size: 12px;
+  font-weight: 300;
+  box-sizing: content-box;
+  padding: 10px;
+  border-radius: 10px;
+  width: 60px;
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  cursor: pointer;
+}
+
+/* Fade In & Out*/
+.login p {
+  cursor: pointer;
+  color: #900000;
+  font-size: 15px;
+  font-family: benguiat;
+}
+
+.loginMsg,
+.signupMsg {
+  /*opacity: 1;*/
+  transition: opacity 0.8s ease-in-out;
+}
+
+.visibility {
+  opacity: 0;
+}
+
+.hide {
+  display: none;
+}
