@@ -120,13 +120,14 @@ export const Home = (props) => {
       {/*SECCION DE POPULARES*/}
 
       <div className="tendencias text-light">
+        <h2 className="mt-3 text-start ps-5 py-4 ms-5">POPULARES</h2>
         <h2
           className="mt-3 text-start ps-5 py-4 ms-5"
           onClick={() => {
             actions.popularidad();
           }}
         >
-          POPULARES
+          ORDENAR POR POPULARIDAD
         </h2>
         <div>
           {/*//NOS GENERA UNA LISTA DINAMICA EN BASE AL GENERO QUE SE ENCUENTRA
@@ -146,7 +147,7 @@ export const Home = (props) => {
         <div className="d-flex pt-3 px-0 overflow">
           {/*COMPONENTE CARDMOVIE*/}
 
-          {store.peliculasPopulares?.map((obj, index) => {
+          {store.peliculas?.map((obj, index) => {
             return (
               <div key={index}>
                 <CardPelicula

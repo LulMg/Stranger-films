@@ -147,19 +147,21 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         //console.log("peliculas ordenadas por votos", store.peliculas);
       },
-      ordenarPor: (propiedad) => {
-        console.log("aaa");
+      popularidad: () => {
+        console.log("ORDENANDO POR POPULARIDAD");
         let store = getStore();
 
         store.peliculas.sort(function (a, b) {
-          if (a.propiedad < b.propiedad) {
+          if (a.popularity > b.popularity) {
             return 1;
           }
-          if (a.propiedad > b.propiedad) {
+          if (a.popularity < b.popularity) {
             return -1;
           }
           return 0;
         });
+        setStore({ peliculasPopulares: store.peliculas });
+        console.log(getStore());
       },
       proximamente: async () => {
         console.log("buscando las pelis en la API");
