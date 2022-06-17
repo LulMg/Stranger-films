@@ -123,33 +123,24 @@ export const Home = (props) => {
         <h2
           className="mt-3 text-start ps-5 py-4 ms-5"
           onClick={() => {
-            actions.filtroDeGenero(12);
+            actions.popularidad();
           }}
         >
           POPULARES
         </h2>
         <div>
-          //NOS GENERA UNA LISTA DINAMICA EN BASE AL GENERO QUE SE ENCUENTRA
-          ALMACENADO EN PELICULASGENERO
+          {/*//NOS GENERA UNA LISTA DINAMICA EN BASE AL GENERO QUE SE ENCUENTRA
+          ALMACENADO EN PELICULASGENERO*/}
           <ul>
-            {/*{store.peliculasPrueba?.map((obj, index) => {
-              return <li key={index}>{obj}</li>;
-            })}*/}
-            {
-              store.peliculas?.map((obj, index) => {
-                if (
-                  store.peliculasPrueba.includes(obj.index) &&
-                  store.peliculasPrueba > 0
-                ) {
-                  return <li>{store.peliculas[index].title}</li>;
+            {store.peliculas?.map((pelicula, index) => {
+              store.peliculasPrueba.map((peliprueba, indice) => {
+                if (peliprueba === index) {
+                  console.log("DESDE HOME => peli de genero ", pelicula.title);
+                  return <li key={index}>{pelicula.title}</li>;
                 }
-              })
-              //for(let i=0; i<store.peliculas.length -1; i++){
-              //  //if(store.peliculasPrueba == i){
-              //  return <li>{peliculas[i].title}</li>;
-              //
-              //  //}
-            }
+              });
+              // return <li key={index}>{pelicula.title}</li>;
+            })}
           </ul>
         </div>
         <div className="d-flex pt-3 px-0 overflow">
@@ -160,7 +151,7 @@ export const Home = (props) => {
               <div key={index}>
                 <CardPelicula
                   key={index}
-                  poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
+                  poster={`https://image.tmdb.org/t/p/w342/${obj.poster_path}`}
                   averageVote={obj.vote_average}
                   titulo={obj.title}
                 />
@@ -186,7 +177,7 @@ export const Home = (props) => {
                   <div key={index}>
                     <RatedMovie
                       key={index}
-                      poster={`https://image.tmdb.org/t/p/w500${obj.poster_path}`}
+                      poster={`https://image.tmdb.org/t/p/w154${obj.poster_path}`}
                       titulo={obj.title}
                       rate={obj.vote_average}
                       fecha={obj.release_date}
@@ -196,9 +187,11 @@ export const Home = (props) => {
                 );
               })}
             </div>
-
-            {/*SECCION DE GENEROS Y PERSONAJES*/}
           </div>
+          <h2 className="mt-5 text-start proximamente">PRÓXIMAMENTE</h2>
+
+          {/*SECCION DE GENEROS Y PERSONAJES*/}
+
           <div className="accordion d-flex mt-5">
             <div className="accordion-item bg-transparent">
               <h1 className="accordion-header">
@@ -227,7 +220,20 @@ export const Home = (props) => {
                             className="flex-shrink-0 p-3 bg-gradient ms-1 d-flex"
                             style={{ width: "280px" }}
                           >
-                            <li key={index}>
+                            {/* HACEMOS QUE EL KEY SEA EL OBJ.ID ASÍ LUEGO LO APROVECHAMOS 
+                              PARA HACER LA BUSQUEDA POR GENEROS AL LLAMAR A LA FUNCION DE MOSTRAR
+                              POR GENERO EL ID SE CORRESPONDE CON LA CONSULTA DEVUELTA POR LA API Y QUE
+                              CONTIENE EL GENERO DE CADA PELICULA
+                              EJ :     {
+                              "id": 37,
+                              "name": "Western"}
+                            */}
+                            <li
+                              key={obj.id} //al poner de ID el OBJ.ID Coincide con el genero de la API de MOVIEDB
+                              onClick={() => {
+                                actions.filtroDeGenero(obj.id); //
+                              }}
+                            >
                               <i className="fas fa-tag me-3 ms-5"></i>
                               {obj.name}
                             </li>
@@ -238,7 +244,6 @@ export const Home = (props) => {
                   </div>
                 </div>
               </div>
-              <h2 className="mt-3 text-start py-4 ms-5">PRÓXIMAMENTE</h2>
             </div>
             <div className="d-flex pt-3 px-0 overflow">
               {store.proximamente?.map((obj, index) => {
@@ -296,3 +301,4 @@ export const Home = (props) => {
 
 //
 //
+/* */

@@ -19,6 +19,7 @@
 }
 .nav-link {
   color: white;
+  font-size: medium;
 }
 .nav-link:hover {
   color: #f3acac;
@@ -31,7 +32,4 @@
 .imagenPrinc {
   width: 95rem;
   height: 45rem;
-}
-a {
-  font-size: 20px;
 }
