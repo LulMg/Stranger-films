@@ -139,9 +139,9 @@ export const Home = (props) => {
         <div>
           //NOS GENERA UNA LISTA DINAMICA EN BASE AL GENERO QUE SE ENCUENTRA
           ALMACENADO EN PELICULASGENERO
-          <ul>
+          {/* <ul>
             {store.peliculas?.map((pelicula, index) => {
-              store.peliculasPrueba.map((peliprueba, indice) => {
+              store.peliculasPopulares.map((peliprueba, indice) => {
                 if (peliprueba === index) {
                   console.log("DESDE HOME => peli de genero ", pelicula.title);
                   return <li key={index}>{pelicula.title}</li>;
@@ -149,12 +149,12 @@ export const Home = (props) => {
               });
               // return <li key={index}>{pelicula.title}</li>;
             })}
-          </ul>
+          </ul> */}
         </div>
         <div className="d-flex pt-3 px-0 overflow">
           {/*COMPONENTE CARDMOVIE*/}
 
-          {store.peliculas?.map((obj, index) => {
+          {store.peliculasPopulares?.map((obj, index) => {
             return (
               <div key={index}>
                 <CardPelicula
