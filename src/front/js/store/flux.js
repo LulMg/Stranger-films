@@ -5,6 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       peliculasPrueba: [],
       peliculasPopulares: [],
       peliculasporVotos: [],
+      carrousel: [],
       posters: [],
       generos: [],
       proximamente: [],
@@ -52,14 +53,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) =>
             console.log("Error loading message from backend", error)
           );
-      },
-      cargarCarrousel: () => {
-        //Funcion para cargar las tres peliculas AL AZAR para el carrousel
-        var tresAleatorios = [];
-        for (let i = 0; i < 3; i++) {
-          tresAleatorios.push(Math.floor(Math.random() * 399 + 1));
-        }
-        console.log(tresAleatorios);
       },
 
       generosDePeliculas: async () => {
@@ -180,6 +173,19 @@ const getState = ({ getStore, getActions, setStore }) => {
             " " + store.peliculasPopulares[i].title
           );
         }
+      },
+      cargarCarrousel: () => {
+        //Funcion para cargar las tres peliculas AL AZAR para el carrousel
+        const store = getStore();
+        var tresAleatorios = [];
+        for (let i = 0; i < 3; i++) {
+          tresAleatorios.push(Math.floor(Math.random() * 399 + 1));
+        }
+        console.log(tresAleatorios);
+        for (var i = 0; i < 3; i++) {
+          store.carrousel.push(store.peliculas[tresAleatorios[i]]);
+        }
+        console.log(store.carrousel);
       },
       proximamente: async () => {
         console.log("buscando las pelis en la API");

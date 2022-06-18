@@ -47,7 +47,42 @@ export const Home = (props) => {
           ></button>
         </div>
         <div className="carousel-inner">
-          <div className="carousel-item active">
+          {store.carrousel?.map((obj, index) => {
+            if (index == 0) {
+              return (
+                <div className="carousel-item active">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${obj.backdrop_path}`}
+                    className="imagenPrinc"
+                    alt="..."
+                  />
+                  <div className="carousel-caption">
+                    <Detalles
+                      title={<h1 className="display-6 ms-3">{obj.title}</h1>}
+                      description="kasdfjkadsfasdf"
+                    />
+                  </div>
+                </div>
+              );
+            } else {
+              return (
+                <div className="carousel-item">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${obj.backdrop_path}`}
+                    className="imagenPrinc"
+                    alt="..."
+                  />
+                  <div className="carousel-caption">
+                    <Detalles
+                      title={<h1 className="display-6 ms-3">{obj.title}</h1>}
+                      description="kasdfjkadsfasdf"
+                    />
+                  </div>
+                </div>
+              );
+            }
+          })}
+          {/* <div className="carousel-item active">
             <img
               src="https://los40.com/los40/imagenes/2022/03/29/cinetv/1648545776_800000_1648545862_gigante_normal.jpg"
               className="imagenPrinc"
@@ -59,8 +94,8 @@ export const Home = (props) => {
                 description={"ANIMACION | ACCION | FANTASIA"}
               />
             </div>
-          </div>
-          <div className="carousel-item">
+          </div> */}
+          {/* <div className="carousel-item">
             <img
               src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/3FF6648A2BB444D7A43CB0E41FD3E1F1AB3E0500CEF32F07A002ABDC30212A0D/scale?width=2880&aspectRatio=1.78&format=jpeg"
               className="imagenPrinc"
@@ -76,8 +111,8 @@ export const Home = (props) => {
                 description={"ACCION | SUPERHEROES | FANTASIA"}
               />
             </div>
-          </div>
-          <div className="carousel-item">
+          </div> */}
+          {/* <div className="carousel-item">
             <img
               src="https://ntvb.tmsimg.com/assets/p22147304_v_h8_aa.jpg?w=960&h=540"
               className="imagenPrinc"
@@ -89,7 +124,7 @@ export const Home = (props) => {
                 description={"COMEDIA | AVENTURA | ACCION"}
               />
             </div>
-          </div>
+          </div> */}
         </div>
         <button
           className="carousel-control-prev"
@@ -130,9 +165,9 @@ export const Home = (props) => {
         </h2>
         <h2
           className="mt-3 text-start ps-5 py-4 ms-5"
-          onClick={() => {
-            actions.popularidad();
-          }}
+          // onClick={() => {
+          //   actions.popularidad();
+          // }}
         >
           ORDENAR POR POPULARIDAD
         </h2>

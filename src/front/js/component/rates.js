@@ -18,7 +18,7 @@ export default function RatedMovie(props) {
               <i className="fas fa-film fa-lg"></i>
             </small>
           </div>
-          <div class="progress">
+          <div className="progress">
             <div
               className="progress-bar"
               role="progressbar"
@@ -32,7 +32,7 @@ export default function RatedMovie(props) {
             </div>
           </div>
           <small className="d-flex flex-start mt-2">Popularidad</small>
-          <div class="progress mt-1">
+          <div className="progress mt-1">
             <div
               className="progress-bar bg-warning"
               role="progressbar"
