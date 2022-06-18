@@ -27,8 +27,23 @@ const getState = ({ getStore, getActions, setStore }) => {
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
+      popularidad: () => {
+        console.log("ORDENANDO POR POPULARIDAD");
+        let store = getStore();
 
-      loadFilmsFromExternalAPI: async () => {
+        store.peliculas.sort(function (a, b) {
+          if (a.popularity > b.popularity) {
+            return 1;
+          }
+          if (a.popularity < b.popularity) {
+            return -1;
+          }
+          return 0;
+        });
+        setStore({ peliculasPopulares: store.peliculas });
+        console.log(getStore());
+      },
+      cargaPopulares: async () => {
         //CONECTAMOS A LA API EXTERNA Y TRATAMOS DE LEER LAS PELICULAS
         console.log("INTENTAMOS CONECTAR A LA API EXTERNA");
         //ÚNICAMENTE SE ESTÁ CARGANDO LA PRIMERA PAGINA, PELICULAS EN INGLES

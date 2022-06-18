@@ -30,4 +30,8 @@ li {
     rgba(37, 6, 6, 0.849) 0 30%,
     rgba(253, 36, 36, 0.774)
   );
+  width: 21rem;
+}
+.proximamente {
+  margin-left: 28rem;
 }

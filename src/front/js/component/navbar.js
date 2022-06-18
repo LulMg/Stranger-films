@@ -9,12 +9,33 @@ export const Navbar = () => {
     <div>
       <nav className="navbar navbar-expand-lg">
         <div className="container d-flex">
-          <div>
+          <div className="d-flex">
             <Link to="/">
               <span className="navbar-brand mb-0 h1">
                 <img className="logo" src={logo}></img>
               </span>
             </Link>
+            <div className="d-flex">
+              <div className="d-flex">
+                <a
+                  className="nav-link active py-3 mt-2"
+                  aria-current="page"
+                  href="#"
+                >
+                  Principal
+                </a>
+                <div className="divisor bg-light mt-4"></div>
+
+                <a className="nav-link py-3 mt-2 border-danger" href="#">
+                  Películas
+                </a>
+                <div className="divisor bg-light mt-4"></div>
+
+                <a className="nav-link py-3 mt-2" href="#">
+                  Más
+                </a>
+              </div>
+            </div>
           </div>
           <div className="d-flex">
             <div className="ml-auto d-flex bg-tranparent bg-gradient rounded-pill me-3">
@@ -33,32 +54,6 @@ export const Navbar = () => {
           </div>
         </div>
       </nav>
-      <div className="d-flex justify-content-center">
-        <div className="d-flex">
-          <a
-            className="nav-link active px-5 py-3 mb-2 "
-            aria-current="page"
-            href="#"
-          >
-            Principal
-          </a>
-          <a
-            className="nav-link border-start px-5 py-3 mb-2 border-danger"
-            href="#"
-          >
-            Películas
-          </a>
-          <a
-            className="nav-link border-start px-5 py-3 mb-2 border-danger"
-            href="#"
-          >
-            Más
-          </a>
-          <a className="nav-link disabled border-start px-5 py-3 mb-2 border-danger">
-            Disabled
-          </a>
-        </div>
-      </div>
     </div>
   );
 };

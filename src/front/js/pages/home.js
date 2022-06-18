@@ -120,14 +120,7 @@ export const Home = (props) => {
       {/*SECCION DE POPULARES*/}
 
       <div className="tendencias text-light">
-        <h2
-          className="mt-3 text-start ps-5 py-4 ms-5"
-          onClick={() => {
-            actions.filtroDeGenero(10752);
-          }}
-        >
-          POPULARES
-        </h2>
+        <h2 className="mt-3 text-start ps-5 py-4 ms-5">POPULARES</h2>
         <h2
           className="mt-3 text-start ps-5 py-4 ms-5"
           onClick={() => {
@@ -137,8 +130,8 @@ export const Home = (props) => {
           ORDENAR POR POPULARIDAD
         </h2>
         <div>
-          //NOS GENERA UNA LISTA DINAMICA EN BASE AL GENERO QUE SE ENCUENTRA
-          ALMACENADO EN PELICULASGENERO
+          {/*//NOS GENERA UNA LISTA DINAMICA EN BASE AL GENERO QUE SE ENCUENTRA
+          ALMACENADO EN PELICULASGENERO*/}
           <ul>
             {store.peliculas?.map((pelicula, index) => {
               store.peliculasPrueba.map((peliprueba, indice) => {
@@ -159,7 +152,7 @@ export const Home = (props) => {
               <div key={index}>
                 <CardPelicula
                   key={index}
-                  poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
+                  poster={`https://image.tmdb.org/t/p/w342/${obj.poster_path}`}
                   averageVote={obj.vote_average}
                   titulo={obj.title}
                 />
@@ -185,7 +178,7 @@ export const Home = (props) => {
                   <div key={index}>
                     <RatedMovie
                       key={index}
-                      poster={`https://image.tmdb.org/t/p/w500${obj.poster_path}`}
+                      poster={`https://image.tmdb.org/t/p/w154${obj.poster_path}`}
                       titulo={obj.title}
                       rate={obj.vote_average}
                       fecha={obj.release_date}
@@ -195,9 +188,11 @@ export const Home = (props) => {
                 );
               })}
             </div>
-
-            {/*SECCION DE GENEROS Y PERSONAJES*/}
           </div>
+          <h2 className="mt-5 text-start proximamente">PRÓXIMAMENTE</h2>
+
+          {/*SECCION DE GENEROS Y PERSONAJES*/}
+
           <div className="accordion d-flex mt-5">
             <div className="accordion-item bg-transparent">
               <h1 className="accordion-header">
@@ -227,13 +222,13 @@ export const Home = (props) => {
                             style={{ width: "280px" }}
                           >
                             {/* HACEMOS QUE EL KEY SEA EL OBJ.ID ASÍ LUEGO LO APROVECHAMOS 
-        PARA HACER LA BUSQUEDA POR GENEROS AL LLAMAR A LA FUNCION DE MOSTRAR
-        POR GENERO EL ID SE CORRESPONDE CON LA CONSULTA DEVUELTA POR LA API Y QUE
-        CONTIENE EL GENERO DE CADA PELICULA
-        EJ :     {
-        "id": 37,
-        "name": "Western"}
-      */}
+                              PARA HACER LA BUSQUEDA POR GENEROS AL LLAMAR A LA FUNCION DE MOSTRAR
+                              POR GENERO EL ID SE CORRESPONDE CON LA CONSULTA DEVUELTA POR LA API Y QUE
+                              CONTIENE EL GENERO DE CADA PELICULA
+                              EJ :     {
+                              "id": 37,
+                              "name": "Western"}
+                            */}
                             <li
                               key={obj.id} //al poner de ID el OBJ.ID Coincide con el genero de la API de MOVIEDB
                               onClick={() => {
@@ -250,7 +245,6 @@ export const Home = (props) => {
                   </div>
                 </div>
               </div>
-              <h2 className="mt-3 text-start py-4 ms-5">PRÓXIMAMENTE</h2>
             </div>
             <div className="d-flex pt-3 px-0 overflow">
               {store.proximamente?.map((obj, index) => {
@@ -308,3 +302,4 @@ export const Home = (props) => {
 
 //
 //
+/* */
