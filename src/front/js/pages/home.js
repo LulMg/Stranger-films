@@ -165,15 +165,9 @@ export const Home = (props) => {
           ORDENAR POR POPULARIDAD
         </h2>
         <div>
-<<<<<<< HEAD
           //NOS GENERA UNA LISTA DINAMICA EN BASE AL GENERO QUE SE ENCUENTRA
           ALMACENADO EN PELICULASGENERO
           {/* <ul>
-=======
-          {/*//NOS GENERA UNA LISTA DINAMICA EN BASE AL GENERO QUE SE ENCUENTRA
-          ALMACENADO EN PELICULASGENERO*/}
-          <ul>
->>>>>>> 8b14cb3122deb87e02f8f1c95e992e773124c2e5
             {store.peliculas?.map((pelicula, index) => {
               store.peliculasPopulares.map((peliprueba, indice) => {
                 if (peliprueba === index) {
