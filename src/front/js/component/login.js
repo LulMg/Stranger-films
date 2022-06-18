@@ -3,7 +3,7 @@ import "../../styles/login.css";
 import logo from "../../img/logo.png";
 
 export const LogIn = () => (
-  <div className="container">
+  <div className="container-login">
     <div className="backbox">
       <div className="loginMsg">
         <div className="textcontent">
