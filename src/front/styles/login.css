@@ -58,7 +58,6 @@ body {
 .signupMsg .title {
   font-weight: 300;
   font-size: 23px;
-  font-family: benguiat;
 }
 
 .loginMsg p,
@@ -96,7 +95,6 @@ body {
 .signup h2 {
   color: #b72929;
   font-size: 22px;
-  font-family: benguiat;
 }
 
 .inputbox {
@@ -135,7 +133,6 @@ body {
   cursor: pointer;
   color: #900000;
   font-size: 15px;
-  font-family: benguiat;
 }
 
 .loginMsg,

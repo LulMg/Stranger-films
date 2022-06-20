@@ -3,7 +3,7 @@ import "../../styles/footer.css";
 import logo from "../../img/logo.png";
 
 export const Footer = () => (
-  <footer className="footer mt-auto py-3 container">
+  <footer className="footer mt-auto py-3 container mt-5">
     <div className="d-flex text-light text-center">
       <div>
         <img className="logo-footer mt-4 me-4" src={logo}></img>
