@@ -11,10 +11,6 @@ export default function CardPelicula(props) {
         <img className="card-img-top" src={props.poster} alt="movie-poster" />
         <div className="card-body">
           <div className="d-flex">
-            <i
-              style={{ color: "yellow" }}
-              className="fas fa-star me-1 mt-1"
-            ></i>
             <p>
               <strong>{props.averageVote}</strong>
             </p>

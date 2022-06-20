@@ -155,18 +155,17 @@ export const Home = (props) => {
       {/*SECCION DE POPULARES*/}
 
       <div className="tendencias text-light">
-        <h2 className="mt-3 text-start ps-5 py-4 ms-5">POPULARES</h2>
         <h2
           className="mt-3 text-start ps-5 py-4 ms-5"
-          // onClick={() => {
-          //   actions.popularidad();
-          // }}
+          onClick={() => {
+            actions.popularidad();
+          }}
         >
-          ORDENAR POR POPULARIDAD
+          POPULARES
         </h2>
         <div>
-          //NOS GENERA UNA LISTA DINAMICA EN BASE AL GENERO QUE SE ENCUENTRA
-          ALMACENADO EN PELICULASGENERO
+          {/*//NOS GENERA UNA LISTA DINAMICA EN BASE AL GENERO QUE SE ENCUENTRA
+          ALMACENADO EN PELICULASGENERO*/}
           {/* <ul>
             {store.peliculas?.map((pelicula, index) => {
               store.peliculasPopulares.map((peliprueba, indice) => {
@@ -188,7 +187,15 @@ export const Home = (props) => {
                 <CardPelicula
                   key={index}
                   poster={`https://image.tmdb.org/t/p/w342/${obj.poster_path}`}
-                  averageVote={obj.vote_average}
+                  averageVote={
+                    <div>
+                      <i
+                        style={{ color: "yellow" }}
+                        className="fas fa-star me-1 mt-1"
+                      ></i>
+                      {obj.vote_average}
+                    </div>
+                  }
                   titulo={obj.title}
                 />
               </div>
@@ -196,6 +203,29 @@ export const Home = (props) => {
           })}
         </div>
       </div>
+
+      {/*SECCION AHORA EN CINES*/}
+      <div>
+        <h2 className="mt-3 text-start text-light ps-5 py-4 ms-5">
+          AHORA EN CINES
+        </h2>
+        <div className="d-flex pt-3 px-0 overflow">
+          {store.enCines?.map((obj, index) => {
+            return (
+              <div key={index}>
+                <CardPelicula
+                  key={index}
+                  poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
+                  titulo={obj.title}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/*SECCION TOP-RATED*/}
+
       <div className="text-light">
         <div>
           <h2
@@ -205,8 +235,6 @@ export const Home = (props) => {
             MEJOR VALORADAS
           </h2>
           <div className="d-flex">
-            {/*SECCION TOP-RATED*/}
-
             <div className="d-flex overflow me-5">
               {store.peliculas?.map((obj, index) => {
                 return (
@@ -217,46 +245,48 @@ export const Home = (props) => {
                       titulo={obj.title}
                       rate={obj.vote_average}
                       fecha={obj.release_date}
-                      popularidad={obj.popularity}
+                      vote_count={obj.vote_count}
                     />
                   </div>
                 );
               })}
             </div>
           </div>
+
           <h2 className="mt-5 text-start proximamente">PRÓXIMAMENTE</h2>
 
           {/*SECCION DE GENEROS Y PERSONAJES*/}
+          <div>
+            <div className="d-flex">
+              <div className="accordion">
+                <div className="accordion-item bg-transparent">
+                  <h1 className="accordion-header">
+                    <button
+                      className="accordion-button text-light ps-5"
+                      type="btn"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#panelsStayOpen-collapseOne"
+                      aria-expanded="true"
+                      aria-controls="panelsStayOpen-collapseOne"
+                    >
+                      <h2>GENEROS</h2>
+                    </button>
+                  </h1>
 
-          <div className="accordion d-flex mt-5">
-            <div className="accordion-item bg-transparent">
-              <h1 className="accordion-header">
-                <button
-                  className="accordion-button text-light ps-5"
-                  type="btn"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#panelsStayOpen-collapseOne"
-                  aria-expanded="true"
-                  aria-controls="panelsStayOpen-collapseOne"
-                >
-                  <h2>GENEROS</h2>
-                </button>
-              </h1>
-
-              <div
-                id="panelsStayOpen-collapseOne"
-                className="accordion-collapse collapse show"
-              >
-                <div className="accordion-body text-dark">
-                  <div>
-                    {store.generos?.map((obj, index) => {
-                      return (
-                        <div key={index}>
-                          <div
-                            className="flex-shrink-0 p-3 bg-gradient ms-1 d-flex"
-                            style={{ width: "280px" }}
-                          >
-                            {/* HACEMOS QUE EL KEY SEA EL OBJ.ID ASÍ LUEGO LO APROVECHAMOS 
+                  <div
+                    id="panelsStayOpen-collapseOne"
+                    className="accordion-collapse collapse show"
+                  >
+                    <div className="accordion-body text-dark">
+                      <div>
+                        {store.generos?.map((obj, index) => {
+                          return (
+                            <div key={index}>
+                              <div
+                                className="flex-shrink-0 p-3 bg-gradient ms-1 d-flex"
+                                style={{ width: "280px" }}
+                              >
+                                {/* HACEMOS QUE EL KEY SEA EL OBJ.ID ASÍ LUEGO LO APROVECHAMOS 
                               PARA HACER LA BUSQUEDA POR GENEROS AL LLAMAR A LA FUNCION DE MOSTRAR
                               POR GENERO EL ID SE CORRESPONDE CON LA CONSULTA DEVUELTA POR LA API Y QUE
                               CONTIENE EL GENERO DE CADA PELICULA
@@ -264,35 +294,37 @@ export const Home = (props) => {
                               "id": 37,
                               "name": "Western"}
                             */}
-                            <li
-                              key={obj.id} //al poner de ID el OBJ.ID Coincide con el genero de la API de MOVIEDB
-                              onClick={() => {
-                                actions.filtroDeGenero(obj.id); //
-                              }}
-                            >
-                              <i className="fas fa-tag me-3 ms-5"></i>
-                              {obj.name}
-                            </li>
-                          </div>
-                        </div>
-                      );
-                    })}
+                                <li
+                                  key={obj.id} //al poner de ID el OBJ.ID Coincide con el genero de la API de MOVIEDB
+                                  onClick={() => {
+                                    actions.filtroDeGenero(obj.id); //
+                                  }}
+                                >
+                                  <i className="fas fa-tag me-3 ms-5"></i>
+                                  {obj.name}
+                                </li>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="d-flex pt-3 px-0 overflow">
-              {store.proximamente?.map((obj, index) => {
-                return (
-                  <div key={index}>
-                    <CardPelicula
-                      key={index}
-                      poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
-                      titulo={obj.title}
-                    />
-                  </div>
-                );
-              })}
+              <div className="d-flex pt-3 px-0 overflow">
+                {store.proximamente?.map((obj, index) => {
+                  return (
+                    <div key={index}>
+                      <CardPelicula
+                        key={index}
+                        poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
+                        titulo={obj.title}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
@@ -300,41 +332,4 @@ export const Home = (props) => {
     </div>
   );
 };
-//{/*SECCION AHORA EN CINES*/}
-//<div>
-//  <h2 className="mt-3 text-start py-4 ms-5 ps-5">AHORA EN CINES</h2>
-//  <div className="px-5 mx-5">
-//    {store.enCines?.map((obj, index) => {
-//      return (
-//        <div key={index} className="text-light d-flex">
-//          <div className="col p-2 d-flex">
-//            <p>{obj.title}</p>
-//          </div>
-//          <div className="d-flex flex-start">
-//            <p>{obj.release_date}</p>
-//          </div>
-//          <div className="progress">
-//            <div
-//              className="progress-bar bg-danger"
-//              role="progressbar"
-//              style={{
-//                width: `4${obj.vote_average}%`,
-//              }}
-//              aria-valuemin="0"
-//              aria-valuemax="20"
-//            >
-//              {obj.vote_average}
-//            </div>
-//          </div>
-//          <button className="btn">
-//            <i className="fas fa-plus-square fa-2x"></i>
-//          </button>
-//        </div>
-//      );
-//    })}
-//  </div>
-//</div>
-
 //
-//
-/* */

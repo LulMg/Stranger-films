@@ -51,12 +51,29 @@ export const Navbar = () => {
               </button>
             </div>
             <div className="divisor bg-light me-3"></div>
-            <h6 className="text-light mt-1 me-2" onClick={() => {}}>
-              iniciar sesión
+            <h6 className="text-light mt-1 me-2">
+              <button
+                className="btn text-light"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                iniciar sesión
+              </button>
             </h6>
           </div>
         </div>
       </nav>
+      {/*MODAL DEL INICIO DE SESION*/}
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog"></div>
+        <LogIn />
+      </div>
     </div>
   );
 };

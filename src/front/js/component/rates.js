@@ -23,7 +23,7 @@ export default function RatedMovie(props) {
               className="progress-bar"
               role="progressbar"
               style={{
-                width: `5${props.rate}%`,
+                width: `7${props.rate}%`,
               }}
               aria-valuemin="0"
               aria-valuemax="20"
@@ -31,19 +31,18 @@ export default function RatedMovie(props) {
               {props.rate}
             </div>
           </div>
-          <small className="d-flex flex-start mt-2">Popularidad</small>
-          <div className="progress mt-1">
-            <div
-              className="progress-bar bg-warning"
-              role="progressbar"
-              style={{
-                width: `${props.popularidad}%`,
-              }}
-              aria-valuemin="0"
-              aria-valuemax="20"
-            ></div>
+          <small className="d-flex flex-start mt-3">Votos</small>
+          <div
+            className="ms-5"
+            style={{
+              width: "10rem",
+            }}
+          >
+            <div className="bg-gradient rounded">{props.vote_count}</div>
           </div>
-          <small className="text-secondary">{props.fecha}</small>
+          <div className="text-end me-3">
+            <small className="text-secondary">{props.fecha}</small>
+          </div>
         </span>
       </div>
     </div>
