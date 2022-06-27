@@ -1,7 +1,6 @@
 .glitch,
 .glow {
-  z-index: 2;
-  color: rgb(180, 6, 6) !important;
+  color: #f5f0f0;
   position: relative;
   font-size: 60px;
   /*margin: 15% 17%;*/
@@ -12,8 +11,8 @@
   content: attr(data-text);
   position: absolute;
   left: -2px;
-  text-shadow: -5px 0 #880e0e;
-  background: rgb(243, 230, 230);
+  text-shadow: -5px 0 #ff0000;
+  background: rgb(8, 7, 7);
   overflow: hidden;
   top: 0;
   animation: noise-1 3s linear infinite alternate-reverse,
@@ -24,7 +23,7 @@
   content: attr(data-text);
   position: absolute;
   left: 2px;
-  text-shadow: -5px 0 #0e0000;
+  text-shadow: -5px 0 #be3131;
   background: #000;
   overflow: hidden;
   top: 0;
@@ -244,4 +243,7 @@
   2% {
     transform: rotateX(0deg) skewX(0deg);
   }
+}
+.generoNombre {
+  margin-left: 35rem;
 }

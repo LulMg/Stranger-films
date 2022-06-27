@@ -15,7 +15,7 @@ export default function CardPelicula(props) {
               <strong>{props.averageVote}</strong>
             </p>
           </div>
-          <div className="mx-1 botones rounded">
+          <div className="mx-1 botones rounded text-center">
             <button className="btn col text-light">
               <i className="fa fa-plus me-2"></i>Mi lista
             </button>

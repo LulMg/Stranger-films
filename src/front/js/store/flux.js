@@ -10,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       generos: [],
       proximamente: [],
       enCines: [],
+      ruleta: [],
       message: null,
       demo: [
         {
@@ -45,21 +46,21 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ peliculasPopulares: store.peliculas });
         console.log(getStore());
       },
-      cargaPopulares: async () => {
-        //CONECTAMOS A LA API EXTERNA Y TRATAMOS DE LEER LAS PELICULAS
-        console.log("INTENTAMOS CONECTAR A LA API EXTERNA");
-        //ÚNICAMENTE SE ESTÁ CARGANDO LA PRIMERA PAGINA, PELICULAS EN INGLES
-
-        await fetch(
-          "https://api.themoviedb.org/3/movie/popular?api_key=87330f0fa794fb3eb980c887157031c9"
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            //console.log(data.results);
-            setStore({ peliculasPopulares: data.results });
-          })
-          .catch((error) => console.log(error));
-      },
+      //      cargaPopulares: async () => {
+      //        //CONECTAMOS A LA API EXTERNA Y TRATAMOS DE LEER LAS PELICULAS
+      //        console.log("INTENTAMOS CONECTAR A LA API EXTERNA");
+      //        //ÚNICAMENTE SE ESTÁ CARGANDO LA PRIMERA PAGINA, PELICULAS EN INGLES
+      //
+      //        await fetch(
+      //          "https://api.themoviedb.org/3/movie/popular?api_key=87330f0fa794fb3eb980c887157031c9"
+      //        )
+      //          .then((response) => response.json())
+      //          .then((data) => {
+      //            //console.log(data.results);
+      //            setStore({ peliculasPopulares: data.results });
+      //          })
+      //          .catch((error) => console.log(error));
+      //      },
       getMessage: () => {
         // fetching data from the backend
         fetch(process.env.BACKEND_URL + "/api/hello")
@@ -106,8 +107,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         actions.topRated();
         actions.cargarCarrousel();
         actions.proximamente();
-        actions.enCines();
-        // actions.popularidad();
+        actions.popularidad();
 
         console.log("PELICULAS TOTALES", store.peliculas);
         // actcargarCarrousel();
@@ -147,8 +147,22 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ enCines: data.results });
           })
           .catch((error) => console.log("Algo salió mal", error));
+        const store = getStore();
+        console.log("en cines...", store.enCines);
         let actions = getActions();
-        actions.popularidad();
+        actions.OrdenarPorFecha();
+      },
+      OrdenarPorFecha: () => {
+        let store = getStore();
+        store.enCines.sort(function (a, b) {
+          if (a.release_date < b.release_date) {
+            return 1;
+          }
+          if (a.release_date > b.release_date) {
+            return -1;
+          }
+          return 0;
+        });
       },
       topRated: () => {
         let store = getStore();
@@ -214,6 +228,25 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ proximamente: data.results });
           })
           .catch((error) => console.log("Algo salió mal", error));
+      },
+      rodarRuleta: () => {
+        const store = getStore();
+        var veinteRandom = [];
+
+        for (let i = 0; i < 20; i++) {
+          veinteRandom.push(Math.floor(Math.random() * 399 + 1));
+        }
+        console.log("veinte random", veinteRandom);
+        let cadenaTitulo = "";
+
+        for (let i = 0; i < 20; i++) {
+          cadenaTitulo =
+            store.peliculas[veinteRandom[i]]?.title /*.substring(0, 15)*/;
+          setStore({
+            ruleta: [...store.ruleta, { option: cadenaTitulo.substring(0, 9) }],
+          });
+        }
+        console.log(getStore());
       },
       changeColor: (index, color) => {
         //get the store
