@@ -3,11 +3,14 @@ import "../../styles/descripPoster.css";
 
 export default function Detalles(props) {
   return (
-    <div className="descrip p-3">
-      <div className="d-flex justify-content-start">
-        <h5>{props.title}</h5>
+    <div className="descrip p-3 px-5 mx-5 mt-3">
+      <div
+        className="d-flex justify-content-start mt-5 glitch"
+        style={{ width: "28rem", fontFamily: "fantasy" }}
+      >
+        <h4>{props.title}</h4>
       </div>
-      <div className="d-flex justify-content-start">
+      <div className=" bg-gradient p-3 rounded" style={{ width: "30rem" }}>
         <p>{props.description}</p>
       </div>
       <div className="d-flex justify-content-start">
@@ -16,3 +19,4 @@ export default function Detalles(props) {
     </div>
   );
 }
+//<img className="gif mt-5" src={giphy}></img>

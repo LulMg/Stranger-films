@@ -3,11 +3,21 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { object } from "prop-types";
 import { useState, useEffect } from "react";
+import ruletaa from "../../img/ruletaa.png";
+import giphy from "../../img/giphy.gif";
 //COMPONENTES
 import CardPelicula from "../component/card-pelicula";
 import RatedMovie from "../component/rates";
 import Detalles from "../component/descripPoster";
+import Ruleta from "../component/ruleta";
 
+var estilo = {
+  backgroundImage: `url(${giphy})`,
+  backgroundPosition: "center",
+  backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
+  opacity: "0.8",
+};
 export const Home = (props) => {
   const { store, actions } = useContext(Context);
   const [categoria, setCategoia] = useState(12);
@@ -16,12 +26,12 @@ export const Home = (props) => {
   //  store.peliculas.length > 0 && actions.filtroDeGenero(12);
   //}, []);
   return (
-    <div className="text-center" id="home">
+    <div className="text-end mx-5 mt-2" id="home">
       {/*CAROUSEL ESTRENOS*/}
 
       <div
         id="carouselExampleCaptions"
-        className="carousel slide"
+        className="carousel slide fondo rounded"
         data-bs-ride="carousel"
       >
         <div className="carousel-indicators">
@@ -46,85 +56,56 @@ export const Home = (props) => {
             aria-label="Slide 3"
           ></button>
         </div>
-        <div className="carousel-inner">
+        <div className="carousel-inner" style={estilo}>
           {store.carrousel?.map((obj, index) => {
             if (index == 0) {
               return (
-                <div className="carousel-item active">
+                <div className="carousel-item active" style={estilo}>
                   <img
+                    onError={(e) => {
+                      e.target.src =
+                        "https://c.tenor.com/T4DuBupd0IUAAAAd/stand-by-technical-difficulties.gif";
+                    }}
                     src={`https://image.tmdb.org/t/p/w500/${obj.backdrop_path}`}
                     className="imagenPrinc"
                     alt="..."
+                    style={{
+                      width: "60rem",
+                      height: "30rem",
+                      borderBlockStartColor: "greenyellow",
+                    }}
                   />
                   <div className="carousel-caption">
                     <Detalles
                       title={<h1 className="display-6 ms-3">{obj.title}</h1>}
-                      description="kasdfjkadsfasdf"
+                      description={obj.overview}
                     />
                   </div>
                 </div>
               );
             } else {
               return (
-                <div className="carousel-item">
+                <div className="carousel-item" style={estilo}>
                   <img
+                    onError={(e) => {
+                      e.target.src =
+                        "https://c.tenor.com/T4DuBupd0IUAAAAd/stand-by-technical-difficulties.gif";
+                    }}
                     src={`https://image.tmdb.org/t/p/w500/${obj.backdrop_path}`}
                     className="imagenPrinc"
                     alt="..."
+                    style={{ width: "60rem", height: "30rem" }}
                   />
                   <div className="carousel-caption">
                     <Detalles
                       title={<h1 className="display-6 ms-3">{obj.title}</h1>}
-                      description="kasdfjkadsfasdf"
+                      description={obj.overview}
                     />
                   </div>
                 </div>
               );
             }
           })}
-          {/* <div className="carousel-item active">
-            <img
-              src="https://los40.com/los40/imagenes/2022/03/29/cinetv/1648545776_800000_1648545862_gigante_normal.jpg"
-              className="imagenPrinc"
-              alt="..."
-            />
-            <div className="carousel-caption">
-              <Detalles
-                title={<h1 className="display-6 ms-3">"Sonic"</h1>}
-                description={"ANIMACION | ACCION | FANTASIA"}
-              />
-            </div>
-          </div> */}
-          {/* <div className="carousel-item">
-            <img
-              src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/3FF6648A2BB444D7A43CB0E41FD3E1F1AB3E0500CEF32F07A002ABDC30212A0D/scale?width=2880&aspectRatio=1.78&format=jpeg"
-              className="imagenPrinc"
-              alt="..."
-            />
-            <div className="carousel-caption">
-              <Detalles
-                title={
-                  <h1 className="display-6 ms-3">
-                    "Doctor Strange in the Multiverse of Madness"
-                  </h1>
-                }
-                description={"ACCION | SUPERHEROES | FANTASIA"}
-              />
-            </div>
-          </div> */}
-          {/* <div className="carousel-item">
-            <img
-              src="https://ntvb.tmsimg.com/assets/p22147304_v_h8_aa.jpg?w=960&h=540"
-              className="imagenPrinc"
-              alt="..."
-            />
-            <div className="carousel-caption">
-              <Detalles
-                title={<h1 className="display-6 ms-3">"Jackass"</h1>}
-                description={"COMEDIA | AVENTURA | ACCION"}
-              />
-            </div>
-          </div> */}
         </div>
         <button
           className="carousel-control-prev"
@@ -207,7 +188,7 @@ export const Home = (props) => {
       {/*SECCION AHORA EN CINES*/}
       <div>
         <h2 className="mt-3 text-start text-light ps-5 py-4 ms-5">
-          AHORA EN CINES
+          ULTIMOS ESTRENOS
         </h2>
         <div className="d-flex pt-3 px-0 overflow">
           {store.enCines?.map((obj, index) => {
@@ -216,6 +197,15 @@ export const Home = (props) => {
                 <CardPelicula
                   key={index}
                   poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
+                  averageVote={
+                    <div>
+                      <i
+                        style={{ color: "yellow" }}
+                        className="fas fa-star me-1 mt-1"
+                      ></i>
+                      {obj.vote_average}
+                    </div>
+                  }
                   titulo={obj.title}
                 />
               </div>
@@ -258,7 +248,7 @@ export const Home = (props) => {
           {/*SECCION DE GENEROS Y PERSONAJES*/}
           <div>
             <div className="d-flex">
-              <div className="accordion">
+              <div className="accordion accordion-flush">
                 <div className="accordion-item bg-transparent">
                   <h1 className="accordion-header">
                     <button
@@ -275,7 +265,7 @@ export const Home = (props) => {
 
                   <div
                     id="panelsStayOpen-collapseOne"
-                    className="accordion-collapse collapse show"
+                    className="accordion-collapse collapse"
                   >
                     <div className="accordion-body text-dark">
                       <div>
@@ -303,12 +293,38 @@ export const Home = (props) => {
                                   <i className="fas fa-tag me-3 ms-5"></i>
                                   {obj.name}
                                 </li>
+                                <span
+                                  className="expand"
+                                  data-toggle="sidebar-tpggle-genre-on"
+                                ></span>
                               </div>
                             </div>
                           );
                         })}
                       </div>
                     </div>
+                  </div>
+                </div>
+                {/*MI LISTA DE REPRODUCCION*/}
+                <div className="mt-5 text-light">
+                  <div className="d-flex mt-2">
+                    <div className="divisor bg-light mx-2 ms-5"></div>
+                    <h4>Mi lista de seguimiento</h4>
+                  </div>
+                  <div
+                    className="mt-5 bg-gradient rounded p-3 text-center"
+                    style={{ width: "21rem" }}
+                  >
+                    <i className="fas fa-plus-square fa-2x m-3"></i>
+                    <h6>
+                      Inicia sesión para acceder a tu lista de reproducción
+                    </h6>
+                    <small className="text-secondary">
+                      Guarda tus peliculas favoritas
+                    </small>
+                    <button className="btn btn-danger mt-3">
+                      Inicia sesión en Stranger Films
+                    </button>
                   </div>
                 </div>
               </div>
@@ -326,10 +342,20 @@ export const Home = (props) => {
                 })}
               </div>
             </div>
+
+            {/*RULETA*/}
+            <div className="bg-gradient container rounded p-3 mt-3">
+              <h2 className="mt-5 text-start proximamente">
+                ¿NO SABES QUE VER?
+              </h2>
+              <h4 className="text-center text-secondary">
+                Haz rodar la ruleta y déjalo a la suerte!
+              </h4>
+              <Ruleta />
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 };
-//

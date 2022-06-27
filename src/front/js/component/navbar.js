@@ -57,7 +57,7 @@ export const Navbar = () => {
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
               >
-                iniciar sesión
+                iniciar sesión <i className="far fa-user ms-2"></i>
               </button>
             </h6>
           </div>
