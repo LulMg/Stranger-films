@@ -104,7 +104,7 @@ def iniciar_sesion():
     else:
         return "User lost to the Demogorgon", 400
 
-#Funciona el token
+#Funciona el token (se podria borrar, es para probar que funciona)
 @app.route('/member', methods=['GET'])
 @jwt_required()
 def members():
@@ -120,9 +120,21 @@ def add_fav_movie():
         newfav = Fav_movie(user_id=request_body['user_id'], movie_id=request_body['movie_id'])
         db.session.add(newfav)
         db.session.commit()
-        return "Añadida con exito"
+        return "Successfully added"
     else:
-        return "Te pillo el Demogorgon"
+        return "To the UpsideDown with it"
+
+#El usuario pide ver sus favoritos
+@app.route('/viewfav', methods=['GET'])
+@jwt_required()
+def get_your_favorite():
+    identidad = get_jwt_identity()
+    ufav = Fav_movie.query.filter_by(user_id=identidad).all()
+    if ufav:
+        ufav = ufav.serialize()
+        return jsonify({"resultado": ufav})
+    else:
+        return jsonify({"resultado": "Favourite movie not found"})
 
 #Borrar la peli que ya no es favorita
 @app.route('/undofav/movie', methods=['POST'])
@@ -176,8 +188,6 @@ def edit_comment():
     else:
         return jsonify({"Could not edit comment"})
 
-
-
 #Borrar el comentario
 @app.route('/undocom/movie', methods=['POST'])
 @jwt_required()
@@ -200,6 +210,45 @@ def get_all_comments(id):
         return jsonify({"resultado": allcomments})
     else:
         return jsonify({"resultado": "Comment not found"})
+
+#Guardar tu peli en la lista
+@app.route('/list/movie', methods=['POST'])
+@jwt_required()
+def add_list_movie():
+    request_body = request.get_json()
+    listmovie = request_body
+    if listmovie:
+        newlist = List_movie(user_id=request_body['user_id'], movie_id=request_body['movie_id'])
+        db.session.add(newlist)
+        db.session.commit()
+        return "Saved to your list"
+    else:
+        return "Couldn't save it"
+
+#Ver las peliculas guardadas en la lista
+@app.route('/viewlist', methods=['GET'])
+@jwt_required()
+def get_your_list():
+    identidad = get_jwt_identity()
+    ulist = List_movie.query.filter_by(user_id=identidad).all()
+    if ulist:
+        ulist = ulist.serialize()
+        return jsonify({"resultado": ulist})
+    else:
+        return jsonify({"resultado": "No movies in the list"})
+
+#Borrar la peli de la lista
+@app.route('/undolist/movie', methods=['POST'])
+@jwt_required()
+def undo_list_movie():
+    request_body = request.get_json()
+    undolist = List_movie.query.filter_by(user_id=request_body['user_id'], movie_id=request_body['movie_id']). first()
+    if undolist:
+        db.session.delete(undolist)
+        db.session.commit()
+        return "To the UpsideDown with it"
+    else:
+        return "Couldn't delete it"
 
 # this only runs if `$ python src/main.py` is executed esto va a lfinal
 if __name__ == '__main__':
