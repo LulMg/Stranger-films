@@ -62,3 +62,19 @@ class Comment(db.Model):
             "user_comment": self.user_comment,
         }
 
+class List_movie(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    movie_id = db.Column(db.Integer, unique=False, nullable=False)
+    rel_user = db.relationship(User)
+
+    def __repr__(self):
+        return '<List_movie %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "movie_id": self.movie_id,
+        }
+
