@@ -11,6 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       proximamente: [],
       enCines: [],
       ruleta: [],
+      peliculasporGenero: [],
       message: null,
       demo: [
         {
@@ -79,7 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         )
           .then((response) => response.json())
           .then((data) => {
-            //console.log(data.genres);
+            console.log("generos:", data.genres);
             setStore({ generos: data.genres });
           })
           .catch((error) => console.log("Algo salió mal", error));
@@ -114,7 +115,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       filtroDeGenero(genero) {
         console.log("ejecutando filtro de genero", genero);
-        var indicePeliculas = [];
+        //var indicePeliculas = [];
         const store = getStore();
         for (var i = 0; i < store.peliculas.length - 1; i++) {
           for (var x = 0; x < store.peliculas[i].genre_ids.length - 1; x++) {
@@ -126,14 +127,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 "  ",
                 store.peliculas[i].original_title
               );
-              indicePeliculas.push(i);
+              //indicePeliculas.push(i);
+              store.peliculasporGenero.push(store.peliculas[i]);
             } //FIN IF
           }
         }
-        console.log("peliculas genero ", indicePeliculas);
-        store.peliculasPrueba = indicePeliculas;
-        // setStore({ peliculasPrueba: indicePeliculas });
-        console.log(store.peliculasPrueba);
       },
       enCines: async () => {
         console.log("en cines.... buscando");
@@ -195,13 +193,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           return 0;
         });
         // setStore({ peliculasPopulares: store.peliculas });
-        for (var i = 0; i < 20; i++) {
-          console.log(
-            "peliculas por popularidad ",
-            store.peliculasPopulares[i].popularity,
-            " " + store.peliculasPopulares[i].title
-          );
-        }
       },
       cargarCarrousel: () => {
         //Funcion para cargar las tres peliculas AL AZAR para el carrousel
@@ -232,7 +223,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       rodarRuleta: () => {
         const store = getStore();
         var veinteRandom = [];
-
+        store.ruleta = [];
         for (let i = 0; i < 20; i++) {
           veinteRandom.push(Math.floor(Math.random() * 399 + 1));
         }
@@ -245,8 +236,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({
             ruleta: [...store.ruleta, { option: cadenaTitulo.substring(0, 9) }],
           });
+          console.log(getStore());
         }
-        console.log(getStore());
       },
       changeColor: (index, color) => {
         //get the store

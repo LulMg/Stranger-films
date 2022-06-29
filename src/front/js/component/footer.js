@@ -11,35 +11,35 @@ export const Footer = () => (
       <div className="m-2">
         <ul>
           <h5>Lo básico</h5>
-          <li>Sobre Stranger Films</li>
-          <li>Contacto</li>
-          <li>API</li>
+          <li key={0}>Sobre Stranger Films</li>
+          <li key={1}>Contacto</li>
+          <li key={2}>API</li>
         </ul>
       </div>
       <div className="border ms-4"></div>
       <div className="m-2">
         <ul>
           <h5>Participa</h5>
-          <li>Aportaciones</li>
-          <li>Guía de aportaciones</li>
-          <li>Añadir nueva película</li>
+          <li key={3}>Aportaciones</li>
+          <li key={4}>Guía de aportaciones</li>
+          <li key={5}>Añadir nueva película</li>
         </ul>
       </div>
       <div className="border ms-4"></div>
       <div className="m-2">
         <ul>
           <h5>Comunidad</h5>
-          <li>Discusiones</li>
-          <li>Contenidos</li>
-          <li>Redes sociales</li>
+          <li key={6}>Discusiones</li>
+          <li key={7}>Contenidos</li>
+          <li key={8}>Redes sociales</li>
         </ul>
       </div>
       <div className="border ms-4"></div>
       <div className="m-2">
         <ul>
           <h5 className="ps-4">Legal</h5>
-          <li>Política de privacidad</li>
-          <li>Términos de uso</li>
+          <li key={9}>Política de privacidad</li>
+          <li key={10}>Términos de uso</li>
         </ul>
       </div>
     </div>
