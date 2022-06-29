@@ -11,9 +11,9 @@ export default function CardPelicula(props) {
         <img className="card-img-top" src={props.poster} alt="movie-poster" />
         <div className="card-body">
           <div className="d-flex">
-            <p>
+            <span>
               <strong>{props.averageVote}</strong>
-            </p>
+            </span>
           </div>
           <div className="mx-1 botones rounded text-center">
             <button className="btn col text-light">

@@ -8,7 +8,7 @@ export default function Detalles(props) {
         className="d-flex justify-content-start mt-5 glitch"
         style={{ width: "28rem", fontFamily: "fantasy" }}
       >
-        <h4>{props.title}</h4>
+        <span>{props.title}</span>
       </div>
       <div className=" bg-gradient p-3 rounded" style={{ width: "30rem" }}>
         <p>{props.description}</p>
