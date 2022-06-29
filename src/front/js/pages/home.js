@@ -12,6 +12,7 @@ import RatedMovie from "../component/rates";
 import Detalles from "../component/descripPoster";
 import Ruleta from "../component/ruleta";
 import AcordionGenero from "../component/navbar-generos";
+import { DetallesPeli } from "../component/detallesPeli";
 
 var estilo = {
   backgroundImage: `url(${giphy})`,
@@ -166,21 +167,23 @@ export const Home = (props) => {
 
           {store.peliculasPopulares?.map((obj, index) => {
             return (
-              <div key={index}>
-                <CardPelicula
-                  key={index}
-                  poster={`https://image.tmdb.org/t/p/w342/${obj.poster_path}`}
-                  averageVote={
-                    <div>
-                      <i
-                        style={{ color: "yellow" }}
-                        className="fas fa-star me-1 mt-1"
-                      ></i>
-                      {obj.vote_average}
-                    </div>
-                  }
-                  titulo={obj.title}
-                />
+              <div key={obj.id}>
+                <Link to={"/detalles/" + obj.id}>
+                  <CardPelicula
+                    key={obj.id}
+                    poster={`https://image.tmdb.org/t/p/w342/${obj.poster_path}`}
+                    averageVote={
+                      <div>
+                        <i
+                          style={{ color: "yellow" }}
+                          className="fas fa-star me-1 mt-1"
+                        ></i>
+                        {obj.vote_average}
+                      </div>
+                    }
+                    titulo={obj.title}
+                  />
+                </Link>
               </div>
             );
           })}
@@ -197,7 +200,7 @@ export const Home = (props) => {
             return (
               <div key={index}>
                 <CardPelicula
-                  key={index}
+                  key={obj.id}
                   poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
                   averageVote={
                     <div>
@@ -256,7 +259,7 @@ export const Home = (props) => {
                   return (
                     <div key={index}>
                       <CardPelicula
-                        key={index}
+                        key={obj.id}
                         poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
                         titulo={obj.title}
                       />

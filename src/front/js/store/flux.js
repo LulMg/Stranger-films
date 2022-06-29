@@ -47,21 +47,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ peliculasPopulares: store.peliculas });
         console.log(getStore());
       },
-      //      cargaPopulares: async () => {
-      //        //CONECTAMOS A LA API EXTERNA Y TRATAMOS DE LEER LAS PELICULAS
-      //        console.log("INTENTAMOS CONECTAR A LA API EXTERNA");
-      //        //ÚNICAMENTE SE ESTÁ CARGANDO LA PRIMERA PAGINA, PELICULAS EN INGLES
-      //
-      //        await fetch(
-      //          "https://api.themoviedb.org/3/movie/popular?api_key=87330f0fa794fb3eb980c887157031c9"
-      //        )
-      //          .then((response) => response.json())
-      //          .then((data) => {
-      //            //console.log(data.results);
-      //            setStore({ peliculasPopulares: data.results });
-      //          })
-      //          .catch((error) => console.log(error));
-      //      },
       getMessage: () => {
         // fetching data from the backend
         fetch(process.env.BACKEND_URL + "/api/hello")
@@ -70,6 +55,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) =>
             console.log("Error loading message from backend", error)
           );
+      },
+      peliculaDetalle: () => {
+        var store = getStore();
+        //for (var i = 0; i < store.peliculas.length - 1; i++) {
+        //  if (store.peliculas.id == id) {
+        //    console("Peli encontraDA ", store.peliculas[id].title);
+        //  }
+        //}
+        console.log("hola");
       },
 
       generosDePeliculas: async () => {
@@ -117,6 +111,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log("ejecutando filtro de genero", genero);
         //var indicePeliculas = [];
         const store = getStore();
+        //COMENTAR
+        store.peliculasporGenero = [];
         for (var i = 0; i < store.peliculas.length - 1; i++) {
           for (var x = 0; x < store.peliculas[i].genre_ids.length - 1; x++) {
             if (store.peliculas[i].genre_ids[x] == genero) {

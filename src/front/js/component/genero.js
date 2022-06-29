@@ -33,7 +33,7 @@ export const Genero = () => {
                   return (
                     <div key={index} className="col text-light mb-2">
                       <CardPelicula
-                        key={index}
+                        key={obj.id}
                         poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
                         titulo={obj.title}
                       />
