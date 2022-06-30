@@ -1,6 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      peliculasBusqueda: [],
+      generoSeleccionado: "Género",
       peliculas: [],
       peliculasPrueba: [],
       peliculasPopulares: [],
@@ -108,9 +110,16 @@ const getState = ({ getStore, getActions, setStore }) => {
         // actcargarCarrousel();
       },
       filtroDeGenero(genero) {
-        console.log("ejecutando filtro de genero", genero);
-        //var indicePeliculas = [];
         const store = getStore();
+
+        for (var i = 0; i < store.generos.length - 1; i++) {
+          if (genero == store.generos[i].id) {
+            store.generoSeleccionado = store.generos[i].name;
+            console.log(store.generos[i].name);
+            console.log("GENERO SELECCIONADO : ", store.generoSeleccionado);
+          }
+        }
+        //var indicePeliculas = [];
         //COMENTAR
         store.peliculasporGenero = [];
         for (var i = 0; i < store.peliculas.length - 1; i++) {
