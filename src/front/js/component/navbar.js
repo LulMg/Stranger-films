@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "../../styles/navbar.css";
 import { LogIn } from "../component/login";
-
+import { useState, useEffect } from "react";
+import { Context } from "../store/appContext";
+import { useContext } from "react";
 //funcion que retorna el NAVBAR
 export const Navbar = () => {
+  const [inputText, setInputText] = useState("");
+  const { store, actions } = useContext(Context);
   return (
     <div>
       <nav className="navbar navbar-expand-lg">
@@ -43,10 +47,16 @@ export const Navbar = () => {
               <input
                 className="border-0 ps-2 rounded-start buscar bg-transparent"
                 type="search"
+                value={inputText}
                 placeholder="Buscar"
                 id="search"
+                onChange={(e) => setInputText(e.target.value)}
               />
-              <button className="btn" type="submit">
+              <button
+                className="btn"
+                type="submit"
+                onClick={() => actions.buscarPelicula(inputText)}
+              >
                 <i className="fas fa-search"></i>
               </button>
             </div>
