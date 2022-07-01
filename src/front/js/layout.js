@@ -13,6 +13,9 @@ import { LogIn } from "./component/login";
 import { Genero } from "./component/genero";
 import Detalles from "./component/descripPoster";
 import { DetallesPeli } from "./component/detallesPeli";
+import Busqueda from "./component/busquedaPeli";
+import Stranger from "./component/strangerFilms";
+import Api from "./component/footerApi";
 
 //create your first component
 const Layout = () => {
@@ -31,6 +34,15 @@ const Layout = () => {
             </Route>
             <Route exact path="/demo">
               <Demo />
+            </Route>
+            <Route exact path="/busqueda/:inputText">
+              <Busqueda />
+            </Route>
+            <Route exact path="/strangerFilms">
+              <Stranger />
+            </Route>
+            <Route exact path="/Api">
+              <Api />
             </Route>
             <Route exact path="/single/:theid">
               <Single />

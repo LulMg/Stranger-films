@@ -21,9 +21,12 @@ export const Genero = () => {
         {/*TITULO*/}
         <div className="col">
           <div>
-            <div class="glitch d-flex generoNombre" data-text="GENERO">
-              GENERO
-              <div class="glow">GENERO</div>
+            <div
+              className="glitch d-flex generoNombre"
+              data-text={store.generoSeleccionado}
+            >
+              {store.generoSeleccionado}
+              <div className="glow"> {store.generoSeleccionado}</div>
             </div>
             <div className="row">
               {store.peliculasporGenero?.map((obj, index) => {

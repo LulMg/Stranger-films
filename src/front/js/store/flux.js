@@ -1,6 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      peliculasBusqueda: [],
+      generoSeleccionado: "Género",
       peliculas: [],
       peliculasPrueba: [],
       peliculasPopulares: [],
@@ -46,6 +48,61 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         setStore({ peliculasPopulares: store.peliculas });
         console.log(getStore());
+      },
+      generartrailer: async () => {
+        const store = getStore();
+        for (var i = 0; i < store.peliculas.length - 1; i++) {
+          await fetch(
+            "https://api.themoviedb.org/3/movie/" +
+              +store.peliculas[i].id +
+              "/videos?api_key=87330f0fa794fb3eb980c887157031c9&language=en-US"
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              // console.log("trailer para " + store.peliculas[i].title);
+              for (var x = 0; x < data.results.length - 1; x++) {
+                if (
+                  data.results[x].official == true &&
+                  (data.results.type = "Trailer") &&
+                  (data.results.type = "Youtube")
+                ) {
+                  store.peliculas[i].trailer =
+                    "https://www.youtube.com/watch?v=" + data.results[x].key;
+                  //HACEMOS BREAK PARA QUE ÚNICAMENTE MUESTRE UN TRAILER OFICIAL
+                  //YA QUE HAY PELICULAS QUE TIENEN VARIOS TRAILERS
+                  break;
+                } else {
+                  store.peliculas[i].trailer = "none";
+                }
+              }
+            })
+            .catch((error) => console.log("Algo salió mal", error));
+        }
+        console.log(getStore());
+      },
+      buscarPelicula: (busqueda) => {
+        console.log("ejecutando buscarpelicula");
+
+        var cadena = busqueda;
+        var minusculas = cadena.toLowerCase();
+        const store = getStore();
+        store.buscarPelicula = [];
+        var array = [];
+        for (var i = 0; i < store.peliculas.length - 1; i++) {
+          // console.log("en minusculas busqueda", minusculas);
+          var titulo = store.peliculas[i].title.toLowerCase();
+          // console.log("titulos en minusculas", titulo);
+
+          if (titulo.includes(minusculas)) {
+            console.log(
+              "found " + minusculas + " en la pelicula",
+              store.peliculas[i].title
+            );
+            array.push(store.peliculas[i]);
+          }
+          store.peliculasBusqueda = array;
+        }
+        console.log("set Store busqueda", getStore());
       },
       getMessage: () => {
         // fetching data from the backend
@@ -108,9 +165,16 @@ const getState = ({ getStore, getActions, setStore }) => {
         // actcargarCarrousel();
       },
       filtroDeGenero(genero) {
-        console.log("ejecutando filtro de genero", genero);
-        //var indicePeliculas = [];
         const store = getStore();
+
+        for (var i = 0; i < store.generos.length - 1; i++) {
+          if (genero == store.generos[i].id) {
+            store.generoSeleccionado = store.generos[i].name;
+            console.log(store.generos[i].name);
+            //console.log("GENERO SELECCIONADO : ", store.generoSeleccionado);
+          }
+        }
+        //var indicePeliculas = [];
         //COMENTAR
         store.peliculasporGenero = [];
         for (var i = 0; i < store.peliculas.length - 1; i++) {

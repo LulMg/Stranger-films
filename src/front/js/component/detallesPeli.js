@@ -15,18 +15,11 @@ export const DetallesPeli = () => {
       //con.log("params = ", +params.theid + "id " + obj.id);
       console.log("OJITO SAM, hemos encontrado la pelicula");
       console.log(obj.title);
+      console.log(obj);
       return <div className="prueba text-light">{obj.title}</div>;
     } //<div className="prueba text-light"> hey</div>;
   });
 };
-//<div className="prueba text-light">
-//{
-//  }
-//
-//</div>
-//return (
-//  };
-//)
 
 /*<div className="container-fluid">
         <div className="banner-content">

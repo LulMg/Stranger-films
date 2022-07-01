@@ -1,0 +1,14 @@
+.tematica {
+  background-image: url("https://i.blogs.es/06464f/jumpstory-download20200605-112209/1366_2000.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.acerca {
+  color: rgb(183, 197, 197);
+}
+.image {
+  height: 207px;
+}
+.texto {
+  text-shadow: 2px 2px #d46d6d;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../../styles/footer.css";
 import logo from "../../img/logo.png";
+import { Link } from "react-router-dom";
 
 export const Footer = () => (
   <footer className="footer mt-auto py-3 container mt-5">
@@ -11,9 +12,12 @@ export const Footer = () => (
       <div className="m-2">
         <ul>
           <h5>Lo básico</h5>
-          <li key={0}>Sobre Stranger Films</li>
-          <li key={1}>Contacto</li>
-          <li key={2}>API</li>
+          <Link to="/StrangerFilms">
+            <li key={0}>Sobre Stranger Films</li>
+          </Link>
+          <Link to="/Api">
+            <li key={2}>API</li>
+          </Link>
         </ul>
       </div>
       <div className="border ms-4"></div>

@@ -30,7 +30,7 @@ const injectContext = (PassedComponent) => {
        **/
       state.actions.peliculasGenerales();
       state.actions.generosDePeliculas();
-      state.actions.proximamente();
+      //state.actions.proximamente();
       state.actions.enCines();
     }, []);
 
