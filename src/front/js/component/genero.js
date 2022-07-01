@@ -22,11 +22,11 @@ export const Genero = () => {
         <div className="col">
           <div>
             <div
-              class="glitch d-flex generoNombre"
+              className="glitch d-flex generoNombre"
               data-text={store.generoSeleccionado}
             >
               {store.generoSeleccionado}
-              <div class="glow"> {store.generoSeleccionado}</div>
+              <div className="glow"> {store.generoSeleccionado}</div>
             </div>
             <div className="row">
               {store.peliculasporGenero?.map((obj, index) => {

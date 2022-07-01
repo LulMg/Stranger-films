@@ -11,7 +11,7 @@
   content: attr(data-text);
   position: absolute;
   left: -2px;
-  text-shadow: -5px 0 #ff0000;
+  text-shadow: -5px 0 #916262;
   background: rgb(8, 7, 7);
   overflow: hidden;
   top: 0;
@@ -23,8 +23,8 @@
   content: attr(data-text);
   position: absolute;
   left: 2px;
-  text-shadow: -5px 0 #be3131;
-  background: #000;
+  text-shadow: -5px 0 #c74141;
+  background: rgb(39, 4, 4);
   overflow: hidden;
   top: 0;
   animation: noise-2 3s linear infinite alternate-reverse, glitch 5s 5s infinite;
@@ -231,7 +231,7 @@
   }
 }
 .glow {
-  text-shadow: 0 0 1000px #ca5757;
+  text-shadow: 0 0 1000px #e25151;
   color: transparent;
   margin-top: -50%;
 }

@@ -6,6 +6,7 @@ import { Wheel } from "react-custom-roulette";
 
 export default function Ruleta() {
   const { store, actions } = useContext(Context);
+  const [prize, showPrize] = useState(false);
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [ruleta, showRuleta] = useState(false);
@@ -49,9 +50,20 @@ export default function Ruleta() {
             />
           </div>
           <div className="text-center mt-3">
-            <button className="btn btn-danger btn-lg" onClick={handleSpinClick}>
+            <button
+              className="btn btn-danger btn-lg"
+              onClick={() => {
+                handleSpinClick();
+                setTimeout(() => {
+                  showPrize(true);
+                }, 12000);
+              }}
+            >
               A rodar!!
             </button>
+            <p className="text-light">
+              {prize && store.ruleta[prizeNumber].option}
+            </p>
           </div>
         </>
       )}

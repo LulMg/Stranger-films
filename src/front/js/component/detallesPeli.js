@@ -20,14 +20,6 @@ export const DetallesPeli = () => {
     } //<div className="prueba text-light"> hey</div>;
   });
 };
-//<div className="prueba text-light">
-//{
-//  }
-//
-//</div>
-//return (
-//  };
-//)
 
 /*<div className="container-fluid">
         <div className="banner-content">
