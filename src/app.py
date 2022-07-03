@@ -68,7 +68,7 @@ def serve_any_other_file(path):
     return response
 
 #Registrar usuarios el body contendra username email y password
-#Queremos que  tanto el correo como el usuario sean unicos
+#Queremos que el correo sea unico
 @app.route('/register', methods=['POST'])
 def register():
     request_body=request.get_json()
@@ -122,10 +122,10 @@ def add_fav_movie():
         return "To the UpsideDown with it"
 
 #El usuario pide ver sus favoritos
-@app.route('/viewfav/<int:id>', methods=['GET'])
+@app.route('/viewfav', methods=['GET'])
 @jwt_required()
-def get_your_favorite(id):
-    identidad = id
+def get_your_favorite():
+    identidad = get_jwt_identity()
     ufav = Fav_movie.query.filter_by(user_id=identidad).all()
     if ufav:
         ufav = ufav.serialize()
