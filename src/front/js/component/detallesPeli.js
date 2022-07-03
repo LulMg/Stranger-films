@@ -3,7 +3,8 @@ import { Context } from "../store/appContext";
 //import "../../styles/home.css";
 import CardPelicula from "../component/card-pelicula";
 import { useParams } from "react-router-dom";
-import { objectOf } from "prop-types";
+import { object, objectOf } from "prop-types";
+import "../../styles/detallesPeli.css";
 
 export const DetallesPeli = () => {
   const { store, actions } = useContext(Context);
@@ -13,13 +14,90 @@ export const DetallesPeli = () => {
   return store.peliculas.map(function (obj, index) {
     if (obj.id == params.theid) {
       //con.log("params = ", +params.theid + "id " + obj.id);
-      console.log("OJITO SAM, hemos encontrado la pelicula");
       console.log(obj.title);
-      console.log(obj);
-      return <div className="prueba text-light">{obj.title}</div>;
-    } //<div className="prueba text-light"> hey</div>;
+      return (
+        // <div className="container">
+        //   <a className="tittle text-white font-weight-700">
+        //   <span>{obj.title}</span>
+        //   </a>
+        //   <div>
+        //     <img src={"https://image.tmdb.org/t/p/w500/" + obj.poster_path} />
+        //     <img src={"https://image.tmdb.org/t/p/w500/" + obj.backdrop_path} />
+        //   </div>
+        //   <div className="text-white">{obj.id}</div>
+        //   <div className="text-white">{index}</div>
+        // </div>
+<div className="container">
+<div id="contenedor" class="row">
+
+<div id="verde" class="col-3 my-auto mx-auto"> 
+    <div class="card">
+      <img src={"https://image.tmdb.org/t/p/w500/" + obj.poster_path} class="card-img-top" alt="..."/>
+
+      <div class="card-body">
+        <h5 class="card-title">{obj.title}</h5>
+        <p class="card-text">{obj.averageVote}Corre platano</p>
+        <a href="#" class="btn btn-danger">Mi lista</a>
+      </div>
+    </div>                        
+  </div>
+
+  <div id="naranja" class="col-9 my-auto mx-auto">
+  <div id="imagen-superior" class="imagen-path">
+  <div class="imagen-detalle">
+    <div class="imagen-active">
+      <img src={"https://image.tmdb.org/t/p/w500/" + obj.backdrop_path} class="d-block w-100" alt="..."/>
+      <div class="carousel-caption d-none d-md-block">
+        <h2>{obj.title}</h2>
+        <p>Some representative placeholder content for the first slide.
+        <a href="#" class="btn btn-danger">Trailer</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div classNsme="row">
+  <div class="col-lg-11">
+        <form>
+            <div class="form-group">
+			<label>Comentario</label>
+    <p class="clasificacion">
+
+    <input id="radio1" type="radio" name="estrellas" value="5"/>
+    <label for="radio1">★</label>
+    <input id="radio2" type="radio" name="estrellas" value="4"/>
+    <label for="radio2">★</label>
+    <input id="radio3" type="radio" name="estrellas" value="3"/>
+    <label for="radio3">★</label>
+    <input id="radio4" type="radio" name="estrellas" value="2"/>
+    <label for="radio4">★</label>
+    <input id="radio5" type="radio" name="estrellas" value="1"/>
+    <label for="radio5">★</label>
+  </p>
+			<textarea id="comment" class="form-control"></textarea>
+			</div>
+			<button type="button" class="btn btn-primary" onclick="commentBox();">Enviar</button>
+        </form>
+        
+    </div>
+    </div>
+            
+</div>
+      );
+    }
+    //<div className="prueba text-light"> hey</div>;
   });
 };
+
+
+
+
+
+
+
 
 /*<div className="container-fluid">
         <div className="banner-content">
