@@ -72,17 +72,14 @@ def serve_any_other_file(path):
 @app.route('/register', methods=['POST'])
 def register():
     request_body=request.get_json()
-    mailtaken=User.query.filter_by(email=body['email']),first()
-    nametaken=User.query.filter_by(username=body['username']),first()
+    mailtaken=User.query.filter_by(email=request_body['email']).first()
     if mailtaken:
-        return "Email already taken" 
-        if nametaken:
-            return "User already taken" 
-        else:
-            newuser=User(username=body['username'], email=body['email'], password=body['password'])
+        return "Email already taken",418
+    else:
+            newuser=User(username=request_body['username'], email=request_body['email'], password=request_body['password'])
             db.session.add(newuser)
             db.session.commit()
-            return jsonify(body)
+            return jsonify(request_body),201
             #NOTA PROGRAMACION; ESTAR ATENTO SI LOS IF ELSE SON CORRECTOS
 
 #Entregar un token a un usuario con Email y Password correctos
@@ -125,10 +122,10 @@ def add_fav_movie():
         return "To the UpsideDown with it"
 
 #El usuario pide ver sus favoritos
-@app.route('/viewfav', methods=['GET'])
+@app.route('/viewfav/<int:id>', methods=['GET'])
 @jwt_required()
-def get_your_favorite():
-    identidad = get_jwt_identity()
+def get_your_favorite(id):
+    identidad = id
     ufav = Fav_movie.query.filter_by(user_id=identidad).all()
     if ufav:
         ufav = ufav.serialize()
@@ -184,9 +181,9 @@ def edit_comment():
     if edit_comment:
         edit_comment.user_comment = new_comment
         db.session.commit()
-        return jsonify({"Successfully change"})
+        return "Successfully change"
     else:
-        return jsonify({"Could not edit comment"})
+        return "Could not edit comment"
 
 #Borrar el comentario
 @app.route('/undocom/movie', methods=['POST'])
