@@ -121,6 +121,7 @@ def add_fav_movie():
     else:
         return "To the UpsideDown with it"
 
+#REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #El usuario pide ver sus favoritos
 @app.route('/viewfav', methods=['GET'])
 @jwt_required()
@@ -198,10 +199,11 @@ def undo_com():
     else:
         return "You roll a 1"
 
+#REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #Pedir todos los comentarios de una pelicula sin que sea necesario estar registrado.
 @app.route('/comment/<int:id>', methods=['GET'])
 def get_all_comments(id):
-    allcomments = Comments.query.filter_by(movie_id=id).all()
+    allcomments = Comment.query.filter_by(movie_id=id).all()
     if allcomments:
         allcomments = allcomments.serialize()
         return jsonify({"resultado": allcomments})
@@ -222,6 +224,7 @@ def add_list_movie():
     else:
         return "Couldn't save it"
 
+#REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #Ver las peliculas guardadas en la lista
 @app.route('/viewlist', methods=['GET'])
 @jwt_required()
