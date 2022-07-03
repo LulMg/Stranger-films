@@ -68,7 +68,7 @@ def serve_any_other_file(path):
     return response
 
 #Registrar usuarios el body contendra username email y password
-#Queremos que  tanto el correo como el usuario sean unicos
+#Queremos que el correo sea unico
 @app.route('/register', methods=['POST'])
 def register():
     request_body=request.get_json()
@@ -121,11 +121,12 @@ def add_fav_movie():
     else:
         return "To the UpsideDown with it"
 
+#REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #El usuario pide ver sus favoritos
-@app.route('/viewfav/<int:id>', methods=['GET'])
+@app.route('/viewfav', methods=['GET'])
 @jwt_required()
-def get_your_favorite(id):
-    identidad = id
+def get_your_favorite():
+    identidad = get_jwt_identity()
     ufav = Fav_movie.query.filter_by(user_id=identidad).all()
     if ufav:
         ufav = ufav.serialize()
@@ -198,10 +199,11 @@ def undo_com():
     else:
         return "You roll a 1"
 
+#REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #Pedir todos los comentarios de una pelicula sin que sea necesario estar registrado.
 @app.route('/comment/<int:id>', methods=['GET'])
 def get_all_comments(id):
-    allcomments = Comments.query.filter_by(movie_id=id).all()
+    allcomments = Comment.query.filter_by(movie_id=id).all()
     if allcomments:
         allcomments = allcomments.serialize()
         return jsonify({"resultado": allcomments})
@@ -222,6 +224,7 @@ def add_list_movie():
     else:
         return "Couldn't save it"
 
+#REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #Ver las peliculas guardadas en la lista
 @app.route('/viewlist', methods=['GET'])
 @jwt_required()
