@@ -49,7 +49,10 @@ export const DetallesPeli = () => {
 
                   <div className="card-body">
                     <h5 className="card-title">{obj.title}</h5>
-                    <p className="card-text">{obj.averageVote}Corre platano</p>
+                    <p className="card-text">{obj.release_date}</p>
+                    <p className="card-text1">
+                      {obj.vote_average} // {obj.vote_count}
+                    </p>
                     <a
                       href="#"
                       className="btn btn-danger"
@@ -77,7 +80,7 @@ export const DetallesPeli = () => {
                       <div className="carousel-caption d-none d-md-block">
                         <h2>{obj.title}</h2>
                         <p className="descripcion">
-                          Inserte descripción de la película aquí
+                          {obj.overview}
                           <a href="#" className="btn btn-danger" id="trailer">
                             Trailer
                           </a>
@@ -131,7 +134,7 @@ export const DetallesPeli = () => {
                       />
                       <label for="radio5">★</label>
                     </p>
-                    
+
                     <input
                       className="caja-comentarios"
                       type="comments"
