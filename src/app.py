@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 from flask_swagger import swagger
 from flask_cors import CORS
 from api.utils import APIException, generate_sitemap
-from api.models import db, User, Comment, Fav_movie
+from api.models import db, User, Comment, Fav_movie, List_movie
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
@@ -68,21 +68,18 @@ def serve_any_other_file(path):
     return response
 
 #Registrar usuarios el body contendra username email y password
-#Queremos que  tanto el correo como el usuario sean unicos
+#Queremos que el correo sea unico
 @app.route('/register', methods=['POST'])
 def register():
     request_body=request.get_json()
-    mailtaken=User.query.filter_by(email=body['email']),first()
-    nametaken=User.query.filter_by(username=body['username']),first()
+    mailtaken=User.query.filter_by(email=request_body['email']).first()
     if mailtaken:
-        return "Email already taken" 
-        if nametaken:
-            return "User already taken" 
-        else:
-            newuser=User(username=body['username'], email=body['email'], password=body['password'])
+        return "Email already taken",418
+    else:
+            newuser=User(username=request_body['username'], email=request_body['email'], password=request_body['password'])
             db.session.add(newuser)
             db.session.commit()
-            return jsonify(body)
+            return jsonify(request_body),201
             #NOTA PROGRAMACION; ESTAR ATENTO SI LOS IF ELSE SON CORRECTOS
 
 #Entregar un token a un usuario con Email y Password correctos
@@ -104,7 +101,7 @@ def iniciar_sesion():
     else:
         return "User lost to the Demogorgon", 400
 
-#Funciona el token
+#Funciona el token (se podria borrar, es para probar que funciona)
 @app.route('/member', methods=['GET'])
 @jwt_required()
 def members():
@@ -120,9 +117,22 @@ def add_fav_movie():
         newfav = Fav_movie(user_id=request_body['user_id'], movie_id=request_body['movie_id'])
         db.session.add(newfav)
         db.session.commit()
-        return "Añadida con exito"
+        return "Successfully added"
     else:
-        return "Te pillo el Demogorgon"
+        return "To the UpsideDown with it"
+
+#REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#El usuario pide ver sus favoritos
+@app.route('/viewfav', methods=['GET'])
+@jwt_required()
+def get_your_favorite():
+    identidad = get_jwt_identity()
+    ufav = Fav_movie.query.filter_by(user_id=identidad).all()
+    if ufav:
+        ufav = ufav.serialize()
+        return jsonify({"resultado": ufav})
+    else:
+        return jsonify({"resultado": "Favourite movie not found"})
 
 #Borrar la peli que ya no es favorita
 @app.route('/undofav/movie', methods=['POST'])
@@ -172,11 +182,9 @@ def edit_comment():
     if edit_comment:
         edit_comment.user_comment = new_comment
         db.session.commit()
-        return jsonify({"Successfully change"})
+        return "Successfully change"
     else:
-        return jsonify({"Could not edit comment"})
-
-
+        return "Could not edit comment"
 
 #Borrar el comentario
 @app.route('/undocom/movie', methods=['POST'])
@@ -191,15 +199,56 @@ def undo_com():
     else:
         return "You roll a 1"
 
+#REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #Pedir todos los comentarios de una pelicula sin que sea necesario estar registrado.
 @app.route('/comment/<int:id>', methods=['GET'])
 def get_all_comments(id):
-    allcomments = Comments.query.filter_by(movie_id=id).all()
+    allcomments = Comment.query.filter_by(movie_id=id).all()
     if allcomments:
         allcomments = allcomments.serialize()
         return jsonify({"resultado": allcomments})
     else:
         return jsonify({"resultado": "Comment not found"})
+
+#Guardar tu peli en la lista
+@app.route('/list/movie', methods=['POST'])
+@jwt_required()
+def add_list_movie():
+    request_body = request.get_json()
+    listmovie = request_body
+    if listmovie:
+        newlist = List_movie(user_id=request_body['user_id'], movie_id=request_body['movie_id'])
+        db.session.add(newlist)
+        db.session.commit()
+        return "Saved to your list"
+    else:
+        return "Couldn't save it"
+
+#REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#Ver las peliculas guardadas en la lista
+@app.route('/viewlist', methods=['GET'])
+@jwt_required()
+def get_your_list():
+    identidad = get_jwt_identity()
+    ulist = List_movie.query.filter_by(user_id=identidad).all()
+    if ulist:
+        ulist = ulist.serialize()
+        return jsonify({"resultado": ulist})
+    else:
+        return jsonify({"resultado": "No movies in the list"})
+
+#Borrar la peli de la lista
+@app.route('/undolist/movie', methods=['POST'])
+@jwt_required()
+def undo_list_movie():
+    request_body = request.get_json()
+    undolist = List_movie.query.filter_by(user_id=request_body['user_id'], movie_id=request_body['movie_id']). first()
+    if undolist:
+        db.session.delete(undolist)
+        db.session.commit()
+        return "To the UpsideDown with it"
+    else:
+        return "Couldn't delete it"
 
 # this only runs if `$ python src/main.py` is executed esto va a lfinal
 if __name__ == '__main__':

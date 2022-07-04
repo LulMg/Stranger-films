@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           src: "https://www.youtube.com/embed/4UZrsTqkcW4",
         },
       ],
+      peliculasTrailer: [],
       peliculasBusqueda: [],
       generoSeleccionado: "Género",
       peliculas: [],
@@ -33,6 +34,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
     },
+
     actions: {
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
@@ -55,8 +57,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log(getStore());
       },
       generartrailer: async () => {
+        console.log(" GENERANDO TRAilers ");
         const store = getStore();
-        for (var i = 0; i < store.peliculas.length - 1; i++) {
+        const actions = getActions();
+        // store.carrousel = [];
+        for (var i = 0; i < store.peliculas.length; i++) {
           await fetch(
             "https://api.themoviedb.org/3/movie/" +
               +store.peliculas[i].id +
@@ -65,7 +70,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             .then((response) => response.json())
             .then((data) => {
               // console.log("trailer para " + store.peliculas[i].title);
-              for (var x = 0; x < data.results.length - 1; x++) {
+              // store.peliculas[0].trailer = "none";
+              for (var x = 0; x < data.results.length; x++) {
                 if (
                   data.results[x].official == true &&
                   (data.results.type = "Trailer") &&
@@ -73,16 +79,23 @@ const getState = ({ getStore, getActions, setStore }) => {
                 ) {
                   store.peliculas[i].trailer =
                     "https://www.youtube.com/watch?v=" + data.results[x].key;
+                  store.peliculasTrailer.push(store.peliculas[i]);
                   //HACEMOS BREAK PARA QUE ÚNICAMENTE MUESTRE UN TRAILER OFICIAL
                   //YA QUE HAY PELICULAS QUE TIENEN VARIOS TRAILERS
                   break;
                 } else {
-                  store.peliculas[i].trailer = "none";
+                  store.peliculas[i].trailer =
+                    "https://www.youtube.com/watch?v=111111";
                 }
               }
+              // setStore({ carrousel: store.peliculas[i] });
+
+              // store.carrousel.push(store.peliculas[i]);
             })
+            // .then(actions.cargarCarrousel())
             .catch((error) => console.log("Algo salió mal", error));
         }
+        // actions.cargarCarrousel();
         console.log(getStore());
       },
       buscarPelicula: (busqueda) => {
@@ -161,6 +174,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             .catch((error) => console.log("Algo salió mal", error));
         }
         let store = getStore();
+        actions.generartrailer();
         actions.topRated();
         actions.cargarCarrousel();
         actions.proximamente();
@@ -242,7 +256,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         // console.log("peliculas ordenadas por votos", store.peliculas);
       },
-
+      paginarPeliculas: (pagina, elementosPorPagina, arrayaPaginar) => {
+        //Le pasamos como argumentos
+        // pagina -> la pagina a la que pasamos
+        //elementosPorPagina -> cuantos elementos se van a mostrar en cada pagina
+        // array - > array completo con todos los elementos que se mostraran,  esta función
+        //decidirá cuales se muestran , es decir pasamos el array total por ejemplio 400 elementos
+        // y la función , en base a la pagina y de los elementos a mostrar calcula que elementos del array mostrar
+        pagina = pagina - 1;
+        var inicio = pagina * elementosPorPagina;
+        var fin = inicio + (elementosPorPagina - 1);
+        var arrayAMostrar = [];
+        if (fin > arrayaPaginar.length - 1) {
+          // comprobamos si es el ultimo elemento
+          fin = arrayaPaginar.length - 1;
+        }
+        console.log(
+          "inicio = ",
+          inicio,
+          "Fin : ",
+          fin,
+          "longitud array ",
+          arrayaPaginar.length
+        );
+        console.log("array 399", arrayaPaginar[399]);
+        for (var i = inicio; i <= fin; i++) {
+          // if (i <= array.length - 1) {
+          arrayAMostrar.push(arrayaPaginar[i]);
+          // }
+        }
+        //EN EL COMPONENTE A RENDERIZAR DEBERIAMOS COGER LOS DATOS DE arrayAMostrar
+        console.log(arrayAMostrar);
+        // return array;
+      },
       popularidad: () => {
         let store = getStore();
         store.peliculasPopulares = store.peliculas;
@@ -317,6 +363,43 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         //reset the global store
         setStore({ demo: demo });
+      },
+
+      logIn: (email, password) => {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          email: email,
+          password: password,
+        });
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch(
+          "https://3001-lulmg-strangerfilms-bmgcedkl5a2.ws-eu47.gitpod.io/login",
+          requestOptions
+        )
+          .then((response) => response.JSON())
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+      },
+
+      register: (username, email, password) => {
+        // pegar postman
+      },
+
+      favmovie: (favmovie) => {
+        // pegar postman
+      },
+
+      newcomment: (newcoment) => {
+        // pegar postman
       },
     },
   };
