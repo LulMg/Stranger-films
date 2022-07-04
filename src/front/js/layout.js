@@ -16,6 +16,7 @@ import { DetallesPeli } from "./component/detallesPeli";
 import Busqueda from "./component/busquedaPeli";
 import Stranger from "./component/strangerFilms";
 import Api from "./component/footerApi";
+import Aportaciones from "./component/aportacionesFooter";
 
 //create your first component
 const Layout = () => {
@@ -43,6 +44,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/Api">
               <Api />
+            </Route>
+            <Route exact path="/Aportaciones">
+              <Aportaciones />
             </Route>
             <Route exact path="/single/:theid">
               <Single />

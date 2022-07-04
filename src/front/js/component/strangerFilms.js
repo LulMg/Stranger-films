@@ -49,7 +49,7 @@ export default function Stranger() {
           </ul>
 
           <h6 className="text-center">
-            Para crear su cuenta de IMDb, vaya a la página de registro.
+            Para crear tu cuenta en Stranger Films , ve a la página de registro.
           </h6>
         </div>
       </div>

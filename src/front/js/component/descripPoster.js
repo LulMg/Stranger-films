@@ -20,8 +20,8 @@ export default function Detalles(props) {
       </div>
       <div className="d-flex justify-content-start">
         <Trailer
-          trailer={store.peliculas?.map((obj, index) => {
-            return obj.trailer;
+          trailer={store.pruebaTrailer?.map((obj, index) => {
+            return obj.src;
           })}
         />
       </div>

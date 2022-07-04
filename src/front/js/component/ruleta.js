@@ -3,6 +3,7 @@ import "../../styles/ruleta.css";
 import { Context } from "../store/appContext";
 import { useContext } from "react";
 import { Wheel } from "react-custom-roulette";
+import CardPelicula from "./card-pelicula";
 
 export default function Ruleta() {
   const { store, actions } = useContext(Context);
@@ -61,9 +62,9 @@ export default function Ruleta() {
             >
               A rodar!!
             </button>
-            <p className="text-light">
-              {prize && store.ruleta[prizeNumber].option}
-            </p>
+            <div className="text-light">
+              <h1>{prize && store.ruleta[prizeNumber].option}</h1>
+            </div>
           </div>
         </>
       )}

@@ -1,6 +1,11 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      pruebaTrailer: [
+        {
+          src: "https://www.youtube.com/embed/4UZrsTqkcW4",
+        },
+      ],
       peliculasBusqueda: [],
       generoSeleccionado: "Género",
       peliculas: [],

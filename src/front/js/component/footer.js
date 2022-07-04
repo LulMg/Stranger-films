@@ -24,16 +24,15 @@ export const Footer = () => (
       <div className="m-2">
         <ul>
           <h5>Participa</h5>
-          <li key={3}>Aportaciones</li>
-          <li key={4}>Guía de aportaciones</li>
-          <li key={5}>Añadir nueva película</li>
+          <Link to="/Aportaciones">
+            <li key={3}>Aportaciones</li>
+          </Link>
         </ul>
       </div>
       <div className="border ms-4"></div>
       <div className="m-2">
         <ul>
           <h5>Comunidad</h5>
-          <li key={6}>Discusiones</li>
           <li key={7}>Contenidos</li>
           <li key={8}>Redes sociales</li>
         </ul>
