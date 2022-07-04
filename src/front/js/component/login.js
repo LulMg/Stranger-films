@@ -6,12 +6,12 @@ import { Context } from "../store/appContext";
 export const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {actions} = useContext(Context);
-  useEffect(()=>{
-    console.log(email,password)
-  },[email,password])
+  const { actions } = useContext(Context);
+  useEffect(() => {
+    console.log(email, password);
+  }, [email, password]);
   return (
-    <div className="container">
+    <div className="container1">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -25,7 +25,7 @@ export const LogIn = () => {
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Enter email"
-            onChange={(e)=>setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <small id="emailHelp" className="form-text text-muted">
             We'll never share your email with anyone else.
@@ -38,7 +38,7 @@ export const LogIn = () => {
             className="form-control"
             id="exampleInputPassword1"
             placeholder="Password"
-            onChange={(e)=>setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="form-check">
@@ -51,7 +51,13 @@ export const LogIn = () => {
             Check me out
           </label>
         </div>
-        <button type="submit" onClick={()=>{actions.logIn(email, password)}} className="btn btn-primary">
+        <button
+          type="submit"
+          onClick={() => {
+            actions.logIn(email, password);
+          }}
+          className="btn btn-primary"
+        >
           Submit
         </button>
       </form>

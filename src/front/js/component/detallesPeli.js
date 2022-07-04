@@ -32,7 +32,7 @@ export const DetallesPeli = () => {
         //   <div classNameName="text-white">{obj.id}</div>
         //   <div classNameName="text-white">{index}</div>
         // </div>
-        <div classNameName="container">
+        <div classNameName="container2">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -76,10 +76,9 @@ export const DetallesPeli = () => {
                       />
                       <div className="carousel-caption d-none d-md-block">
                         <h2>{obj.title}</h2>
-                        <p>
-                          Some representative placeholder content for the first
-                          slide.
-                          <a href="#" className="btn btn-danger">
+                        <p className="descripcion">
+                          Inserte descripción de la película aquí
+                          <a href="#" className="btn btn-danger" id="trailer">
                             Trailer
                           </a>
                         </p>
@@ -90,7 +89,7 @@ export const DetallesPeli = () => {
               </div>
             </div>
 
-            <div classNameNsme="row">
+            <div className="container" id="comentarios">
               <div className="col-lg-11">
                 <form>
                   <div className="form-group">
@@ -132,7 +131,9 @@ export const DetallesPeli = () => {
                       />
                       <label for="radio5">★</label>
                     </p>
+                    
                     <input
+                      className="caja-comentarios"
                       type="comments"
                       placeholder="Inserte su comentario aquí"
                       onChange={(e) => setNewcomment(e.target.value)}
