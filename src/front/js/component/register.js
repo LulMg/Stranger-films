@@ -1,24 +1,42 @@
 import React, { useEffect, useState, useContext } from "react";
-import "../../styles/login.css";
+import "../../styles/register.css";
 import logo from "../../img/logo.png";
 import { Context } from "../store/appContext";
 
 export const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const { actions } = useContext(Context);
+
   useEffect(() => {
-    console.log(email, password);
-  }, [email, password]);
+    console.log(username, email, password);
+  }, [username, email, password]);
+
   return (
-    <div className="container1">
+    <div className="container">
       <form
         onSubmit={(e) => {
           e.preventDefault();
         }}
       >
         <div className="form-group">
-          <label htmlFor="exampleInputEmail1">Email address</label>
+          <label htmlFor="exampleInputUsername1">Usuario</label>
+          <input
+            type="username"
+            className="form-control"
+            id="exampleInputUsername1"
+            aria-describedby="usernameHelp"
+            placeholder="Enter username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <small id="emailHelp" className="form-text text-muted">
+            Introduce tu usuario. Debe ser único.
+          </small>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="exampleInputEmail1">Email</label>
           <input
             type="email"
             className="form-control"
@@ -28,7 +46,7 @@ export const LogIn = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
+            Nunca compartiremos tu Email con nadie mas.
           </small>
         </div>
         <div className="form-group">
@@ -48,13 +66,13 @@ export const LogIn = () => {
             id="exampleCheck1"
           />
           <label className="form-check-label" htmlFor="exampleCheck1">
-            Check me out
+            Cerrar Sesión
           </label>
         </div>
         <button
           type="submit"
           onClick={() => {
-            actions.logIn(email, password);
+            actions.register(username, email, password);
           }}
           className="btn btn-primary"
         >

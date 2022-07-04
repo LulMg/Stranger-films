@@ -6,11 +6,18 @@
   border-color: black;
   box-shadow: 0 0 40px rgb(255, 68, 68);
   margin-top: 20px;
+  position: inherit;
+  border-radius: 20px;
 }
 
 .carousel-caption {
   background-color: rgba(0, 0, 0, 0.678);
   border-radius: 20px;
+}
+
+.card{
+  margin-left: 20px;
+  margin-top: 25px;
 }
 
 h5 {
@@ -32,13 +39,25 @@ h2 {
     0 0 102px rgb(255, 0, 0), 0 0 151px rgb(255, 0, 0);
 }
 
+.descripcion{
+  color: #fff;
+}
+
+.btn#trailer{
+  margin-left: 250px;
+}
+
 .row {
   margin-top: 20px;
+  height: 200px;
+  width: 1300px;
+  margin-left: 100px;
 }
 
 .container2 {
   padding-top: 20px;
   margin-top: 100px;
+  margin-left: 20px;
 }
 
 label{
@@ -76,4 +95,15 @@ label:hover ~ label {
 
 input[type="radio"]:checked ~ label {
   color: orange;
+}
+
+.container#comentarios{
+  margin-top:400px;
+  margin-left: 120px;
+}
+
+.caja-comentarios{
+  height: 50px;
+  width: 1250px;
+  margin-bottom: 20px;
 }
