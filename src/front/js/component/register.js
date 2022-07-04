@@ -3,7 +3,7 @@ import "../../styles/register.css";
 import logo from "../../img/logo.png";
 import { Context } from "../store/appContext";
 
-export const LogIn = () => {
+export default function Register () {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");

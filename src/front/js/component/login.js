@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import "../../styles/login.css";
 import logo from "../../img/logo.png";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 export const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -41,6 +42,16 @@ export const LogIn = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+
+        <div className="form-group">
+          <Link to="/register">
+            <a href="https://lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/register">
+              {" "}
+              ¿Aún no te has registrado? Crear cuenta
+            </a>
+          </Link>
+        </div>
+
         <div className="form-check">
           <input
             type="checkbox"

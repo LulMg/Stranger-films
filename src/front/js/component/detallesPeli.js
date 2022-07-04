@@ -38,9 +38,9 @@ export const DetallesPeli = () => {
               e.preventDefault();
             }}
           >
-            <div id="contenedor" className="row">
+            <div id="contenedor" className="row detallesPelis3">
               <div id="verde" className="col-3 my-auto mx-auto">
-                <div className="card">
+                <div className="card detallesPelis2">
                   <img
                     src={"https://image.tmdb.org/t/p/w500/" + obj.poster_path}
                     className="card-img-top"
@@ -49,7 +49,14 @@ export const DetallesPeli = () => {
 
                   <div className="card-body">
                     <h5 className="card-title">{obj.title}</h5>
-                    <p className="card-text">{obj.averageVote}Corre platano</p>
+                    <p className="card-text">{obj.release_date}</p>
+                    <p className="card-text1">
+                      <i
+                        style={{ color: "yellow" }}
+                        className="fas fa-star me-1 mt-1"
+                      ></i>
+                      {obj.vote_average} // {obj.vote_count}
+                    </p>
                     <a
                       href="#"
                       className="btn btn-danger"
@@ -74,10 +81,10 @@ export const DetallesPeli = () => {
                         className="d-block w-100"
                         alt="..."
                       />
-                      <div className="carousel-caption d-none d-md-block">
-                        <h2>{obj.title}</h2>
+                      <div className="carousel-caption d-none d-md-block detallesPelis1">
+                        <h2 className="detallesPelis">{obj.title}</h2>
                         <p className="descripcion">
-                          Inserte descripción de la película aquí
+                          {obj.overview}
                           <a href="#" className="btn btn-danger" id="trailer">
                             Trailer
                           </a>
@@ -131,7 +138,7 @@ export const DetallesPeli = () => {
                       />
                       <label for="radio5">★</label>
                     </p>
-                    
+
                     <input
                       className="caja-comentarios"
                       type="comments"
