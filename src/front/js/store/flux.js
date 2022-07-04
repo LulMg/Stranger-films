@@ -316,7 +316,37 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       logIn: (email, password) => {
-        
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+        email: email,
+        password: password
+      });
+
+      var requestOptions = {
+         method: 'POST',
+         headers: myHeaders,
+         body: raw,
+        redirect: 'follow'
+      };
+
+      fetch("https://3001-lulmg-strangerfilms-bmgcedkl5a2.ws-eu47.gitpod.io/login", requestOptions)
+        .then(response => response.JSON())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error)); 
+      },
+
+      register: (username, email, password) =>{
+        // pegar postman
+      },
+
+      favmovie: (favmovie) =>{
+        // pegar postman
+      },
+
+      newcomment: (newcoment) =>{
+        // pegar postman
       },
     },
   };
