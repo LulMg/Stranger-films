@@ -47,13 +47,26 @@ export const Navbar = () => {
             </div>
             <div className="divisor bg-light me-3"></div>
             <h6 className="text-light mt-1 me-2">
-              <button
-                className="btn text-light"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                iniciar sesión <i className="far fa-user ms-2"></i>
-              </button>
+              {localStorage.getItem("token") ? (
+                <>
+                  <i className="far fa-user ms-2"></i>
+                  <span
+                    onClick={() => {
+                      actions.logOut();
+                    }}
+                  >
+                    Cerrar Sesión
+                  </span>
+                </>
+              ) : (
+                <button
+                  className="btn text-light"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  iniciar sesión
+                </button>
+              )}
             </h6>
           </div>
         </div>

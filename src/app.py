@@ -2,6 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
+import datetime
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
@@ -90,7 +91,7 @@ def iniciar_sesion():
     user = User.query.filter_by(email=request_body['email']).first()
     if user:
         if user.password == request_body['password']:
-            acceso = create_access_token(identity = user.id)
+            acceso = create_access_token(identity = user.id, expires_delta=datetime.timedelta(minutes=60))
 
             return jsonify({
                 "mensaje": "Welcome to the UpsideDown",

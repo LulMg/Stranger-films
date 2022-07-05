@@ -147,6 +147,9 @@ export const Home = (props) => {
         >
           POPULARES
         </h2>
+        {/* <h2 className="text-light" onClick={() =>{
+          console.log(store.messageLogin)
+        }}>CLick aqui</h2> */}
         <div>
           {/*//NOS GENERA UNA LISTA DINAMICA EN BASE AL GENERO QUE SE ENCUENTRA
           ALMACENADO EN PELICULASGENERO*/}
