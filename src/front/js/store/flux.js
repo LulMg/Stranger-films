@@ -1,11 +1,6 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      pruebaTrailer: [
-        {
-          src: "https://www.youtube.com/embed/4UZrsTqkcW4",
-        },
-      ],
       peliculasTrailer: [],
       peliculasBusqueda: [],
       generoSeleccionado: "Género",
@@ -78,14 +73,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                   (data.results.type = "Youtube")
                 ) {
                   store.peliculas[i].trailer =
-                    "https://www.youtube.com/watch?v=" + data.results[x].key;
+                    "https://www.youtube.com/embed/" + data.results[x].key;
                   store.peliculasTrailer.push(store.peliculas[i]);
                   //HACEMOS BREAK PARA QUE ÚNICAMENTE MUESTRE UN TRAILER OFICIAL
                   //YA QUE HAY PELICULAS QUE TIENEN VARIOS TRAILERS
                   break;
                 } else {
                   store.peliculas[i].trailer =
-                    "https://www.youtube.com/watch?v=111111";
+                    "https://www.youtube.com/embed/111111";
                 }
               }
               // setStore({ carrousel: store.peliculas[i] });
@@ -315,6 +310,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log(tresAleatorios);
         for (var i = 0; i < 3; i++) {
           store.carrousel.push(store.peliculas[tresAleatorios[i]]);
+          //store.carrousel[tresAleatorios][i].id = tresAleatorios[i];
         }
         console.log(store.carrousel);
       },

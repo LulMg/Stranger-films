@@ -4,6 +4,8 @@ import { Context } from "../store/appContext";
 import { useContext } from "react";
 //COMPONENTE TRAILER
 import Trailer from "./pupUpTrailer";
+import { objectOf } from "prop-types";
+import { Link } from "react-router-dom";
 
 export default function Detalles(props) {
   const { store, actions } = useContext(Context);
@@ -19,11 +21,9 @@ export default function Detalles(props) {
         <p>{props.description}</p>
       </div>
       <div className="d-flex justify-content-start">
-        <Trailer
-          trailer={store.pruebaTrailer?.map((obj, index) => {
-            return obj.src;
-          })}
-        />
+        <Link to={"/detalles/" + props.id}>
+          <button>Ver mas</button>
+        </Link>
       </div>
     </div>
   );

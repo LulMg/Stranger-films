@@ -137,7 +137,17 @@ export const Home = (props) => {
       </div>
 
       {/*SECCION DE POPULARES*/}
+      <h3
+        onClick={() => {
+          store.peliculas?.map((obj, index) => {
+            console.log("trailer", obj.trailer);
+          });
+        }}
 
+        //return obj.trailer;
+      >
+        PRUEBA
+      </h3>
       <div className="tendencias text-light">
         <h2
           className="mt-3 text-start ps-5 py-4 ms-5"

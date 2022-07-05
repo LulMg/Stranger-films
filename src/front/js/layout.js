@@ -17,6 +17,7 @@ import Busqueda from "./component/busquedaPeli";
 import Stranger from "./component/strangerFilms";
 import Api from "./component/footerApi";
 import Aportaciones from "./component/aportacionesFooter";
+import Register from "./component/register";
 
 //create your first component
 const Layout = () => {
@@ -56,6 +57,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/detalles/:theid">
               <DetallesPeli />
+            </Route>
+            <Route exact path="/register">
+              <Register />
             </Route>
             <Route>
               <LogIn />
