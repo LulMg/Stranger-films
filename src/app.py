@@ -153,8 +153,10 @@ def undo_fav_movie():
 @app.route('/add/comment', methods=['POST'])
 @jwt_required()
 def add_comment():
+    user_ID = get_jwt_identity()
     request_body = request.get_json()
-    newcomment = Comment(user_id=request_body['user_id'], movie_id=request_body['movie_id'], user_comment=request_body['user_comment'])
+    user = Comment.query.filter_by(user_id=user_ID)
+    newcomment = Comment( movie_id=request_body['movie_id'], user_comment=request_body['user_comment'], user_id = user)
     if newcomment:
         db.session.add(newcomment)
         db.session.commit()

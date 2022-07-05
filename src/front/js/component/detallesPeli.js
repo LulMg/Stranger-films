@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Context } from "../store/appContext";
 //import "../../styles/home.css";
-import CardPelicula from "../component/card-pelicula";
+import Comentario from "../component/comentarios";
 import { useParams } from "react-router-dom";
 import { object, objectOf } from "prop-types";
 import "../../styles/detallesPeli.css";
@@ -11,24 +11,11 @@ export const DetallesPeli = () => {
   const params = useParams();
   const [favmovie, setFavmovie] = useState("");
   const [newcomment, setNewcomment] = useState("");
-  console.log(params);
-  useEffect(() => {
-    console.log(favmovie, newcomment);
-  }, [favmovie, newcomment]);
-  
+
   return store.peliculas.map(function (obj, index) {
     if (obj.id == params.theid) {
       //con.log("params = ", +params.theid + "id " + obj.id);
-      console.log(obj.title);
       return (
-        // <div className="container">
-        //   <div>
-        //     <img src={"https://image.tmdb.org/t/p/w500/" + obj.poster_path} />
-        //     <img src={"https://image.tmdb.org/t/p/w500/" + obj.backdrop_path} />
-        //   </div>
-        //   <div className="text-white">{obj.id}</div>
-        //   <div className="text-white">{index}</div>
-        // </div>
         <div className="container2">
           <form
             onSubmit={(e) => {
@@ -161,9 +148,20 @@ export const DetallesPeli = () => {
               </div>
             </div>
           </form>
+
+          <div class="container-fluid" id="main-content">
+            <div className="columna6">
+              <Comentario
+                id={params.theid}
+                key={obj.id}
+                poster={`https://image.tmdb.org/t/p/w342/${obj.poster_path}`}
+                averageVote={<div>{obj.title}</div>}
+              />
+              );
+            </div>
+          </div>
         </div>
       );
     }
   });
 };
-
