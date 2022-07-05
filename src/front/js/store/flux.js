@@ -16,18 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       peliculasporGenero: [],
       message: null,
       messageLogin: "",
-      demo: [
-        {
-          title: "FIRST",
-          background: "white",
-          initial: "white",
-        },
-        {
-          title: "SECOND",
-          background: "white",
-          initial: "white",
-        },
-      ],
+      commentsForOneMovie: null,
     },
 
     actions: {
@@ -122,7 +111,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         //    console("Peli encontraDA ", store.peliculas[id].title);
         //  }
         //}
-        console.log("hola");
       },
 
       generosDePeliculas: async () => {
@@ -144,7 +132,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         var actions = getActions();
         for (var pagina = 1; pagina < 21; pagina++) {
           await fetch(
-            "https://api.themoviedb.org/3/discover/movie?api_key=87330f0fa794fb3eb980c887157031c9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=" +
+            "https://api.themoviedb.org/3/discover/movie?api_key=87330f0fa794fb3eb980c887157031c9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=3" +
               pagina +
               "&with_watch_monetization_types=flatrate"
           )
@@ -380,29 +368,26 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       favmovie: (favmovie) => {
-    //     var myHeaders = new Headers();
-    //     myHeaders.append("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1NzA1Mzc1OCwianRpIjoiZmQyMWUzYWUtYzAzNC00NjNmLWE1MzItMTM2OTk4MWQ4M2E0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU3MDUzNzU4LCJleHAiOjE2NTcwNTczNTh9.lcRtVDsip4TF7j959aJzYwTlOIAmMjU_2LR2fzAO1kc");
-    //     myHeaders.append("Content-Type", "application/json");
+        //     var myHeaders = new Headers();
+        //     myHeaders.append("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1NzA1Mzc1OCwianRpIjoiZmQyMWUzYWUtYzAzNC00NjNmLWE1MzItMTM2OTk4MWQ4M2E0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU3MDUzNzU4LCJleHAiOjE2NTcwNTczNTh9.lcRtVDsip4TF7j959aJzYwTlOIAmMjU_2LR2fzAO1kc");
+        //     myHeaders.append("Content-Type", "application/json");
+        //     var raw = JSON.stringify({
+        //       "user_id": "1",
+        //       "movie_id": "3000"
+        //     });
+        //     var requestOptions = {
+        //       method: 'POST',
+        //       headers: myHeaders,
+        //       body: raw,
+        //       redirect: 'follow'
+        //     };
+        //     fetch("https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/favorite/movie", requestOptions)
+        //       .then(response => response.text())
+        //       .then(result => console.log(result))
+        //       .catch(error => console.log('error', error));
+      },
 
-    //     var raw = JSON.stringify({
-    //       "user_id": "1",
-    //       "movie_id": "3000"
-    //     });
-
-    //     var requestOptions = {
-    //       method: 'POST',
-    //       headers: myHeaders,
-    //       body: raw,
-    //       redirect: 'follow'
-    //     };
-
-    //     fetch("https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/favorite/movie", requestOptions)
-    //       .then(response => response.text())
-    //       .then(result => console.log(result))
-    //       .catch(error => console.log('error', error));
-     },
-
-      newcomment: async (newcomment, id) => {
+      newcomment: async (newcomment, id, user) => {
         let comment = {
           user_comment: newcomment,
           movie_id: id,
@@ -420,6 +405,21 @@ const getState = ({ getStore, getActions, setStore }) => {
             body: JSON.stringify(comment),
           }
         );
+      },
+      getAllcommentsForOneMovie: async (id) => {
+        const response = await fetch(
+          `https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/comment/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }
+        );
+        const data = await response.json();
+
+        setStore({ commentsForOneMovie: data.resultado });
       },
     },
   };
