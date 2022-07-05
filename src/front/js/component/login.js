@@ -2,15 +2,16 @@ import React, { useEffect, useState, useContext } from "react";
 import "../../styles/login.css";
 import logo from "../../img/logo.png";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+
 
 export const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { actions } = useContext(Context);
-  useEffect(() => {
-    console.log(email, password);
-  }, [email, password]);
+  // useEffect(() => {
+  //   console.log(email, password);
+  // }, [email, password]);
   return (
     <div className="container1">
       <form

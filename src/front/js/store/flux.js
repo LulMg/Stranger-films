@@ -16,6 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ruleta: [],
       peliculasporGenero: [],
       message: null,
+      messageLogin: "",
       demo: [
         {
           title: "FIRST",
@@ -363,6 +364,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       logIn: (email, password) => {
         var myHeaders = new Headers();
+        let store = getStore();
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
@@ -396,6 +398,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       newcomment: (newcoment) => {
         // pegar postman
+      },
+
+      newcomment: (newcomment, idPeli) => {
+        var myHeaders = new Headers();
+        myHeaders.append(
+          "Authorization",
+          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1NzAyMzcyNywianRpIjoiMDRjMDZmYjQtNjQ1Ny00OWZiLTk1MTAtNTNkNWFhMmFiNzY0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU3MDIzNzI3LCJleHAiOjE2NTcwMjczMjd9.DUrEfsd6ZDv0hjjokNeS1-HmIhh3l5EiIstnt4gwEkw"
+        );
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          movie_id: idPeli,
+          user_comment: newcomment,
+        });
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch(
+          "https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/add/comment",
+          requestOptions
+        )
+          .then((response) => response.json())
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
       },
     },
   };

@@ -22,7 +22,7 @@ export default function Detalles(props) {
       </div>
       <div className="d-flex justify-content-start">
         <Link to={"/detalles/" + props.id}>
-          <button>Ver mas</button>
+          <button className="btn btn-danger">Ver mas</button>
         </Link>
       </div>
     </div>

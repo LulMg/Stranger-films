@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 //COMPONENTES
 import CardPelicula from "./card-pelicula";
 import AcordionGenero from "./navbar-generos";
+import MiLista from "../component/acordionMilista";
 
 export default function Busqueda() {
   const params = useParams();
@@ -15,12 +16,18 @@ export default function Busqueda() {
     setTimeout(() => {
       actions.buscarPelicula(params.inputText);
       setLoad(true);
-    }, 5000);
+    }, 4000);
   }, []);
   return (
     <div className="d-flex">
       <div>
-        <AcordionGenero />
+        {localStorage.getItem("token") ? (
+          <>
+            <MiLista />
+          </>
+        ) : (
+          <AcordionGenero />
+        )}
       </div>
       <div className="col">
         <div className="m-3">
@@ -53,7 +60,7 @@ export default function Busqueda() {
             <lord-icon
               src="https://cdn.lordicon.com/ymrqtsej.json"
               trigger="loop"
-              colors="primary:#121331"
+              colors="primary:#e94242"
               style={{ width: "250px", height: "250px" }}
             ></lord-icon>
           )}

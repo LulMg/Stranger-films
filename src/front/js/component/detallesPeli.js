@@ -12,35 +12,24 @@ export const DetallesPeli = (props) => {
   const params = useParams();
   const [favmovie, setFavmovie] = useState("");
   const [newcomment, setNewcomment] = useState("");
-
+  console.log(params);
   useEffect(() => {
     console.log(favmovie, newcomment);
   }, [favmovie, newcomment]);
-  //<div classNameName="generalBody">
+
   return store.peliculas.map(function (obj, index) {
     if (obj.id == params.theid) {
       //con.log("params = ", +params.theid + "id " + obj.id);
       console.log(obj.title);
       return (
-        // <div classNameName="container">
-        //   <a classNameName="tittle text-white font-weight-700">
-        //   <span>{obj.title}</span>
-        //   </a>
-        //   <div>
-        //     <img src={"https://image.tmdb.org/t/p/w500/" + obj.poster_path} />
-        //     <img src={"https://image.tmdb.org/t/p/w500/" + obj.backdrop_path} />
-        //   </div>
-        //   <div classNameName="text-white">{obj.id}</div>
-        //   <div classNameName="text-white">{index}</div>
-        // </div>
-        <div classNameName="container2 text-center">
+        <div classNameName="container2">
           <form
             onSubmit={(e) => {
               e.preventDefault();
             }}
           >
             <div id="contenedor" className="row detallesPelis3">
-              <div id="verde" className="col-3 my-auto mx-auto">
+              <div id="verde" className="col-3">
                 <div className="card detallesPelis2">
                   <img
                     src={"https://image.tmdb.org/t/p/w500/" + obj.poster_path}
@@ -60,7 +49,7 @@ export const DetallesPeli = (props) => {
                     </p>
                     <a
                       href="#"
-                      className="btn btn-danger"
+                      className="btn btn-danger col-12"
                       onClick={() => {
                         actions.favmovie(favmovie);
                       }}
@@ -84,11 +73,11 @@ export const DetallesPeli = (props) => {
                       />
                       <div className="carousel-caption d-none d-md-block detallesPelis1">
                         <h2 className="detallesPelis">{obj.title}</h2>
-                        <p className="descripcion">
+                        <p className="descripcion p-3">
                           {obj.overview}
-                          <h1 className="text-light">{obj.trailer}</h1>
-                          <h1 className="text-light">{obj.title}</h1>
-                          <Trailer trailer={obj.trailer} />
+                          <div className="mt-4">
+                            <Trailer trailer={obj.trailer} />
+                          </div>
                         </p>
                       </div>
                     </div>
@@ -98,7 +87,7 @@ export const DetallesPeli = (props) => {
             </div>
 
             <div className="container" id="comentarios">
-              <div className="col-lg-11">
+              <div className="col-lg-11 ms-5">
                 <form>
                   <div className="form-group">
                     <label>Comentario</label>
@@ -139,23 +128,28 @@ export const DetallesPeli = (props) => {
                       />
                       <label for="radio5">★</label>
                     </p>
-
-                    <input
-                      className="caja-comentarios"
-                      type="comments"
-                      placeholder="Inserte su comentario aquí"
-                      onChange={(e) => setNewcomment(e.target.value)}
-                    ></input>
                   </div>
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={() => {
-                      actions.newcoment(newcomment);
-                    }}
-                  >
-                    Enviar
-                  </button>
+                  {localStorage.getItem("token") ? (
+                    <>
+                      {" "}
+                      <input
+                        className="caja-comentarios"
+                        type="comments"
+                        onChange={(e) => setNewcomment(e.target.value)}
+                      ></input>
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={() => {
+                          actions.newcomment(newcomment, obj.id);
+                        }}
+                      >
+                        Enviar
+                      </button>
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </form>
               </div>
             </div>
@@ -163,6 +157,5 @@ export const DetallesPeli = (props) => {
         </div>
       );
     }
-    //<div classNameName="prueba text-light"> hey</div>;
   });
 };

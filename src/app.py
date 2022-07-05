@@ -2,6 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
+import datetime
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
@@ -90,7 +91,7 @@ def iniciar_sesion():
     user = User.query.filter_by(email=request_body['email']).first()
     if user:
         if user.password == request_body['password']:
-            acceso = create_access_token(identity = user.id)
+            acceso = create_access_token(identity = user.id, expires_delta=datetime.timedelta(minutes=60))
 
             return jsonify({
                 "mensaje": "Welcome to the UpsideDown",
@@ -121,15 +122,16 @@ def add_fav_movie():
     else:
         return "To the UpsideDown with it"
 
-#REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#FUNCIONA!!!!
 #El usuario pide ver sus favoritos
 @app.route('/viewfav', methods=['GET'])
 @jwt_required()
 def get_your_favorite():
     identidad = get_jwt_identity()
     ufav = Fav_movie.query.filter_by(user_id=identidad).all()
+    ufav=list(map(lambda X:X.serialize(), ufav))
     if ufav:
-        ufav = ufav.serialize()
+        #ufav = ufav.serialize()
         return jsonify({"resultado": ufav})
     else:
         return jsonify({"resultado": "Favourite movie not found"})
@@ -160,14 +162,16 @@ def add_comment():
     else:
         return "Error"
 
+#FUNCIONA!!!!
 #El usuario pide ver su comentario
-@app.route('/your/comment/<int:id>', methods=['GET'])
+@app.route('/your/comment', methods=['GET'])
 @jwt_required()
-def get_your_comment(id):
+def get_your_comment():
     identidad = get_jwt_identity()
-    ucomment = Comment.query.filter_by(user_id=identidad, movie_id=id).first()
+    ucomment = Comment.query.filter_by(user_id=identidad).all()
+    ucomment = list(map(lambda X:X.serialize(), ucomment))
     if ucomment:
-        ucomment = ucomment.serialize()
+        #ucomment = ucomment.serialize()
         return jsonify({"resultado": ucomment})
     else:
         return jsonify({"resultado": "Comment not found"})
@@ -199,13 +203,14 @@ def undo_com():
     else:
         return "You roll a 1"
 
-#REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#FUNCIONA!!!!
 #Pedir todos los comentarios de una pelicula sin que sea necesario estar registrado.
-@app.route('/comment/<int:id>', methods=['GET'])
+@app.route('/comment/<int:id>', methods=['GET'])  #id = ID de la pelicula
 def get_all_comments(id):
     allcomments = Comment.query.filter_by(movie_id=id).all()
+    allcomments=list(map(lambda X:X.serialize(), allcomments))
     if allcomments:
-        allcomments = allcomments.serialize()
+        #allcomments = allcomments.serialize()
         return jsonify({"resultado": allcomments})
     else:
         return jsonify({"resultado": "Comment not found"})
@@ -224,15 +229,16 @@ def add_list_movie():
     else:
         return "Couldn't save it"
 
-#REVISAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#FUNCIONA!!!!
 #Ver las peliculas guardadas en la lista
 @app.route('/viewlist', methods=['GET'])
 @jwt_required()
 def get_your_list():
     identidad = get_jwt_identity()
     ulist = List_movie.query.filter_by(user_id=identidad).all()
+    ulist=list(map(lambda X:X.serialize(), ulist))
     if ulist:
-        ulist = ulist.serialize()
+        #ulist = ulist.serialize()
         return jsonify({"resultado": ulist})
     else:
         return jsonify({"resultado": "No movies in the list"})
