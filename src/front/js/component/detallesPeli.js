@@ -5,25 +5,30 @@ import Comentario from "../component/comentarios";
 import { useParams } from "react-router-dom";
 import { object, objectOf } from "prop-types";
 import "../../styles/detallesPeli.css";
+import Trailer from "./pupUpTrailer";
 
-export const DetallesPeli = () => {
+export const DetallesPeli = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
   const [favmovie, setFavmovie] = useState("");
   const [newcomment, setNewcomment] = useState("");
+  console.log(params);
+  useEffect(() => {
+    console.log(favmovie, newcomment);
+  }, [favmovie, newcomment]);
 
   return store.peliculas.map(function (obj, index) {
     if (obj.id == params.theid) {
       //con.log("params = ", +params.theid + "id " + obj.id);
       return (
-        <div className="container2">
+        <div classNameName="container2">
           <form
             onSubmit={(e) => {
               e.preventDefault();
             }}
           >
             <div id="contenedor" className="row detallesPelis3">
-              <div id="verde" className="col-3 my-auto mx-auto">
+              <div id="verde" className="col-3">
                 <div className="card detallesPelis2">
                   <img
                     src={"https://image.tmdb.org/t/p/w500/" + obj.poster_path}
@@ -43,7 +48,7 @@ export const DetallesPeli = () => {
                     </p>
                     <a
                       href="#"
-                      className="btn btn-danger"
+                      className="btn btn-danger col-12"
                       onClick={() => {
                         actions.favmovie(favmovie);
                       }}
@@ -67,11 +72,11 @@ export const DetallesPeli = () => {
                       />
                       <div className="carousel-caption d-none d-md-block detallesPelis1">
                         <h2 className="detallesPelis">{obj.title}</h2>
-                        <p className="descripcion">
+                        <p className="descripcion p-3">
                           {obj.overview}
-                          <a href="#" className="btn btn-danger" id="trailer">
-                            Trailer
-                          </a>
+                          <div className="mt-4">
+                            <Trailer trailer={obj.trailer} />
+                          </div>
                         </p>
                       </div>
                     </div>
@@ -81,7 +86,7 @@ export const DetallesPeli = () => {
             </div>
 
             <div className="container" id="comentarios">
-              <div className="col-lg-11">
+              <div className="col-lg-11 ms-5">
                 <form>
                   <div className="form-group">
                     <label>Comentario</label>

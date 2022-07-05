@@ -13,6 +13,7 @@ import Detalles from "../component/descripPoster";
 import Ruleta from "../component/ruleta";
 import AcordionGenero from "../component/navbar-generos";
 import { DetallesPeli } from "../component/detallesPeli";
+import MiLista from "../component/acordionMilista";
 
 var estilo = {
   backgroundImage: `url(${giphy})`,
@@ -202,20 +203,22 @@ export const Home = (props) => {
           {store.enCines?.map((obj, index) => {
             return (
               <div key={index}>
-                <CardPelicula
-                  key={obj.id}
-                  poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
-                  averageVote={
-                    <div>
-                      <i
-                        style={{ color: "yellow" }}
-                        className="fas fa-star me-1 mt-1"
-                      ></i>
-                      {obj.vote_average}
-                    </div>
-                  }
-                  titulo={obj.title}
-                />
+                <Link to={"/detalles/" + obj.id}>
+                  <CardPelicula
+                    key={obj.id}
+                    poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
+                    averageVote={
+                      <div>
+                        <i
+                          style={{ color: "yellow" }}
+                          className="fas fa-star me-1 mt-1"
+                        ></i>
+                        {obj.vote_average}
+                      </div>
+                    }
+                    titulo={obj.title}
+                  />
+                </Link>
               </div>
             );
           })}
@@ -237,14 +240,16 @@ export const Home = (props) => {
               {store.peliculas?.map((obj, index) => {
                 return (
                   <div key={index}>
-                    <RatedMovie
-                      key={index}
-                      poster={`https://image.tmdb.org/t/p/w154${obj.poster_path}`}
-                      titulo={obj.title}
-                      rate={obj.vote_average}
-                      fecha={obj.release_date}
-                      vote_count={obj.vote_count}
-                    />
+                    <Link to={"/detalles/" + obj.id}>
+                      <RatedMovie
+                        key={index}
+                        poster={`https://image.tmdb.org/t/p/w154${obj.poster_path}`}
+                        titulo={obj.title}
+                        rate={obj.vote_average}
+                        fecha={obj.release_date}
+                        vote_count={obj.vote_count}
+                      />
+                    </Link>
                   </div>
                 );
               })}
@@ -256,16 +261,24 @@ export const Home = (props) => {
           {/*SECCION DE GENEROS Y PERSONAJES*/}
           <div>
             <div className="d-flex">
-              <AcordionGenero />
+              {localStorage.getItem("token") ? (
+                <>
+                  <MiLista />
+                </>
+              ) : (
+                <AcordionGenero />
+              )}
               <div className="d-flex pt-3 px-0 overflow">
                 {store.proximamente?.map((obj, index) => {
                   return (
                     <div key={index}>
-                      <CardPelicula
-                        key={obj.id}
-                        poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
-                        titulo={obj.title}
-                      />
+                      <Link to={"/detalles/" + obj.id}>
+                        <CardPelicula
+                          key={obj.id}
+                          poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
+                          titulo={obj.title}
+                        />
+                      </Link>
                     </div>
                   );
                 })}

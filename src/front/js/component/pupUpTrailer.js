@@ -29,6 +29,11 @@ export default function Trailer(props) {
                   class="fas fa-times-circle fa-3x text-light modal__close"
                   onClick={setModal}
                 ></i>
+                <div>
+                  <h1>{props.tituloPeli}</h1>
+                  <h1>{props.trailerTitulo}</h1>
+                  {console.log(props)}
+                </div>
                 <div className="modal__video-align">
                   {videoLoading ? (
                     <div className="modal__spinner">
@@ -37,18 +42,20 @@ export default function Trailer(props) {
                       </div>
                     </div>
                   ) : null}
-                  <iframe
-                    className="modal__video-style"
-                    onLoad={spinner}
-                    loading="lazy"
-                    width="800"
-                    height="500"
-                    src={props.trailer}
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
+                  <div>
+                    <iframe
+                      className="modal__video-style"
+                      onLoad={spinner}
+                      loading="lazy"
+                      width="800"
+                      height="500"
+                      src={props.trailer}
+                      title="YouTube video player"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
                 </div>
               </div>
             </div>
