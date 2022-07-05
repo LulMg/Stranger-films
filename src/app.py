@@ -154,7 +154,7 @@ def undo_fav_movie():
 @jwt_required()
 def add_comment():
     request_body = request.get_json()
-    newcomment = Comment(user_id=request_body['user_id'], movie_id=request_body['movie_id'], user_comment=request_body['user_comment'])
+    newcomment = Comment( movie_id=request_body['movie_id'], user_comment=request_body['user_comment'])
     if newcomment:
         db.session.add(newcomment)
         db.session.commit()
