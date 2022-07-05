@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Context } from "../store/appContext";
 //import "../../styles/home.css";
-import CardPelicula from "../component/card-pelicula";
+import Comentario from "../component/comentarios";
 import { useParams } from "react-router-dom";
 import { object, objectOf } from "prop-types";
 import "../../styles/detallesPeli.css";
@@ -20,7 +20,6 @@ export const DetallesPeli = (props) => {
   return store.peliculas.map(function (obj, index) {
     if (obj.id == params.theid) {
       //con.log("params = ", +params.theid + "id " + obj.id);
-      console.log(obj.title);
       return (
         <div classNameName="container2">
           <form
@@ -154,6 +153,18 @@ export const DetallesPeli = (props) => {
               </div>
             </div>
           </form>
+
+          <div class="container-fluid" id="main-content">
+            <div className="columna6">
+              <Comentario
+                id={params.theid}
+                key={obj.id}
+                poster={`https://image.tmdb.org/t/p/w342/${obj.poster_path}`}
+                averageVote={<div>{obj.title}</div>}
+              />
+              );
+            </div>
+          </div>
         </div>
       );
     }
