@@ -404,33 +404,33 @@ const getState = ({ getStore, getActions, setStore }) => {
         // pegar postman
       },
 
-      newcomment: (newcomment, idPeli) => {
-        var myHeaders = new Headers();
-        myHeaders.append(
-          "Authorization",
-          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1NzAyMzcyNywianRpIjoiMDRjMDZmYjQtNjQ1Ny00OWZiLTk1MTAtNTNkNWFhMmFiNzY0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU3MDIzNzI3LCJleHAiOjE2NTcwMjczMjd9.DUrEfsd6ZDv0hjjokNeS1-HmIhh3l5EiIstnt4gwEkw"
-        );
-        myHeaders.append("Content-Type", "application/json");
-
-        var raw = JSON.stringify({
-          movie_id: idPeli,
-          user_comment: newcomment,
-          movie_id: id,
-        });
-
-        const response = await fetch(
-          "https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/add/comment",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-            body: JSON.stringify(comment),
-          }
-        );
-      },
+      //      newcomment: (newcomment, idPeli) => {
+      //        var myHeaders = new Headers();
+      //        myHeaders.append(
+      //          "Authorization",
+      //          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1NzAyMzcyNywianRpIjoiMDRjMDZmYjQtNjQ1Ny00OWZiLTk1MTAtNTNkNWFhMmFiNzY0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU3MDIzNzI3LCJleHAiOjE2NTcwMjczMjd9.DUrEfsd6ZDv0hjjokNeS1-HmIhh3l5EiIstnt4gwEkw"
+      //        );
+      //        myHeaders.append("Content-Type", "application/json");
+      //
+      //        var raw = JSON.stringify({
+      //          movie_id: idPeli,
+      //          user_comment: newcomment,
+      //          movie_id: id,
+      //        });
+      //
+      //        const response = await fetch(
+      //          "https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/add/comment",
+      //          {
+      //            method: "POST",
+      //            headers: {
+      //              "Content-Type": "application/json",
+      //              Accept: "application/json",
+      //              Authorization: `Bearer ${localStorage.getItem("token")}`,
+      //            },
+      //            body: JSON.stringify(comment),
+      //          }
+      //        );
+      //      },
       getAllcommentsForOneMovie: async (id) => {
         const response = await fetch(
           `https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/comment/${id}`,
