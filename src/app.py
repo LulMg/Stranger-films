@@ -156,7 +156,7 @@ def add_comment():
     user_ID = get_jwt_identity()
     request_body = request.get_json()
     user = Comment.query.filter_by(user_id=user_ID)
-    newcomment = Comment( movie_id=request_body['movie_id'], user_comment=request_body['user_comment'], user_id = user)
+    newcomment = Comment( movie_id=request_body['movie_id'], user_comment=request_body['user_comment'], user_id = user_ID)
     if newcomment:
         db.session.add(newcomment)
         db.session.commit()
@@ -214,8 +214,7 @@ def get_all_comments(id):
     if allcomments:
         #allcomments = allcomments.serialize()
         return jsonify({"resultado": allcomments})
-    else:
-        return jsonify({"resultado": "Comment not found"})
+   
 
 #Guardar tu peli en la lista
 @app.route('/list/movie', methods=['POST'])
@@ -240,10 +239,8 @@ def get_your_list():
     ulist = List_movie.query.filter_by(user_id=identidad).all()
     ulist=list(map(lambda X:X.serialize(), ulist))
     if ulist:
-        #ulist = ulist.serialize()
         return jsonify({"resultado": ulist})
-    else:
-        return jsonify({"resultado": "No movies in the list"})
+  
 
 #Borrar la peli de la lista
 @app.route('/undolist/movie', methods=['POST'])
