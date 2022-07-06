@@ -386,7 +386,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         //       .then(result => console.log(result))
         //       .catch(error => console.log('error', error));
       },
-
       newcomment: async (newcomment, id, user) => {
         let comment = {
           user_comment: newcomment,
