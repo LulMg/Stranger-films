@@ -1,7 +1,6 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      peliculasTrailer: [],
       peliculasBusqueda: [],
       generoSeleccionado: "Género",
       peliculas: [],
@@ -17,7 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       peliculasporGenero: [],
       message: null,
       messageLogin: "",
-      commentsForOneMovie: null,
+      commentsForOneMovie: [{ user_comment: "No hay comentarios" }],
     },
 
     actions: {
@@ -42,11 +41,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log(getStore());
       },
       generartrailer: async () => {
-        console.log(" GENERANDO TRAilers ");
         const store = getStore();
-        const actions = getActions();
-        // store.carrousel = [];
-        for (var i = 0; i < store.peliculas.length; i++) {
+        for (var i = 0; i < store.peliculas.length - 1; i++) {
           await fetch(
             "https://api.themoviedb.org/3/movie/" +
               +store.peliculas[i].id +
@@ -55,32 +51,24 @@ const getState = ({ getStore, getActions, setStore }) => {
             .then((response) => response.json())
             .then((data) => {
               // console.log("trailer para " + store.peliculas[i].title);
-              // store.peliculas[0].trailer = "none";
-              for (var x = 0; x < data.results.length; x++) {
+              for (var x = 0; x < data.results.length - 1; x++) {
                 if (
                   data.results[x].official == true &&
                   (data.results.type = "Trailer") &&
                   (data.results.type = "Youtube")
                 ) {
                   store.peliculas[i].trailer =
-                    "https://www.youtube.com/embed/" + data.results[x].key;
-                  store.peliculasTrailer.push(store.peliculas[i]);
+                    "https://www.youtube.com/watch?v=" + data.results[x].key;
                   //HACEMOS BREAK PARA QUE ÚNICAMENTE MUESTRE UN TRAILER OFICIAL
                   //YA QUE HAY PELICULAS QUE TIENEN VARIOS TRAILERS
                   break;
                 } else {
-                  store.peliculas[i].trailer =
-                    "https://www.youtube.com/embed/111111";
+                  store.peliculas[i].trailer = "none";
                 }
               }
-              // setStore({ carrousel: store.peliculas[i] });
-
-              // store.carrousel.push(store.peliculas[i]);
             })
-            // .then(actions.cargarCarrousel())
             .catch((error) => console.log("Algo salió mal", error));
         }
-        // actions.cargarCarrousel();
         console.log(getStore());
       },
       buscarPelicula: (busqueda) => {
@@ -158,7 +146,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             .catch((error) => console.log("Algo salió mal", error));
         }
         let store = getStore();
-        actions.generartrailer();
         actions.topRated();
         actions.cargarCarrousel();
         actions.proximamente();
@@ -240,39 +227,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         // console.log("peliculas ordenadas por votos", store.peliculas);
       },
-      paginarPeliculas: (pagina, elementosPorPagina, arrayaPaginar) => {
-        //Le pasamos como argumentos
-        // pagina -> la pagina a la que pasamos
-        //elementosPorPagina -> cuantos elementos se van a mostrar en cada pagina
-        // array - > array completo con todos los elementos que se mostraran,  esta función
-        //decidirá cuales se muestran , es decir pasamos el array total por ejemplio 400 elementos
-        // y la función , en base a la pagina y de los elementos a mostrar calcula que elementos del array mostrar
-        pagina = pagina - 1;
-        var inicio = pagina * elementosPorPagina;
-        var fin = inicio + (elementosPorPagina - 1);
-        var arrayAMostrar = [];
-        if (fin > arrayaPaginar.length - 1) {
-          // comprobamos si es el ultimo elemento
-          fin = arrayaPaginar.length - 1;
-        }
-        console.log(
-          "inicio = ",
-          inicio,
-          "Fin : ",
-          fin,
-          "longitud array ",
-          arrayaPaginar.length
-        );
-        console.log("array 399", arrayaPaginar[399]);
-        for (var i = inicio; i <= fin; i++) {
-          // if (i <= array.length - 1) {
-          arrayAMostrar.push(arrayaPaginar[i]);
-          // }
-        }
-        //EN EL COMPONENTE A RENDERIZAR DEBERIAMOS COGER LOS DATOS DE arrayAMostrar
-        console.log(arrayAMostrar);
-        // return array;
-      },
+
       popularidad: () => {
         let store = getStore();
         store.peliculasPopulares = store.peliculas;
@@ -299,7 +254,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log(tresAleatorios);
         for (var i = 0; i < 3; i++) {
           store.carrousel.push(store.peliculas[tresAleatorios[i]]);
-          //store.carrousel[tresAleatorios][i].id = tresAleatorios[i];
         }
         console.log(store.carrousel);
       },
@@ -368,16 +322,49 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
 
         fetch(
-          "https://3001-lulmg-strangerfilms-bmgcedkl5a2.ws-eu47.gitpod.io/login",
+          "https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/login",
           requestOptions
         )
-          .then((response) => response.JSON())
-          .then((result) => console.log(result))
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result);
+            store.messageLogin = result.mensaje;
+            console.log("mensaje", result.mensaje);
+            localStorage.setItem("token", result.token);
+            window.location.reload(false);
+          })
           .catch((error) => console.log("error", error));
       },
 
+      logOut: () => {
+        localStorage.removeItem("token");
+        window.location.reload(false);
+      },
+
       register: (username, email, password) => {
-        // pegar postman
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          username: username,
+          email: email,
+          password: password,
+        });
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch(
+          "https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/register",
+          requestOptions
+        )
+          .then((response) => response.text())
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
       },
 
       favmovie: (favmovie) => {
@@ -399,38 +386,25 @@ const getState = ({ getStore, getActions, setStore }) => {
         //       .then(result => console.log(result))
         //       .catch(error => console.log('error', error));
       },
+      newcomment: async (newcomment, id, user) => {
+        let comment = {
+          user_comment: newcomment,
+          movie_id: id,
+        };
 
-      newcomment: (newcoment) => {
-        // pegar postman
+        const response = await fetch(
+          "https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/add/comment",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify(comment),
+          }
+        );
       },
-
-      //      newcomment: (newcomment, idPeli) => {
-      //        var myHeaders = new Headers();
-      //        myHeaders.append(
-      //          "Authorization",
-      //          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1NzAyMzcyNywianRpIjoiMDRjMDZmYjQtNjQ1Ny00OWZiLTk1MTAtNTNkNWFhMmFiNzY0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU3MDIzNzI3LCJleHAiOjE2NTcwMjczMjd9.DUrEfsd6ZDv0hjjokNeS1-HmIhh3l5EiIstnt4gwEkw"
-      //        );
-      //        myHeaders.append("Content-Type", "application/json");
-      //
-      //        var raw = JSON.stringify({
-      //          movie_id: idPeli,
-      //          user_comment: newcomment,
-      //          movie_id: id,
-      //        });
-      //
-      //        const response = await fetch(
-      //          "https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/add/comment",
-      //          {
-      //            method: "POST",
-      //            headers: {
-      //              "Content-Type": "application/json",
-      //              Accept: "application/json",
-      //              Authorization: `Bearer ${localStorage.getItem("token")}`,
-      //            },
-      //            body: JSON.stringify(comment),
-      //          }
-      //        );
-      //      },
       getAllcommentsForOneMovie: async (id) => {
         const response = await fetch(
           `https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/comment/${id}`,
