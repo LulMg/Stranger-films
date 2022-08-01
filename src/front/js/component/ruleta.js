@@ -57,6 +57,9 @@ export default function Ruleta() {
                 handleSpinClick();
                 setTimeout(() => {
                   showPrize(true);
+                  alert(
+                    store.peliculas[store.ruleta[prizeNumber].indice].overview
+                  );
                 }, 12000);
               }}
             >
@@ -64,6 +67,11 @@ export default function Ruleta() {
             </button>
             <div className="text-light">
               <h1>{prize && store.ruleta[prizeNumber].option}</h1>
+              <h1>{prize && store.ruleta[prizeNumber].indice}</h1>
+              {console.log(store.peliculas[store.ruleta[prizeNumber].indice])}
+              {console.log(
+                store.peliculas[store.ruleta[prizeNumber].indice].overview
+              )}
             </div>
           </div>
         </>
