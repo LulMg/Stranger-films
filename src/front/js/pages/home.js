@@ -12,15 +12,14 @@ import RatedMovie from "../component/rates";
 import Detalles from "../component/descripPoster";
 import Ruleta from "../component/ruleta";
 import AcordionGenero from "../component/navbar-generos";
-import { DetallesPeli } from "../component/detallesPeli";
 import MiLista from "../component/acordionMilista";
 
 var estilo = {
-  backgroundImage: `url(${giphy})`,
+  backgroundImage: `url(${"https://media.giphy.com/media/l1KcPTbTKdeF2u0Ja/giphy.gif"})`,
   backgroundPosition: "center",
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
-  opacity: "0.8",
+  opacity: "0.9",
 };
 export const Home = (props) => {
   const { store, actions } = useContext(Context);
@@ -30,7 +29,7 @@ export const Home = (props) => {
   //  store.peliculas.length > 0 && actions.filtroDeGenero(12);
   //}, []);
   return (
-    <div className="text-end mx-5 mt-2" id="home">
+    <div className="text-center mx-5 mt-2" id="home">
       {/*CAROUSEL ESTRENOS*/}
 
       <div
@@ -98,7 +97,10 @@ export const Home = (props) => {
                     src={`https://image.tmdb.org/t/p/w500/${obj.backdrop_path}`}
                     className="imagenPrinc"
                     alt="..."
-                    style={{ width: "60rem", height: "30rem" }}
+                    style={{
+                      width: "60rem",
+                      height: "30rem",
+                    }}
                   />
                   <div className="carousel-caption">
                     <Detalles
