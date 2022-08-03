@@ -36,11 +36,11 @@ li {
   margin-left: 28rem;
 }
 .fondo {
-  background-color: rgb(163, 33, 33);
+  background-color: rgba(170, 159, 159, 0.644);
   box-shadow: 0 0 15px 15px rgb(0, 0, 0) inset;
 }
 .imagenPrinc {
-  opacity: 0.5;
+  opacity: 0.8;
   border-radius: 2px;
   box-shadow: 0 0 88px -4px rgb(180, 72, 72);
 }

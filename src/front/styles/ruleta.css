@@ -1,3 +1,26 @@
-/*.ruleta {
-color: #df3428);
-}*/
+.imgModal {
+  height: 15rem;
+}
+.contenidoModal {
+  width: 25rem;
+}
+.overview {
+  height: 15rem;
+  overflow: hidden;
+}
+.overview::before {
+  content: "";
+  width: 50%;
+  height: 67%;
+  position: absolute;
+  left: 100;
+  top: 10;
+  background: linear-gradient(transparent 120px, rgb(163, 155, 155));
+}
+.modalTama {
+  height: 26rem;
+  background: linear-gradient(190deg, rgb(3, 3, 3), rgba(117, 4, 4, 0.966));
+}
+.colorBoton {
+  background-color: rgb(255, 34, 34);
+}

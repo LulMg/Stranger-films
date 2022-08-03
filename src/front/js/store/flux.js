@@ -130,6 +130,33 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log("generando el array de todas las pelis");
         var peliculasTotales = [];
         var actions = getActions();
+
+        await fetch(
+          "https://api.themoviedb.org/3/discover/movie?api_key=87330f0fa794fb3eb980c887157031c9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1" +
+            "&with_watch_monetization_types=flatrate"
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            //console.log(data.results);
+            peliculasTotales = [...peliculasTotales, ...data.results];
+            setStore({ peliculas: peliculasTotales });
+          })
+          // .then(state.actions.cargarCarrousel())
+          .catch((error) => console.log("Algo salió mal", error));
+
+        let store = getStore();
+        actions.topRated();
+        actions.cargarCarrousel();
+        actions.proximamente();
+        actions.popularidad();
+
+        console.log("PELICULAS TOTALES", store.peliculas);
+        // actcargarCarrousel();
+      },
+      peliculasGeneralesAntiguas: async () => {
+        console.log("generando el array de todas las pelis");
+        var peliculasTotales = [];
+        var actions = getActions();
         for (var pagina = 1; pagina < 21; pagina++) {
           await fetch(
             "https://api.themoviedb.org/3/discover/movie?api_key=87330f0fa794fb3eb980c887157031c9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=3" +
@@ -249,7 +276,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         var tresAleatorios = [];
         for (let i = 0; i < 3; i++) {
-          tresAleatorios.push(Math.floor(Math.random() * 399 + 1));
+          tresAleatorios.push(Math.floor(Math.random() * 19 + 1));
         }
         console.log(tresAleatorios);
         for (var i = 0; i < 3; i++) {
@@ -275,19 +302,26 @@ const getState = ({ getStore, getActions, setStore }) => {
         var veinteRandom = [];
         store.ruleta = [];
         for (let i = 0; i < 20; i++) {
-          veinteRandom.push(Math.floor(Math.random() * 399 + 1));
+          //veinteRandom.push(Math.floor(Math.random() * 399 + 1));
+          veinteRandom.push(Math.floor(Math.random() * 20));
         }
         console.log("veinte random", veinteRandom);
         let cadenaTitulo = "";
-
+        let elementoRuleta = {};
         for (let i = 0; i < 20; i++) {
           cadenaTitulo =
             store.peliculas[veinteRandom[i]]?.title /*.substring(0, 15)*/;
           setStore({
-            ruleta: [...store.ruleta, { option: cadenaTitulo.substring(0, 9) }],
+            ruleta: [
+              ...store.ruleta,
+              {
+                option: cadenaTitulo.substring(0, 9),
+                indice: veinteRandom[i],
+              },
+            ],
           });
-          console.log(getStore());
         }
+        console.log("ruleta", getStore());
       },
       changeColor: (index, color) => {
         //get the store
