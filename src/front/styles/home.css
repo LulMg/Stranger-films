@@ -40,7 +40,10 @@ li {
   box-shadow: 0 0 15px 15px rgb(0, 0, 0) inset;
 }
 .imagenPrinc {
-  opacity: 0.8;
+  opacity: 1;
   border-radius: 2px;
   box-shadow: 0 0 88px -4px rgb(180, 72, 72);
+}
+h2:hover {
+  color: rgb(185, 21, 21);
 }

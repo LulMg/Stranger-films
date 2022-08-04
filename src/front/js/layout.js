@@ -18,6 +18,10 @@ import Stranger from "./component/strangerFilms";
 import Api from "./component/footerApi";
 import Aportaciones from "./component/aportacionesFooter";
 import Register from "./component/register";
+import { Populares } from "./pages/populares";
+import { UltimosEstrenos } from "./pages/ultimosEstrenos";
+import { TopRated } from "./pages/topRated";
+import { Proximamente } from "./pages/proximamente";
 
 //create your first component
 const Layout = () => {
@@ -48,6 +52,18 @@ const Layout = () => {
             </Route>
             <Route exact path="/Aportaciones">
               <Aportaciones />
+            </Route>
+            <Route exact path="/Populares">
+              <Populares />
+            </Route>
+            <Route exact path="/UltimosEstrenos">
+              <UltimosEstrenos />
+            </Route>
+            <Route exact path="/Proximamente">
+              <Proximamente />
+            </Route>
+            <Route exact path="/Mejorvaloradas">
+              <TopRated />
             </Route>
             <Route exact path="/single/:theid">
               <Single />
