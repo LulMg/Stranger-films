@@ -19,7 +19,7 @@ var estilo = {
   backgroundPosition: "center",
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
-  opacity: "0.9",
+  opacity: "0.8",
 };
 export const Home = (props) => {
   const { store, actions } = useContext(Context);
@@ -82,6 +82,8 @@ export const Home = (props) => {
                     <Detalles
                       title={<h1 className="display-6 ms-3">{obj.title}</h1>}
                       description={obj.overview}
+                      //PENDIENTE
+                      id={obj.id}
                     />
                   </div>
                 </div>
@@ -142,14 +144,16 @@ export const Home = (props) => {
       {/*SECCION DE POPULARES*/}
 
       <div className="tendencias text-light">
-        <h2
-          className="mt-3 text-start ps-5 py-4 ms-5"
-          onClick={() => {
-            actions.popularidad();
-          }}
-        >
-          POPULARES
-        </h2>
+        <Link to={"/Populares"}>
+          <h2
+            className="mt-3 text-start ps-5 py-4 ms-5 "
+            onClick={() => {
+              actions.popularidad();
+            }}
+          >
+            POPULARES
+          </h2>
+        </Link>
         {/* <h2 className="text-light" onClick={() =>{
           console.log(store.messageLogin)
         }}>CLick aqui</h2> */}
@@ -198,9 +202,9 @@ export const Home = (props) => {
 
       {/*SECCION ULTIMOS ESTRENOS*/}
       <div>
-        <h2 className="mt-3 text-start text-light ps-5 py-4 ms-5">
-          ULTIMOS ESTRENOS
-        </h2>
+        <Link to={"/UltimosEstrenos"}>
+          <h2 className="mt-3 text-start ps-5 py-4 ms-5 ">ULTIMOS ESTRENOS</h2>
+        </Link>
         <div className="d-flex pt-3 px-0 overflow text-light">
           {store.enCines?.map((obj, index) => {
             return (
@@ -231,12 +235,14 @@ export const Home = (props) => {
 
       <div className="text-light">
         <div>
-          <h2
-            className="mt-3 text-start ps-5 py-4 ms-5"
-            onClick={actions.topRated()}
-          >
-            MEJOR VALORADAS
-          </h2>
+          <Link to={"/Mejorvaloradas"}>
+            <h2
+              className="mt-3 text-start ps-5 py-4 ms-5"
+              onClick={actions.topRated()}
+            >
+              MEJOR VALORADAS
+            </h2>
+          </Link>
           <div className="d-flex">
             <div className="d-flex overflow me-5">
               {store.peliculas?.map((obj, index) => {
@@ -257,9 +263,9 @@ export const Home = (props) => {
               })}
             </div>
           </div>
-
-          <h2 className="mt-5 text-start proximamente">PRÓXIMAMENTE</h2>
-
+          <Link to={"/Proximamente"}>
+            <h2 className="mt-5 text-start proximamente">PRÓXIMAMENTE</h2>
+          </Link>
           {/*SECCION DE GENEROS Y PERSONAJES*/}
           <div>
             <div className="d-flex">
