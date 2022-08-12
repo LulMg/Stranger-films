@@ -59,6 +59,7 @@ class Comment(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "movie_id": self.movie_id,
+            "user_name": self.rel_user.username,
             "user_comment": self.user_comment,
         }
 

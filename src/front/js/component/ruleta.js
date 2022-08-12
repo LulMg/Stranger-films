@@ -57,14 +57,14 @@ export default function Ruleta() {
             <button
               className="btn btn-danger btn-lg"
               data-bs-toggle="modal"
-              data-bs-target="#exampleMo"
               onClick={() => {
                 handleSpinClick();
                 setTimeout(() => {
                   showPrize(true);
-                  //alert(
-                  //  store.peliculas[store.ruleta[prizeNumber].indice].overview
-                  //);
+                  const myModal = new bootstrap.Modal(
+                    document.getElementById("exampleMo")
+                  );
+                  myModal.show();
                 }, 12000);
               }}
             >

@@ -19,37 +19,30 @@ export const Genero = () => {
           <AcordionGenero />
         </div>
         {/*TITULO*/}
-        <div className="col">
-          <div>
-            <div
-              className="glitch d-flex generoNombre"
-              data-text={store.generoSeleccionado}
-            >
-              {store.generoSeleccionado}
-              <div className="glow"> {store.generoSeleccionado}</div>
-            </div>
-            <div className="row">
-              {store.peliculasporGenero?.map((obj, index) => {
-                //if (index < 19) {
-                var pelisAmostrar = 19;
-                for (var i = 0; i < 20; i + 20) {
-                  return (
-                    <div key={index} className="col text-light mb-2">
-                      <CardPelicula
-                        key={obj.id}
-                        poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
-                        titulo={obj.title}
-                      />
-                    </div>
-                  );
-                }
-                //}
-              })}
-            </div>
-            <div className="d-flex justify-content-center">
-              <button className="btn btn-danger me-2 mb-4">Anterior</button>
-              <button className="btn btn-danger mb-4">Siguiente</button>
-            </div>
+        <div>
+          <div className="glitch d-flex" data-text={store.generoSeleccionado}>
+            {store.generoSeleccionado}
+            <div className="glow"> {store.generoSeleccionado}</div>
+          </div>
+          <div className="row">
+            {store.peliculasporGenero?.map((obj, index) => {
+              var pelisAmostrar = 19;
+              for (var i = 0; i < 20; i + 20) {
+                return (
+                  <div key={index} className="col text-light mb-2">
+                    <CardPelicula
+                      key={obj.id}
+                      poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
+                      titulo={obj.title}
+                    />
+                  </div>
+                );
+              }
+            })}
+          </div>
+          <div className="d-flex justify-content-center">
+            <button className="btn btn-danger me-2 mb-4">Anterior</button>
+            <button className="btn btn-danger mb-4">Siguiente</button>
           </div>
         </div>
       </div>
