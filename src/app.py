@@ -213,6 +213,7 @@ def get_all_comments(id):
     if allcomments:
         #allcomments = allcomments.serialize()
         return jsonify({"resultado": allcomments})
+    return jsonify(({"resultado": []}))
    
 
 #Guardar tu peli en la lista
