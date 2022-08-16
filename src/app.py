@@ -155,7 +155,6 @@ def undo_fav_movie():
 def add_comment():
     user_ID = get_jwt_identity()
     request_body = request.get_json()
-    user = Comment.query.filter_by(user_id=user_ID)
     newcomment = Comment( movie_id=request_body['movie_id'], user_comment=request_body['user_comment'], user_id = user_ID)
     if newcomment:
         db.session.add(newcomment)
@@ -214,6 +213,7 @@ def get_all_comments(id):
     if allcomments:
         #allcomments = allcomments.serialize()
         return jsonify({"resultado": allcomments})
+    return jsonify(({"resultado": []}))
    
 
 #Guardar tu peli en la lista

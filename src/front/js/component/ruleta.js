@@ -57,14 +57,15 @@ export default function Ruleta() {
             <button
               className="btn btn-danger btn-lg"
               data-bs-toggle="modal"
-              data-bs-target="#exampleMo"
               onClick={() => {
                 handleSpinClick();
                 setTimeout(() => {
                   showPrize(true);
-                  //alert(
-                  //  store.peliculas[store.ruleta[prizeNumber].indice].overview
-                  //);
+                  //EN EL EVENTO ONCLICK SE CREA UNA VARIABLE PARA AGARRAR DELA LIBRERIA DE BOOTSTRAP EL .MODAL Y HACER QUE APAREZCA CON SHOW
+                  const myModal = new bootstrap.Modal(
+                    document.getElementById("exampleMo")
+                  );
+                  myModal.show();
                 }, 12000);
               }}
             >

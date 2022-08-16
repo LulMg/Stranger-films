@@ -47,10 +47,13 @@ export const LogIn = () => {
         <div className="mx-3">
           <div className="form-group px-2">
             <Link to="/register">
-              <a href="https://lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/register">
+              <p
+                className="noAccount"
+                href="https://lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/register"
+              >
                 {" "}
                 ¿Aún no te has registrado? Crear cuenta
-              </a>
+              </p>
             </Link>
           </div>
           <div className="form-check">

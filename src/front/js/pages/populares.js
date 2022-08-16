@@ -12,6 +12,11 @@ export const Populares = () => {
         <AcordionGenero />
       </div>
       <div className="row">
+        <div className="text-center text-light">
+          <hr />
+          <h2 className="text-danger">POPULARES</h2>
+          <hr />
+        </div>
         {store.peliculasPopulares.map((obj, index) => {
           return (
             <div key={index} className="col text-light mb-2">

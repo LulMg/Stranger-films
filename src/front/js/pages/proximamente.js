@@ -13,10 +13,12 @@ export const Proximamente = () => {
           <AcordionGenero />
         </div>
         <div>
-          <div>
-            <h1 className="text-light text-center">titulo</h1>
-          </div>
           <div className="row">
+            <div className="text-center text-light">
+              <hr />
+              <h2 className="text-danger">PROXIMAMENTE</h2>
+              <hr />
+            </div>
             {store.proximamente.map((obj, index) => {
               return (
                 <div key={index} className="col text-light mb-2">

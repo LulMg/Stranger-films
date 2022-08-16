@@ -355,10 +355,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           redirect: "follow",
         };
 
-        fetch(
-          "https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/login",
-          requestOptions
-        )
+        fetch(process.env.BACKEND_URL + "/login", requestOptions)
           .then((response) => response.json())
           .then((result) => {
             console.log(result);
@@ -392,10 +389,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           redirect: "follow",
         };
 
-        fetch(
-          "https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/register",
-          requestOptions
-        )
+        fetch(process.env.BACKEND_URL + "/register", requestOptions)
           .then((response) => response.text())
           .then((result) => console.log(result))
           .catch((error) => console.log("error", error));
@@ -426,22 +420,19 @@ const getState = ({ getStore, getActions, setStore }) => {
           movie_id: id,
         };
 
-        const response = await fetch(
-          "https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/add/comment",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-            body: JSON.stringify(comment),
-          }
-        );
+        const response = await fetch(process.env.BACKEND_URL + "/add/comment", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(comment),
+        });
       },
       getAllcommentsForOneMovie: async (id) => {
         const response = await fetch(
-          `https://3001-lulmg-strangerfilms-y7ik6qmo9n4.ws-eu51.gitpod.io/comment/${id}`,
+          process.env.BACKEND_URL + `/comment/${id}`,
           {
             method: "GET",
             headers: {
