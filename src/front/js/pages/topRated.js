@@ -12,6 +12,11 @@ export const TopRated = () => {
         <AcordionGenero />
       </div>
       <div className="row">
+        <div className="text-center text-light">
+          <hr />
+          <h2 className="text-danger">MEJOR VALORADAS</h2>
+          <hr />
+        </div>
         {store.peliculas.map((obj, index) => {
           return (
             <div key={index} className="col text-light mb-2">

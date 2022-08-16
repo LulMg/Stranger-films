@@ -21,7 +21,7 @@ export const DetallesPeli = (props) => {
     if (obj.id == params.theid) {
       //con.log("params = ", +params.theid + "id " + obj.id);
       return (
-        <div classNameName="container2">
+        <div className="container2">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -154,7 +154,7 @@ export const DetallesPeli = (props) => {
             </div>
           </form>
 
-          <div class="container-fluid" id="main-content">
+          <div className="container-fluid" id="main-content">
             <div className="columna6">
               <div className="comentario5 text-light">
                 <div className="row">

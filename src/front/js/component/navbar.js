@@ -49,7 +49,7 @@ export const Navbar = () => {
             <h6 className="text-light mt-1 me-2">
               {localStorage.getItem("token") ? (
                 <>
-                  <i className="far fa-user ms-2"></i>
+                  <i className="far fa-user mx-2 "></i>
                   <span
                     onClick={() => {
                       actions.logOut();

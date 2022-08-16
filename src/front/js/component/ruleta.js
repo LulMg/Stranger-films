@@ -61,6 +61,7 @@ export default function Ruleta() {
                 handleSpinClick();
                 setTimeout(() => {
                   showPrize(true);
+                  //EN EL EVENTO ONCLICK SE CREA UNA VARIABLE PARA AGARRAR DELA LIBRERIA DE BOOTSTRAP EL .MODAL Y HACER QUE APAREZCA CON SHOW
                   const myModal = new bootstrap.Modal(
                     document.getElementById("exampleMo")
                   );
