@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Context } from "../store/appContext";
 //import "../../styles/home.css";
-import Comentario from "../component/comentarios";
 import { useParams } from "react-router-dom";
-import { object, objectOf } from "prop-types";
 import "../../styles/detallesPeli.css";
 import Trailer from "./pupUpTrailer";
+//COMPONENTES
+import CardPelicula from "./card-pelicula";
 
 export const DetallesPeli = (props) => {
   const { store, actions } = useContext(Context);
@@ -21,7 +21,7 @@ export const DetallesPeli = (props) => {
     if (obj.id == params.theid) {
       //con.log("params = ", +params.theid + "id " + obj.id);
       return (
-        <div className="container2">
+        <div className="container2" key={index}>
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -29,57 +29,35 @@ export const DetallesPeli = (props) => {
           >
             <div id="contenedor" className="row detallesPelis3">
               <div id="verde" className="col-3">
-                <div className="card detallesPelis2">
-                  <img
-                    src={"https://image.tmdb.org/t/p/w500/" + obj.poster_path}
-                    className="card-img-top"
-                    alt="..."
-                  />
-
-                  <div className="card-body">
-                    <h5 className="card-title">{obj.title}</h5>
-                    <p className="card-text">{obj.release_date}</p>
-                    <p className="card-text1">
+                <CardPelicula
+                  poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
+                  averageVote={
+                    <div>
                       <i
                         style={{ color: "yellow" }}
                         className="fas fa-star me-1 mt-1"
                       ></i>
-                      {obj.vote_average} // {obj.vote_count}
-                    </p>
-                    <a
-                      href="#"
-                      className="btn btn-danger col-12"
-                      onClick={() => {
-                        actions.favmovie(favmovie);
-                      }}
-                    >
-                      Favoritos
-                    </a>
-                  </div>
-                </div>
+                      {obj.vote_average}
+                    </div>
+                  }
+                />
               </div>
 
-              <div id="naranja" className="col-9 my-auto mx-auto">
-                <div id="imagen-superior" className="imagen-path">
-                  <div className="imagen-detalle">
-                    <div className="imagen-active">
-                      <img
-                        src={
-                          "https://image.tmdb.org/t/p/w500/" + obj.backdrop_path
-                        }
-                        className="d-block w-100"
-                        alt="..."
-                      />
-                      <div className="carousel-caption d-none d-md-block detallesPelis1">
-                        <h2 className="detallesPelis">{obj.title}</h2>
-                        <p className="descripcion p-3">
-                          {obj.overview}
-                          <div className="mt-4">
-                            <Trailer trailer={obj.trailer} />
-                          </div>
-                        </p>
+              <div className="col-9">
+                <div className="imagen-active">
+                  <img
+                    src={"https://image.tmdb.org/t/p/w500/" + obj.backdrop_path}
+                    className="d-block w-100 imagenLarga"
+                    alt="..."
+                  />
+                  <div className="carousel-caption d-none d-md-block detallesPelis1">
+                    <h2 className="detallesPelis">{obj.title}</h2>
+                    <p className="descripcion p-3">
+                      {obj.overview}
+                      <div className="mt-4">
+                        <Trailer trailer={obj.trailer} />
                       </div>
-                    </div>
+                    </p>
                   </div>
                 </div>
               </div>

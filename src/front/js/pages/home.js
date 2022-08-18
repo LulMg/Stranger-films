@@ -1,10 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import { object } from "prop-types";
 import { useState, useEffect } from "react";
-import ruletaa from "../../img/ruletaa.png";
-import giphy from "../../img/giphy.gif";
 import { Link } from "react-router-dom";
 //COMPONENTES
 import CardPelicula from "../component/card-pelicula";

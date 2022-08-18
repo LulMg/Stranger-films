@@ -1,13 +1,9 @@
 .imagen-active {
-  width: 100%;
-  display: block;
   -webkit-filter: contrast(200%);
   filter: contrast(200%);
-  border-color: black;
-  box-shadow: 0 0 40px rgb(255, 68, 68);
-  margin-top: 20px;
-  position: inherit;
+  /*box-shadow: 0 0 20px rgb(255, 68, 68);*/
   border-radius: 20px;
+  /*height: 24rem;*/
 }
 
 .detallesPelis1 {
@@ -57,9 +53,7 @@ p {
 }
 
 .container2 {
-  padding-top: 20px;
-  margin-top: 100px;
-  margin-left: 200px;
+  margin-top: 80px;
 }
 
 label {
@@ -108,4 +102,9 @@ input[type="radio"]:checked ~ label {
   height: 50px;
   width: 1250px;
   margin-bottom: 20px;
+}
+
+.imagenLarga {
+  height: 32rem;
+  opacity: 0.1;
 }
