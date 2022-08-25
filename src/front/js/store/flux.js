@@ -342,7 +342,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((result) => {
             console.log(result);
-            alert(result);
             store.messageLogin = result.mensaje;
             console.log("mensaje", result.mensaje);
             localStorage.setItem("token", result.token);
