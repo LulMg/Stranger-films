@@ -19,6 +19,9 @@ export const DetallesPeli = (props) => {
   }, []);
 
   //prueba desde laura
+
+  //test git comment
+
   return store.peliculas.map(function (obj, index) {
     if (obj.id == params.theid) {
       //con.log("params = ", +params.theid + "id " + obj.id);
