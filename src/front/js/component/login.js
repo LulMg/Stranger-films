@@ -32,7 +32,7 @@ export const LogIn = () => {
               We'll never share your email with anyone else.
             </small>
           </div>
-          <div className="form-group px-2">
+          <div className="form-group px-2 text-light">
             <label htmlFor="exampleInputPassword1">Password</label>
             <input
               type="password"
@@ -55,7 +55,10 @@ export const LogIn = () => {
               </div>
             </div>
             <div className="form-check text-end">
-              <label className="form-check-label" htmlFor="exampleCheck1">
+              <label
+                className="form-check-label text-light"
+                htmlFor="exampleCheck1"
+              >
                 <input
                   type="checkbox"
                   className="form-check-input"

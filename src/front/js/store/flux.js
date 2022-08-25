@@ -17,6 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       message: null,
       messageLogin: "",
       commentsForOneMovie: [{ user_comment: "No hay comentarios" }],
+      userComment: "",
     },
 
     actions: {
@@ -208,6 +209,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log("en cines...", store.enCines);
         let actions = getActions();
         actions.OrdenarPorFecha();
+        //store.peliculas = store.peliculas.concat(store.enCines);
+        //console.log("Peliculas añadidas de encines", store.peliculas);
         //store.peliculas = [...store.peliculas, ...store.enCines];
         ////setStore({ peliculas: peliculas });
         //console.log("ejecutado en cines", store.enCines);
@@ -339,6 +342,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((result) => {
             console.log(result);
+            alert(result);
             store.messageLogin = result.mensaje;
             console.log("mensaje", result.mensaje);
             localStorage.setItem("token", result.token);
@@ -424,6 +428,13 @@ const getState = ({ getStore, getActions, setStore }) => {
         const data = await response.json();
 
         setStore({ commentsForOneMovie: data.resultado });
+        console.log("XXX", data.resultado);
+        //setStore({ userComment: data.userName });
+      },
+
+      // Use getActions to call a function within a fuction
+      exampleFunction: () => {
+        getActions().changeColor(0, "green");
       },
     },
   };

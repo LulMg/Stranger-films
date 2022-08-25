@@ -22,6 +22,8 @@ import { Populares } from "./pages/populares";
 import { UltimosEstrenos } from "./pages/ultimosEstrenos";
 import { TopRated } from "./pages/topRated";
 import { Proximamente } from "./pages/proximamente";
+import { DetallesCine } from "./component/detallesCine";
+import { DetallesProx } from "./component/detallesProximamente";
 
 //create your first component
 const Layout = () => {
@@ -73,6 +75,12 @@ const Layout = () => {
             </Route>
             <Route exact path="/detalles/:theid">
               <DetallesPeli />
+            </Route>
+            <Route exact path="/detallesCine/:theid">
+              <DetallesCine />
+            </Route>
+            <Route exact path="/detallesProx/:theid">
+              <DetallesProx />
             </Route>
             <Route exact path="/register">
               <Register />

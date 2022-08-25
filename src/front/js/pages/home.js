@@ -21,10 +21,7 @@ var estilo = {
 export const Home = (props) => {
   const { store, actions } = useContext(Context);
   const [categoria, setCategoia] = useState(12);
-  //EN LA VARIABLE DE ESTADO CATEGORIA PONEMOS UN USEEFECT PARA QUE NOS MUESTRE LA LISTA DE PELICULAS ORDENADAS POR GENERO
-  //useEffect(() => {
-  //  store.peliculas.length > 0 && actions.filtroDeGenero(12);
-  //}, []);
+
   return (
     <div className="text-center mx-5 mt-2" id="home">
       {/*CAROUSEL ESTRENOS*/}
@@ -206,7 +203,7 @@ export const Home = (props) => {
           {store.enCines?.map((obj, index) => {
             return (
               <div key={index}>
-                <Link to={"/detalles/" + obj.id}>
+                <Link to={"/detallesCine/" + obj.id}>
                   <CardPelicula
                     key={obj.id}
                     poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
@@ -277,7 +274,7 @@ export const Home = (props) => {
                 {store.proximamente?.map((obj, index) => {
                   return (
                     <div key={index}>
-                      <Link to={"/detalles/" + obj.id}>
+                      <Link to={"/detallesProx/" + obj.id}>
                         <CardPelicula
                           key={obj.id}
                           poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}

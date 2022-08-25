@@ -22,8 +22,13 @@ export default function CardPelicula(props) {
               </span>
             </div>
             <div className="mx-1 mt-1 botones rounded text-center d-flex flex-column">
-              <button className="btn text-light border border-dark">
-                <i className="fa fa-plus me-2"></i>Favoritos
+              <button
+                className="btn text-light border border-dark"
+                onClick={() => {
+                  alert(props.titulo);
+                }}
+              >
+                <i className="fas fa-heart me-2 text-danger"></i>Favoritos
               </button>
 
               <button className="btn text-light border border-dark">

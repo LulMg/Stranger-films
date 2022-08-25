@@ -16,7 +16,7 @@ export default function Trailer(props) {
   return (
     <div className="Trailer">
       <button
-        className="btn btn-danger"
+        className="btn btn-danger btn-lg col-6"
         onClick={openModal}
         data-bs-toggle="modal"
       >
@@ -26,7 +26,7 @@ export default function Trailer(props) {
             <div className="modal__align">
               <div className="modal-content" modal={modal}>
                 <i
-                  class="fas fa-times-circle fa-3x text-light modal__close"
+                  className="fas fa-times-circle fa-3x text-light modal__close"
                   onClick={setModal}
                 ></i>
                 <div>
@@ -37,14 +37,14 @@ export default function Trailer(props) {
                 <div className="modal__video-align">
                   {videoLoading ? (
                     <div className="modal__spinner">
-                      <div class="spinner-border text-danger" role="status">
-                        <span class="visually-hidden">Loading...</span>
+                      <div className="spinner-border text-danger" role="status">
+                        <span className="visually-hidden">Loading...</span>
                       </div>
                     </div>
                   ) : null}
                   <div>
                     <iframe
-                      className="modal__video-style"
+                      class="modal__video-style"
                       onLoad={spinner}
                       loading="lazy"
                       width="800"
