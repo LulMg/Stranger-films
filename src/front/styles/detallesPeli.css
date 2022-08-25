@@ -1,111 +1,27 @@
-.imagen-active {
-  width: 100%;
-  display: block;
-  -webkit-filter: contrast(200%);
-  filter: contrast(200%);
-  border-color: black;
-  box-shadow: 0 0 40px rgb(255, 68, 68);
-  margin-top: 20px;
-  position: inherit;
+.imagenLarga {
+  opacity: 0.2;
+  height: 45rem;
+  z-index: 0;
+  position: absolute;
+  box-shadow: 0 0 8px 8px white inset;
+  filter: contrast(100%);
+}
+.divImg {
+  overflow: hidden;
+  height: 12rem;
+  /*box-shadow: 0 0 8px 8px rgb(14, 13, 13) inset;*/
+}
+
+.general2 {
+  z-index: 1;
+  position: relative;
+  background-color: rgb(0, 0, 0);
   border-radius: 20px;
 }
 
-.detallesPelis1 {
-  background-color: rgba(0, 0, 0, 0.501);
-  border-radius: 20px;
+.general {
+  background: linear-gradient(rgb(185, 174, 174), rgb(3, 3, 3));
 }
-
-.detallesPelis2 {
-  margin-left: 20px;
-  margin-top: 25px;
-  background-color: rgb(90, 2, 2);
-  box-shadow: 0 0 20px rgb(255, 68, 68);
-}
-
-h5 {
-  color: rgb(255, 255, 255);
-}
-
 h4 {
-  color: rgb(255, 255, 255);
-}
-
-p {
-  color: rgb(255, 255, 255);
-}
-
-.detallespelis {
-  color: #fff;
-  text-shadow: 0 0 7px rgb(0, 0, 0), 0 0 10px #fff, 0 0 21px #fff,
-    0 0 42px rgb(255, 0, 0), 0 0 82px rgb(255, 0, 0), 0 0 92px rgb(255, 0, 0),
-    0 0 102px rgb(255, 0, 0), 0 0 151px rgb(255, 0, 0);
-}
-
-.descripcion {
-  color: #fff;
-}
-
-.btn#trailer {
-  margin-left: 700px;
-}
-
-.detallesPelis3 {
-  margin-top: 20px;
-  height: 200px;
-  width: 1300px;
-  margin-left: 300px;
-}
-
-.container2 {
-  padding-top: 20px;
-  margin-top: 100px;
-  margin-left: 200px;
-}
-
-label {
-  color: white;
-}
-
-#form {
-  width: 250px;
-  margin: 0 auto;
-  height: 50px;
-}
-
-#form p {
-  text-align: center;
-}
-
-#form label {
-  font-size: 20px;
-}
-
-input[type="radio"] {
-  display: none;
-}
-
-.clasificacion {
-  direction: rtl;
-  unicode-bidi: bidi-override;
-  padding-right: 1120px;
-}
-
-label:hover,
-label:hover ~ label {
-  color: orange;
-}
-
-input[type="radio"]:checked ~ label {
-  color: orange;
-}
-
-.container#comentarios {
-  margin-top: 450px;
-  margin-left: 120px;
-}
-
-.caja-comentarios {
-  height: 50px;
-  width: 1250px;
-  margin-bottom: 20px;
+  color: rgb(199, 157, 157);
 }

@@ -71,8 +71,8 @@ export default function Ruleta() {
             >
               A rodar!!
             </button>
-            <h1>{prize && store.ruleta[prizeNumber].option}</h1>
-            <h1>{prize && store.ruleta[prizeNumber].indice}</h1>
+            {/*<h1>{prize && store.ruleta[prizeNumber].option}</h1>
+            <h1>{prize && store.ruleta[prizeNumber].indice}</h1>*/}
             {console.log(store.peliculas[store.ruleta[prizeNumber].indice])}
             {console.log(
               store.peliculas[store.ruleta[prizeNumber].indice].overview

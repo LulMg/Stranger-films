@@ -7,7 +7,7 @@ import Trailer from "./pupUpTrailer";
 //COMPONENTES
 import CardPelicula from "./card-pelicula";
 
-export const DetallesPeli = (props) => {
+export const DetallesCine = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
   const [favmovie, setFavmovie] = useState("");
@@ -18,7 +18,7 @@ export const DetallesPeli = (props) => {
     actions.getAllcommentsForOneMovie(params.theid);
   }, []);
 
-  return store.peliculas.map(function (obj, index) {
+  return store.enCines.map(function (obj, index) {
     if (obj.id == params.theid) {
       //con.log("params = ", +params.theid + "id " + obj.id);
       return (
@@ -144,56 +144,3 @@ export const DetallesPeli = (props) => {
     }
   });
 };
-{
-  /*<form
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >*/
-}
-{
-  /*</form>*/
-}
-
-{
-  /*<div className="form-group">
-                    <label>Comentario</label>
-                    <p className="clasificacion">
-                      <input
-                        id="radio1"
-                        type="radio"
-                        name="estrellas"
-                        value="5"
-                      />
-                      <label for="radio1">★</label>
-                      <input
-                        id="radio2"
-                        type="radio"
-                        name="estrellas"
-                        value="4"
-                      />
-                      <label for="radio2">★</label>
-                      <input
-                        id="radio3"
-                        type="radio"
-                        name="estrellas"
-                        value="3"
-                      />
-                      <label for="radio3">★</label>
-                      <input
-                        id="radio4"
-                        type="radio"
-                        name="estrellas"
-                        value="2"
-                      />
-                      <label for="radio4">★</label>
-                      <input
-                        id="radio5"
-                        type="radio"
-                        name="estrellas"
-                        value="1"
-                      />
-                      <label for="radio5">★</label>
-                    </p>
-                  </div>*/
-}

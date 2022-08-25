@@ -17,6 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       message: null,
       messageLogin: "",
       commentsForOneMovie: [{ user_comment: "No hay comentarios" }],
+      userComment: "",
     },
 
     actions: {
@@ -25,7 +26,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().changeColor(0, "green");
       },
       popularidad: () => {
-        console.log("ORDENANDO POR POPULARIDAD");
         let store = getStore();
 
         store.peliculas.sort(function (a, b) {
@@ -50,7 +50,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           )
             .then((response) => response.json())
             .then((data) => {
-              // console.log("trailer para " + store.peliculas[i].title);
               for (var x = 0; x < data.results.length - 1; x++) {
                 if (
                   data.results[x].official == true &&
@@ -69,20 +68,15 @@ const getState = ({ getStore, getActions, setStore }) => {
             })
             .catch((error) => console.log("Algo salió mal", error));
         }
-        console.log(getStore());
       },
       buscarPelicula: (busqueda) => {
-        console.log("ejecutando buscarpelicula");
-
         var cadena = busqueda;
         var minusculas = cadena.toLowerCase();
         const store = getStore();
         store.buscarPelicula = [];
         var array = [];
         for (var i = 0; i < store.peliculas.length - 1; i++) {
-          // console.log("en minusculas busqueda", minusculas);
           var titulo = store.peliculas[i].title.toLowerCase();
-          // console.log("titulos en minusculas", titulo);
 
           if (titulo.includes(minusculas)) {
             console.log(
@@ -104,18 +98,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log("Error loading message from backend", error)
           );
       },
-      peliculaDetalle: () => {
-        var store = getStore();
-        //for (var i = 0; i < store.peliculas.length - 1; i++) {
-        //  if (store.peliculas.id == id) {
-        //    console("Peli encontraDA ", store.peliculas[id].title);
-        //  }
-        //}
-      },
-
       generosDePeliculas: async () => {
-        console.log("buscando los generos de las pelis en la API");
-
         await fetch(
           "https://api.themoviedb.org/3/genre/movie/list?api_key=87330f0fa794fb3eb980c887157031c9"
         )
@@ -127,7 +110,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => console.log("Algo salió mal", error));
       },
       peliculasGenerales: async () => {
-        console.log("generando el array de todas las pelis");
         var peliculasTotales = [];
         var actions = getActions();
 
@@ -137,7 +119,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         )
           .then((response) => response.json())
           .then((data) => {
-            //console.log(data.results);
             peliculasTotales = [...peliculasTotales, ...data.results];
             setStore({ peliculas: peliculasTotales });
           })
@@ -151,10 +132,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         actions.popularidad();
 
         console.log("PELICULAS TOTALES", store.peliculas);
-        // actcargarCarrousel();
       },
       peliculasGeneralesAntiguas: async () => {
-        console.log("generando el array de todas las pelis");
         var peliculasTotales = [];
         var actions = getActions();
         for (var pagina = 1; pagina < 21; pagina++) {
@@ -165,21 +144,16 @@ const getState = ({ getStore, getActions, setStore }) => {
           )
             .then((response) => response.json())
             .then((data) => {
-              //console.log(data.results);
               peliculasTotales = [...peliculasTotales, ...data.results];
               setStore({ peliculas: peliculasTotales });
             })
             // .then(state.actions.cargarCarrousel())
             .catch((error) => console.log("Algo salió mal", error));
         }
-        let store = getStore();
         actions.topRated();
         actions.cargarCarrousel();
         actions.proximamente();
         actions.popularidad();
-
-        console.log("PELICULAS TOTALES", store.peliculas);
-        // actcargarCarrousel();
       },
       filtroDeGenero(genero) {
         const store = getStore();
@@ -188,7 +162,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (genero == store.generos[i].id) {
             store.generoSeleccionado = store.generos[i].name;
             console.log(store.generos[i].name);
-            //console.log("GENERO SELECCIONADO : ", store.generoSeleccionado);
           }
         }
         //var indicePeliculas = [];
@@ -210,15 +183,25 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         }
       },
+      //añadirEnCinesApeliculas: () => {
+      //  console.log("ejecutando añadir a pelis");
+      //  let store = getStore();
+      //  for (var i = 0; i < store.enCines.length; i++) {
+      //    for (var x = 0; x < store.peliculas.length; x++) {
+      //      //if (store.enCines.id != store.peliculas.id) {
+      //      store.peliculas.push(store.enCines[i]);
+      //      console.log("añadida peliculas con titulo", store.enCines.title);
+      //      //}
+      //    }
+      //  }
+      //},
       enCines: async () => {
-        console.log("en cines.... buscando");
-
         await fetch(
           "https://api.themoviedb.org/3/movie/now_playing?api_key=87330f0fa794fb3eb980c887157031c9&page=1"
         )
           .then((response) => response.json())
           .then((data) => {
-            //console.log(data.results);
+            //console.log("encines", data.results);
             setStore({ enCines: data.results });
           })
           .catch((error) => console.log("Algo salió mal", error));
@@ -226,6 +209,12 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log("en cines...", store.enCines);
         let actions = getActions();
         actions.OrdenarPorFecha();
+        //store.peliculas = store.peliculas.concat(store.enCines);
+        //console.log("Peliculas añadidas de encines", store.peliculas);
+        //store.peliculas = [...store.peliculas, ...store.enCines];
+        ////setStore({ peliculas: peliculas });
+        //console.log("ejecutado en cines", store.enCines);
+        //actions.añadirEnCinesApeliculas();
       },
       OrdenarPorFecha: () => {
         let store = getStore();
@@ -258,7 +247,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       popularidad: () => {
         let store = getStore();
         store.peliculasPopulares = store.peliculas;
-        console.log("ORDENANDO POR POPULARIDAD");
 
         store.peliculasPopulares.sort(function (a, b) {
           if (a.popularity < b.popularity) {
@@ -278,21 +266,17 @@ const getState = ({ getStore, getActions, setStore }) => {
         for (let i = 0; i < 3; i++) {
           tresAleatorios.push(Math.floor(Math.random() * 19 + 1));
         }
-        console.log(tresAleatorios);
         for (var i = 0; i < 3; i++) {
           store.carrousel.push(store.peliculas[tresAleatorios[i]]);
         }
         console.log(store.carrousel);
       },
       proximamente: async () => {
-        console.log("buscando las pelis en la API");
-
         await fetch(
           "https://api.themoviedb.org/3/movie/upcoming?api_key=87330f0fa794fb3eb980c887157031c9&page=1"
         )
           .then((response) => response.json())
           .then((data) => {
-            //console.log(data.results);
             setStore({ proximamente: data.results });
           })
           .catch((error) => console.log("Algo salió mal", error));
@@ -305,7 +289,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           //veinteRandom.push(Math.floor(Math.random() * 399 + 1));
           veinteRandom.push(Math.floor(Math.random() * 20));
         }
-        console.log("veinte random", veinteRandom);
         let cadenaTitulo = "";
         let elementoRuleta = {};
         for (let i = 0; i < 20; i++) {
@@ -359,6 +342,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((result) => {
             console.log(result);
+            alert(result);
             store.messageLogin = result.mensaje;
             console.log("mensaje", result.mensaje);
             localStorage.setItem("token", result.token);
@@ -444,6 +428,13 @@ const getState = ({ getStore, getActions, setStore }) => {
         const data = await response.json();
 
         setStore({ commentsForOneMovie: data.resultado });
+        console.log("XXX", data.resultado);
+        //setStore({ userComment: data.userName });
+      },
+
+      // Use getActions to call a function within a fuction
+      exampleFunction: () => {
+        getActions().changeColor(0, "green");
       },
     },
   };

@@ -2,10 +2,11 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/pageGenero.css";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 //COMPONENTES
 import CardPelicula from "./card-pelicula";
 import AcordionGenero from "../component/navbar-generos";
+import MiLista from "./acordionMilista";
 
 export const Genero = () => {
   //LLAMAMOS A STORE Y ACTIONS Y USAMOS EL CONTEXT CON EL USECONTEXT
@@ -16,7 +17,15 @@ export const Genero = () => {
       {/*LISTA DE GENEROS*/}
       <div className="d-flex">
         <div>
-          <AcordionGenero />
+          {localStorage.getItem("token") ? (
+            <>
+              <MiLista />
+            </>
+          ) : (
+            <>
+              <AcordionGenero />
+            </>
+          )}
         </div>
         {/*TITULO*/}
         <div>
@@ -29,12 +38,16 @@ export const Genero = () => {
               var pelisAmostrar = 19;
               for (var i = 0; i < 20; i + 20) {
                 return (
-                  <div key={index} className="col text-light mb-2">
-                    <CardPelicula
-                      key={obj.id}
-                      poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
-                      titulo={obj.title}
-                    />
+                  <div className="col">
+                    <div key={index} className="col text-light mb-2">
+                      <Link to={"/detalles/" + obj.id}>
+                        <CardPelicula
+                          key={obj.id}
+                          poster={`https://image.tmdb.org/t/p/w500/${obj.poster_path}`}
+                          titulo={obj.title}
+                        />
+                      </Link>
+                    </div>
                   </div>
                 );
               }

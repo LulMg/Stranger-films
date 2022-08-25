@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useContext } from "react";
+import { LogIn } from "./login";
 
 export default function AcordionGenero() {
   const { store, actions } = useContext(Context);
@@ -80,10 +81,27 @@ export default function AcordionGenero() {
           <small className="text-secondary">
             Guarda tus peliculas favoritas
           </small>
-          <button className="btn btn-danger mt-3">
+
+          <button
+            className="btn btn-danger mt-3"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
             Inicia sesión en Stranger Films
           </button>
         </div>
+      </div>
+      {/*MODAL DEL INICIO DE SESION*/}
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog"></div>
+        <LogIn />
       </div>
     </div>
   );

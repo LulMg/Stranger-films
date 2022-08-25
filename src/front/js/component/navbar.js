@@ -49,22 +49,47 @@ export const Navbar = () => {
             <h6 className="text-light mt-1 me-2">
               {localStorage.getItem("token") ? (
                 <>
-                  <i className="far fa-user mx-2 "></i>
-                  <span
-                    onClick={() => {
-                      actions.logOut();
-                    }}
-                  >
-                    Cerrar Sesión
-                  </span>
+                  <div className="btn-group">
+                    <button
+                      type="button"
+                      className="btn btn-gradient text-light"
+                    >
+                      <i className="far fa-user mx-3 "></i>
+                      hola {store.messageLogin.usuario}
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-danger dropdown-toggle dropdown-toggle-split"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <span className="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul className="dropdown-menu">
+                      <li className="dropdown-item">Favoritos</li>
+                      <li className="dropdown-item">Pendientes</li>
+                      <li>
+                        <hr />
+                      </li>
+                      <li
+                        className="text-center dropdown-item"
+                        onClick={() => {
+                          actions.logOut();
+                        }}
+                      >
+                        Cerrar sesión
+                      </li>
+                    </ul>
+                  </div>
                 </>
               ) : (
                 <button
-                  className="btn text-light"
+                  type="button"
+                  className="btn btn-danger"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                 >
-                  iniciar sesión
+                  Iniciar sesión
                 </button>
               )}
             </h6>

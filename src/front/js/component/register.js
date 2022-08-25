@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import "../../styles/register.css";
-import logo from "../../img/logo.png";
 import { Context } from "../store/appContext";
 
 export default function Register() {
@@ -14,18 +12,19 @@ export default function Register() {
   }, [username, email, password]);
 
   return (
-    <div className="container">
+    <div className="container bg-gradient p-5 mt-5">
       <form
         onSubmit={(e) => {
           e.preventDefault();
         }}
       >
-        <div className="form-group">
-          <label htmlFor="exampleInputUsername1">Usuario</label>
+        <div className="form-group1 mb-3">
+          <p>
+            <bold>Usuario</bold>
+          </p>
           <input
             type="username"
             className="form-control"
-            id="exampleInputUsername1"
             aria-describedby="usernameHelp"
             placeholder="Enter username"
             onChange={(e) => setUsername(e.target.value)}
@@ -35,12 +34,13 @@ export default function Register() {
           </small>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="exampleInputEmail1">Email</label>
+        <div className="form-group2 mb-3">
+          <p>
+            <bold>Email</bold>
+          </p>
           <input
             type="email"
             className="form-control"
-            id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Enter email"
             onChange={(e) => setEmail(e.target.value)}
@@ -49,35 +49,34 @@ export default function Register() {
             Nunca compartiremos tu Email con nadie mas.
           </small>
         </div>
-        <div className="form-group">
-          <label htmlFor="exampleInputPassword1">Password</label>
+        <div className="form-group3 mb-3">
+          <p>
+            <bold>Password</bold>
+          </p>
           <input
             type="password"
             className="form-control"
-            id="exampleInputPassword1"
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="exampleCheck1"
-          />
+          <input type="checkbox" className="form-check-input" />
           <label className="form-check-label" htmlFor="exampleCheck1">
             Cerrar Sesión
           </label>
         </div>
-        <button
-          type="submit"
-          onClick={() => {
-            actions.register(username, email, password);
-          }}
-          className="btn btn-primary"
-        >
-          Submit
-        </button>
+        <div className="text-center d-grid gap-2 col-6 mx-auto">
+          <button
+            type="submit"
+            onClick={() => {
+              actions.register(username, email, password);
+            }}
+            className="btn btn-danger py-2"
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -6,20 +6,20 @@
   );
   border: 0.2rem solid rgba(255, 0, 0, 0);
   border-radius: 2rem;
-  padding: 0.4em;
+  padding: 2rem;
   box-shadow: 0 0 0.2rem rgb(255, 255, 255), 0 0 0.2rem rgb(255, 255, 255),
     0 0 2rem #ff0000, 0 0 0.8rem #ff0000, 0 0 2.8rem #ff0000,
     inset 0 0 1.3rem #ff0000;
-  margin-left: 350px;
+  /*margin-left: 350px;
   margin-top: 150px;
-  padding-top: 30px;
+  padding-top: 30px;*/
   width: 600px;
-  height: 350px;
+  /*height: 350px;*/
 }
 
-.form-group {
+/*.form-group {
   padding-top: 20px;
-}
+}*/
 .form-control {
   width: 98%;
 }
