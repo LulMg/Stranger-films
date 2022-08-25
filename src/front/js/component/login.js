@@ -12,9 +12,9 @@ export const LogIn = () => {
     <div className="d-flex justify-content-center">
       <div className="container1">
         <form
-        //onSubmit={(e) => {
-        //  e.preventDefault();
-        //}}
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
         >
           <div className="form-group px-2 text-light">
             <>Email address</>

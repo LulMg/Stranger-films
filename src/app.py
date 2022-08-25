@@ -89,17 +89,15 @@ def iniciar_sesion():
     request_body = request.get_json()
     print(request_body)
     user = User.query.filter_by(email=request_body['email']).first()
-    print(user.username)
     if user:
         if user.password == request_body['password']:
+            print("usuario correcto")
             acceso = create_access_token(identity = user.id, expires_delta=datetime.timedelta(minutes=60))
 
             return jsonify({
                 "mensaje": "Welcome to the UpsideDown",
-                "token": acceso,
-                "usuario": user.username
-            }
-            )
+                "token": acceso
+            })
         else:
             return "You get lost"
     else:
