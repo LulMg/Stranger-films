@@ -18,6 +18,7 @@ export const DetallesPeli = (props) => {
     actions.getAllcommentsForOneMovie(params.theid);
   }, []);
 
+  //prueba desde laura
   return store.peliculas.map(function (obj, index) {
     if (obj.id == params.theid) {
       //con.log("params = ", +params.theid + "id " + obj.id);
