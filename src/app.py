@@ -91,12 +91,13 @@ def iniciar_sesion():
     user = User.query.filter_by(email=request_body['email']).first()
     if user:
         if user.password == request_body['password']:
-            print("usuario correcto")
+            print("NOMBRE DE USUARIO " ,user.username)
             acceso = create_access_token(identity = user.id, expires_delta=datetime.timedelta(minutes=60))
 
             return jsonify({
-                "mensaje": "Welcome to the UpsideDown",
-                "token": acceso
+                "mensaje": "Welcome to the UpsideDown    2222222",
+                "token": acceso,
+                "username": user.username
             })
         else:
             return "You get lost"
@@ -104,10 +105,10 @@ def iniciar_sesion():
         return "User lost to the Demogorgon", 400
 
 #Funciona el token (se podria borrar, es para probar que funciona)
-@app.route('/member', methods=['GET'])
-@jwt_required()
-def members():
-    return "Welcome back to the UpsideDown"
+# @app.route('/member', methods=['GET'])
+# @jwt_required()
+# def members():
+#     return "Welcome back to the UpsideDown"
 
 #Guardar tu peli favorita
 @app.route('/favorite/movie', methods=['POST'])

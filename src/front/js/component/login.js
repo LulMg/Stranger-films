@@ -72,6 +72,7 @@ export const LogIn = () => {
                 type="submit"
                 onClick={() => {
                   actions.logIn(email, password);
+                  console.log(store);
                 }}
                 className="btn btn-lg btn-dark px-5"
               >
