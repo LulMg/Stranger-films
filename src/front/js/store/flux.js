@@ -17,6 +17,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       message: null,
       messageLogin: "",
       commentsForOneMovie: [{ user_comment: "No hay comentarios" }],
+      userName: "",
+      pendientes: [],
       userLogged: "   ",
     },
 
@@ -183,18 +185,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         }
       },
-      //añadirEnCinesApeliculas: () => {
-      //  console.log("ejecutando añadir a pelis");
-      //  let store = getStore();
-      //  for (var i = 0; i < store.enCines.length; i++) {
-      //    for (var x = 0; x < store.peliculas.length; x++) {
-      //      //if (store.enCines.id != store.peliculas.id) {
-      //      store.peliculas.push(store.enCines[i]);
-      //      console.log("añadida peliculas con titulo", store.enCines.title);
-      //      //}
-      //    }
-      //  }
-      //},
+
       enCines: async () => {
         await fetch(
           "https://api.themoviedb.org/3/movie/now_playing?api_key=87330f0fa794fb3eb980c887157031c9&page=1"
@@ -209,12 +200,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log("en cines...", store.enCines);
         let actions = getActions();
         actions.OrdenarPorFecha();
-        //store.peliculas = store.peliculas.concat(store.enCines);
-        //console.log("Peliculas añadidas de encines", store.peliculas);
-        //store.peliculas = [...store.peliculas, ...store.enCines];
-        ////setStore({ peliculas: peliculas });
-        //console.log("ejecutado en cines", store.enCines);
-        //actions.añadirEnCinesApeliculas();
       },
       OrdenarPorFecha: () => {
         let store = getStore();
@@ -239,9 +224,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           return 0;
         });
-        // const actions = getActions();
-
-        // console.log("peliculas ordenadas por votos", store.peliculas);
       },
 
       popularidad: () => {
@@ -257,7 +239,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           return 0;
         });
-        // setStore({ peliculasPopulares: store.peliculas });
       },
       cargarCarrousel: () => {
         //Funcion para cargar las tres peliculas AL AZAR para el carrousel
@@ -432,7 +413,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         setStore({ commentsForOneMovie: data.resultado });
         console.log("XXX", data.resultado);
-        //setStore({ userComment: data.userName });
       },
 
       // Use getActions to call a function within a fuction

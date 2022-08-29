@@ -56,6 +56,7 @@ export const Navbar = () => {
                       className="btn btn-gradient text-light"
                     >
                       <i className="far fa-user mx-3 "></i>
+
                       {localStorage.getItem("user")}
                       {/* {userLogged} */}
                     </button>
