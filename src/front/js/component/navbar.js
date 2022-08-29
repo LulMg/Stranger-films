@@ -10,6 +10,7 @@ import { useContext } from "react";
 export const Navbar = () => {
   const [inputText, setInputText] = useState("");
   const { store, actions } = useContext(Context);
+
   const history = useHistory();
 
   return (
@@ -55,7 +56,9 @@ export const Navbar = () => {
                       className="btn btn-gradient text-light"
                     >
                       <i className="far fa-user mx-3 "></i>
-                      hola {store.userName}
+
+                      {localStorage.getItem("user")}
+                      {/* {userLogged} */}
                     </button>
                     <button
                       type="button"

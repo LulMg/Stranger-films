@@ -19,6 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       commentsForOneMovie: [{ user_comment: "No hay comentarios" }],
       userName: "",
       pendientes: [],
+      userLogged: "   ",
     },
 
     actions: {
@@ -321,17 +322,21 @@ const getState = ({ getStore, getActions, setStore }) => {
         fetch(process.env.BACKEND_URL + "/login", requestOptions)
           .then((response) => response.json())
           .then((result) => {
-            console.log(result);
+            // alert("MENSAJE DE LOGIN ", result.mensaje);
             store.messageLogin = result.mensaje;
-            console.log("mensaje", result.mensaje);
+            console.log(store);
             localStorage.setItem("token", result.token);
+            localStorage.setItem("user", result.username);
             window.location.reload(false);
+            // store.userLogged = result.username;
           })
           .catch((error) => console.log("error", error));
+        console.log(store);
       },
 
       logOut: () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
         window.location.reload(false);
       },
 
