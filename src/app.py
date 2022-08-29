@@ -96,7 +96,7 @@ def iniciar_sesion():
 
             return jsonify({
                 "mensaje": "Welcome to the UpsideDown",
-                "token": acceso
+                "token": acceso,
             })
         else:
             return "You get lost"

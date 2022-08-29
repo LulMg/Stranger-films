@@ -88,13 +88,13 @@ export const DetallesProx = (props) => {
                           className="p-2"
                           type="comments"
                           rows="4"
-                          cols="60"
+                          cols="57"
                           placeholder="Deja tu comentario..."
                           onChange={(e) => setNewcomment(e.target.value)}
                         ></textarea>
                         <button
                           type="button"
-                          className="btn btn-outline-danger ms-2"
+                          className="btn btn-outline-success ms-2"
                           onClick={() => {
                             actions.newcomment(newcomment, obj.id);
                           }}
@@ -102,34 +102,84 @@ export const DetallesProx = (props) => {
                           Enviar
                         </button>
                       </div>
+                      {/*SECCION DE COMENTARIOS*/}
+                      <div className="comentario-texto p-1 mt-2 ms-5 col-10">
+                        <h4>COMENTARIOS</h4>
+                        <div className="ms-1 bg-gradient p-1 px-3">
+                          {store.commentsForOneMovie.map((value, index) => {
+                            return (
+                              <>
+                                <li key={value.id}>
+                                  {/*<p>{value.user_name ? user_name : ""}</p>*/}
+                                  <div className="d-flex">
+                                    <div className="col-10">
+                                      <p>
+                                        <i className="fas fa-comment me-3 ps-2"></i>
+
+                                        {value.user_comment
+                                          ? value.user_name +
+                                            ": " +
+                                            value.user_comment
+                                          : "No hay comentarios"}
+                                      </p>
+                                    </div>
+                                    <div className="d-flex justify-content-end col-2">
+                                      <button
+                                        type="button"
+                                        className="btn btn-outline-secondary my-2 text-warning"
+                                        onClick={() => {}}
+                                      >
+                                        <i className="far fa-edit"></i>
+                                      </button>
+                                      <button
+                                        type="button"
+                                        className="btn btn-outline-secondary my-2 text-danger "
+                                        onClick={() => {}}
+                                      >
+                                        <i className="far fa-trash-alt"></i>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </li>
+                              </>
+                            );
+                          })}
+                        </div>
+                      </div>
                     </>
                   ) : (
-                    <div className="text-center text-light border border-danger p-3 mx-5 rounded">
-                      <h5>Para dejar tu comentario inicia sesión</h5>
+                    <div>
+                      <div className="text-center text-light border border-danger p-3 mx-5 rounded">
+                        <h5>Para dejar tu comentario inicia sesión</h5>
+                      </div>
+                      {/*SECCION DE COMENTARIOS*/}
+                      <div className="comentario-texto p-1 mt-2 ms-5 col-10">
+                        <h4>COMENTARIOS</h4>
+                        <div className="ms-1 bg-gradient p-1 px-3">
+                          {store.commentsForOneMovie.map((value, index) => {
+                            return (
+                              <>
+                                <li key={value.id}>
+                                  {/*<p>{value.user_name ? user_name : ""}</p>*/}
+                                  <div className="d-flex">
+                                    <p>
+                                      <i className="fas fa-comment me-3 ps-2"></i>
+
+                                      {value.user_comment
+                                        ? value.user_name +
+                                          ": " +
+                                          value.user_comment
+                                        : "No hay comentarios"}
+                                    </p>
+                                  </div>
+                                </li>
+                              </>
+                            );
+                          })}
+                        </div>
+                      </div>
                     </div>
                   )}
-                  {/*SECCION DE COMENTARIOS*/}
-                  <div className="comentario-texto p-1 mt-2 ms-5 col-9">
-                    <h4>COMENTARIOS</h4>
-                    <div className="ms-1 bg-gradient p-1">
-                      {store.commentsForOneMovie.map((value, index) => {
-                        return (
-                          <>
-                            <li key={value.id}>
-                              {/*<p>{value.user_name ? user_name : ""}</p>*/}
-
-                              <p>
-                                <i className="fas fa-comment me-3 ps-2"></i>
-                                {value.user_comment
-                                  ? value.user_name + ": " + value.user_comment
-                                  : "No hay comentarios"}
-                              </p>
-                            </li>
-                          </>
-                        );
-                      })}
-                    </div>
-                  </div>
                 </div>
               </div>
               <div className="col-6 text-center">

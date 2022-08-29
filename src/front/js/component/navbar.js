@@ -55,7 +55,7 @@ export const Navbar = () => {
                       className="btn btn-gradient text-light"
                     >
                       <i className="far fa-user mx-3 "></i>
-                      hola {store.messageLogin.usuario}
+                      hola {store.userName}
                     </button>
                     <button
                       type="button"
