@@ -24,6 +24,7 @@ import { TopRated } from "./pages/topRated";
 import { Proximamente } from "./pages/proximamente";
 import { DetallesCine } from "./component/detallesCine";
 import { DetallesProx } from "./component/detallesProximamente";
+import { Privado } from "./component/login2";
 
 //create your first component
 const Layout = () => {
@@ -84,6 +85,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/register">
               <Register />
+            </Route>
+            <Route exact path="/api/privada">
+              <Privado />
             </Route>
             <Route>
               <LogIn />

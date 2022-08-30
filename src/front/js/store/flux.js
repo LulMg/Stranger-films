@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      permiso: false,
       peliculasBusqueda: [],
       generoSeleccionado: "Género",
       peliculas: [],
@@ -26,6 +27,52 @@ const getState = ({ getStore, getActions, setStore }) => {
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");
+      },
+
+      //EJEMNPLO ACCESO A RUTA PRIVADA
+      privado: () => {
+        // var myHeaders = new Headers();
+        // myHeaders.append(
+        //   "Authorization",
+        //   `Bearer ${sessionStorage.getItem("token")}`
+        // );
+
+        // var requestOptions = {
+        //   method: "GET",
+        //   headers: myHeaders,
+        //   redirect: "follow",
+        // };
+
+        // fetch(process.env.BACKEND_URL + "/api/privada")
+        //   .then((resp) => resp.json())
+        //   .then((result) => console.log(result))
+        //   //.then((data) => setStore({ message: data.message }))
+        //   .catch((error) =>
+        //     console.log("Error loading message from backend", error)
+        //   );
+        var myHeaders = new Headers();
+        // myHeaders.append("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2MTgzNDEzOSwianRpIjoiZmNhNjNjNTAtMzVmZC00YTMzLTk0ZmYtODMzZjA5MGU1ZGU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjYxODM0MTM5LCJleHAiOjE2NjE4Mzc3Mzl9.24qJcfni2dCYa-cGaxp_Hy4kcL_GZW55jft2yirTJIc\n");
+        myHeaders.append(
+          "Authorization",
+          `Bearer ${sessionStorage.getItem("token")}`
+        );
+        var requestOptions = {
+          method: "GET",
+          headers: myHeaders,
+          redirect: "follow",
+        };
+
+        fetch(
+          "https://3001-acontrerasr-strangerfil-kid92nkhjus.ws-eu63.gitpod.io/api/privada",
+          requestOptions
+        )
+          .then((response) => response.json())
+          .then((result) => {
+            console.log(result);
+            setStore({ permiso: result.permiso });
+          })
+
+          .catch((error) => console.log("error", error));
       },
       popularidad: () => {
         let store = getStore();
