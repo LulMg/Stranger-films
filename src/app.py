@@ -59,6 +59,19 @@ def sitemap():
         return generate_sitemap(app)
     return send_from_directory(static_file_dir, 'index.html')
 
+#EJEMPLO ACCESO A RUTA PRIVADA
+@app.route('/api/privada' , methods=['GET'])
+@jwt_required()
+def privada():
+    print("llegando a /api/privada")
+    #mensaje = "HOLA MENSAJE DESDE /api/privada"
+    #permiso = "true"
+    return jsonify({
+        "mensaje": "HOLA MENSAJE DESDE /api/privada",
+        "permiso": "true"
+    })
+
+
 # any other endpoint will try to serve it like a static file
 @app.route('/<path:path>', methods=['GET'])
 def serve_any_other_file(path):
