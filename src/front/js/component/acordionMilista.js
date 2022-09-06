@@ -82,15 +82,25 @@ export default function MiLista() {
             <th>
               <h5 className="bg-dark p-2 rounded">Favoritos</h5>
             </th>
-            <li>peli1sdhaiwfgaiowgefa</li>
-            <li>peli2dsfasgfasegfas</li>
+            {store.favoritos.map((favmovie, index) => {
+              return (
+                <li className="p-2 bg-gradient" key={index}>
+                  {favmovie}
+                </li>
+              );
+            })}
           </ul>
           <ul className="mt-4">
             <th>
-              <h5 className="bg-dark p-2 rounded">Pendientes</h5>
+              <h5 className="bg-dark p-2 rounded text-light">Pendientes</h5>
             </th>
-            <li>asjkdfgashilgsiaer</li>
-            <li>asjkdfgashilgsiaer</li>
+            {store.pendientes.map((movName, index) => {
+              return (
+                <li className="p-2 bg-gradient text-light" key={index}>
+                  {movName}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>

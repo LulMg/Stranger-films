@@ -127,22 +127,41 @@ export const DetallesPeli = (props) => {
                                           : "No hay comentarios"}
                                       </p>
                                     </div>
-                                    <div className="d-flex justify-content-end col-2">
-                                      <button
-                                        type="button"
-                                        className="btn btn-outline-secondary my-2 text-warning"
-                                        onClick={() => {}}
-                                      >
-                                        <i className="far fa-edit"></i>
-                                      </button>
-                                      <button
-                                        type="button"
-                                        className="btn btn-outline-secondary my-2 text-danger "
-                                        onClick={() => {}}
-                                      >
-                                        <i className="far fa-trash-alt"></i>
-                                      </button>
-                                    </div>
+                                    {value.user_name ==
+                                    localStorage.getItem("user") ? (
+                                      <div className="d-flex justify-content-end col-2">
+                                        <button
+                                          type="button"
+                                          className="btn btn-outline-secondary my-2 text-warning"
+                                          onClick={() => {
+                                            //const modalBorrarCom =
+                                            //  new bootstrap.Modal(
+                                            //    document.getElementById(
+                                            //      "borrarComm"
+                                            //    )
+                                            //  );
+                                            //modalBorrarCom.show();
+                                            console.log(value);
+                                            alert("hola");
+                                            actions.eliminarComentario(
+                                              value.id
+                                            );
+                                          }}
+                                        >
+                                          <i className="far fa-edit"></i>
+                                        </button>
+                                        <button
+                                          //type="button"
+                                          //data-bs-toggle="modal"
+                                          //data-bs-target="#modalBorrar"
+                                          className="btn btn-outline-secondary my-2 text-danger "
+                                        >
+                                          <i className="far fa-trash-alt"></i>
+                                        </button>
+                                      </div>
+                                    ) : (
+                                      ""
+                                    )}
                                   </div>
                                 </li>
                               </>
@@ -198,6 +217,42 @@ export const DetallesPeli = (props) => {
     }
   });
 };
+
+//MODAL BORRAR COMENTARIOS
+<div
+  class="modal fade"
+  id="borrarComm"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          Modal title
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">...</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">
+          Understood
+        </button>
+      </div>
+    </div>
+  </div>
+</div>;
 {
   /*<form
             onSubmit={(e) => {

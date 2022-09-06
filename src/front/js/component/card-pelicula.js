@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../../styles/cardMovie.css";
+import { Context } from "../store/appContext";
 
 export default function CardPelicula(props) {
+  const { store, actions } = useContext(Context);
   return (
     <div>
       <div>
@@ -25,14 +27,20 @@ export default function CardPelicula(props) {
               <button
                 className="btn text-light border border-dark"
                 onClick={() => {
-                  alert(props.titulo);
+                  actions.addFavoritos(props.titulo);
                 }}
               >
                 <i className="fas fa-heart me-2 text-danger"></i>Favoritos
               </button>
 
-              <button className="btn text-light border border-dark">
-                <i className="fa fa-plus me-2"></i>Pendientes
+              <button
+                className="btn text-light border border-dark"
+                onClick={() => {
+                  actions.addPendientes(props.titulo);
+                }}
+              >
+                <i className="fa fa-plus me-2"></i>
+                Pendientes
               </button>
             </div>
           </div>
