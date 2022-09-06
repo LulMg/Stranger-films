@@ -105,12 +105,14 @@ def iniciar_sesion():
     if user:
         if user.password == request_body['password']:
             print("NOMBRE DE USUARIO " ,user.username)
+            print("id DE USUARIO " ,user.id)
             acceso = create_access_token(identity = user.id, expires_delta=datetime.timedelta(minutes=60))
 
             return jsonify({
                 "mensaje": "Welcome to the UpsideDown    2222222",
                 "token": acceso,
-                "username": user.username
+                "username": user.username,
+                "userId": user.id
             })
         else:
             return "You get lost"
@@ -211,12 +213,16 @@ def edit_comment():
 @jwt_required()
 def undo_com():
     request_body = request.get_json()
-    undocom = Comment.query.filter_by(user_id=request_body['user_id'], movie_id=request_body['movie_id']). first()
+    print(request_body)
+    undocom = Comment.query.filter_by(comentario_id=request_body['comentario_id']).first()
+
     if undocom:
         db.session.delete(undocom)
         db.session.commit()
+        print("comentario borrado")
         return "To the UpsideDown with it"
     else:
+        print("comentario no barrado")
         return "You roll a 1"
 
 #FUNCIONA!!!!

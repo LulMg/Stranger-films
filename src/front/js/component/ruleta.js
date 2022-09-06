@@ -56,7 +56,7 @@ export default function Ruleta() {
           <div className="text-center mt-3">
             <button
               className="btn btn-danger btn-lg"
-              data-bs-toggle="modal"
+              //data-bs-toggle="modal"
               onClick={() => {
                 handleSpinClick();
                 setTimeout(() => {

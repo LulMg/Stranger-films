@@ -21,6 +21,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       userName: "",
       pendientes: [],
       userLogged: "   ",
+      favoritos: [],
+      pendientes: [],
     },
 
     actions: {
@@ -374,6 +376,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(store);
             localStorage.setItem("token", result.token);
             localStorage.setItem("user", result.username);
+            localStorage.setItem("user_id", result.userId);
             window.location.reload(false);
             // store.userLogged = result.username;
           })
@@ -410,7 +413,36 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => console.log("error", error));
       },
 
-      favmovie: (favmovie) => {
+      eliminarComentario: (id_comentario) => {
+        var myHeaders = new Headers();
+        //myHeaders.append("Content-Type", "application/json");
+        console.log("tok", localStorage.getItem("token"));
+        myHeaders: {
+          "Content-Type", "application/json";
+          "Authorization", "Bearer " + localStorage.getItem("token"); // ⬅⬅⬅ authorization token
+        }
+
+        var raw = JSON.stringify({
+          comentario_id: id_comentario,
+        });
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch(process.env.BACKEND_URL + "/undocom/movie", requestOptions)
+          .then((response) => response.text())
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+      },
+
+      addFavoritos: (favmovie) => {
+        const store = getStore();
+
+        store.favoritos.push(favmovie);
         //     var myHeaders = new Headers();
         //     myHeaders.append("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1NzA1Mzc1OCwianRpIjoiZmQyMWUzYWUtYzAzNC00NjNmLWE1MzItMTM2OTk4MWQ4M2E0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU3MDUzNzU4LCJleHAiOjE2NTcwNTczNTh9.lcRtVDsip4TF7j959aJzYwTlOIAmMjU_2LR2fzAO1kc");
         //     myHeaders.append("Content-Type", "application/json");
@@ -428,6 +460,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         //       .then(response => response.text())
         //       .then(result => console.log(result))
         //       .catch(error => console.log('error', error));
+      },
+      addPendientes: (movName) => {
+        const store = getStore();
+        store.pendientes.push(movName);
       },
       newcomment: async (newcomment, id, user) => {
         let comment = {
